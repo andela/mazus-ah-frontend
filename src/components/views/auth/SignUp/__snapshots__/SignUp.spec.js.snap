@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp Component Should render along with children component 1`] = `ReactWrapper {}`;
+
+exports[`SignUp Component Should render without errors 1`] = `ShallowWrapper {}`;

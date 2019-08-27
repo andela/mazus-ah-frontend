@@ -1,5 +1,5 @@
+import GET_ARTICLES from '@Redux/actions/types/articleType';
 import articleReducer from '../articleReducer';
-import GET_ARTICLES from '../../actions/types/articleType';
 
 describe('test article reducer', () => {
   const initialState = {

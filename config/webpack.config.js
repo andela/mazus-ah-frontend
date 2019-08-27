@@ -20,7 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           'style-loader', // 3. Inject styles into DOM
           'css-loader', // 2. Turns css into commonjs
@@ -39,10 +39,16 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src/'),
+      '@': path.resolve(__dirname, '../', 'src/'),
+      '@Redux': path.resolve(__dirname, '../', 'src/redux/'),
+      '@Common': path.resolve(__dirname, '../', 'src/components/common/'),
+      '@Utils': path.resolve(__dirname, '../', 'utils/'),
     },
+  },
+  node: {
+    fs: 'empty',
   },
   plugins: [
     new CleanWebpackPlugin(
