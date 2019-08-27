@@ -6,7 +6,13 @@
       "browser": true,
       "es6": true,
       "jest": true,
-      "cypress/globals": true
+      "cypress/globals": true,
+    },
+    "globals": {
+      "mount": true,
+      "render": true,
+      "toJson": true,
+      "shallow": true,
     },
     "rules": {
       "react/jsx-one-expression-per-line": 0,

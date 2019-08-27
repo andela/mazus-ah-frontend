@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<NotFound>
+  <div>
+    <h3>
+      MAZUS TEAM is still building out this app, your page cannot be found at the moment
+    </h3>
+  </div>
+</NotFound>
+`;

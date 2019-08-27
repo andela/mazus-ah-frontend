@@ -7,8 +7,7 @@
     "start": "node .",
     "build": "NODE_ENV=production webpack --config ./config/webpack.prod.js",
     "lint": "npx eslint ./src/**.js --fix",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --coverage",
     "e2e:test": "cypress open",
     "dev": "NODE_ENV=development webpack-dev-server --open --config ./config/webpack.dev.js"
   },
@@ -20,12 +19,12 @@
     "prop-types": "15.6.2",
     "react": "16.8.1",
     "react-dom": "16.8.1",
-    "sass-loader": "^7.3.1",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "sass-loader": "^7.3.1"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
@@ -58,8 +57,8 @@
     "jest": "^24.9.0",
     "jest-config": "^24.9.0",
     "mini-css-extract-plugin": "0.5.0",
-    "node-sass": "^4.12.0",
     "moxios": "^0.4.0",
+    "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "postcss-loader": "3.0.0",
     "react-hot-loader": "4.6.3",

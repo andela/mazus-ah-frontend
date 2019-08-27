@@ -1,5 +1,8 @@
 # Authors' Haven
 [![CircleCI](https://circleci.com/gh/andela/mazus-ah-frontend/tree/develop.svg?style=svg)](https://circleci.com/gh/andela/mazus-ah-frontend/tree/develop)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3dcab7cb07096078f346/test_coverage)](https://codeclimate.com/github/andela/mazus-ah-frontend/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3dcab7cb07096078f346/maintainability)](https://codeclimate.com/github/andela/mazus-ah-frontend/maintainability)
+
 Authors' Haven is a social platform for authors to create articles and read articles posted by other authors.
 
 ## Tech Stack Used
