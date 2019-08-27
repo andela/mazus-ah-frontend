@@ -1,9 +1,12 @@
 {
     "parser": "babel-eslint",
     "extends": ["airbnb"],
-    "plugins": ["react-hooks"],
+    "plugins": ["react-hooks", "cypress"],
     "env": {
-      "browser": true
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "cypress/globals": true
     },
     "rules": {
       "react/jsx-one-expression-per-line": 0,
