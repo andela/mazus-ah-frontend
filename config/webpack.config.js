@@ -20,6 +20,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        use: [
+          "style-loader", //3. Inject styles into DOM
+          "css-loader", //2. Turns css into commonjs
+          "sass-loader" //1. Turns sass into css
+        ]
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader', 'eslint-loader'],
@@ -27,13 +35,6 @@ module.exports = {
       {
         test: /\.(jpg|png|svg|gif)$/,
         use: ['file-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          inDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
       },
     ],
   },
