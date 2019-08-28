@@ -9,5 +9,4 @@ global.mount = mount;
 global.render = render;
 global.toJson = toJson;
 
-
 configure({ adapter: new Adapter() });

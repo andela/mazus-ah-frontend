@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Lexend+Deca&display=swap');
+/* variables */
+$primary-color: #2FB5EE;
+  /* BASE STYLING */
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+  html {
+    /* 1rem = 10px; 10px/16px = 62.5% */
+    font-size: 62.5%;
+    font-family: 'Lato', sans-serif;
+  }
+  nav {
+      width: 100%;
+      display: inline-block;
+      background-color: $primary-color; 
+ 
+  }
+
+nav.nav-extended {
+  padding: 0.5rem;
+  height: 7rem;
+}
+nav .brand-logo{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  nav .brand-logo img{
+      max-width: 100%;
+      height: auto;
+  }
+
+  nav.nav-extended .nav-wrapper li a.btn{
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    box-shadow: none;
+    padding: 0 1.3rem;
+}
+
+nav.nav-extended .nav-wrapper #nav-mobile li > *{
+font-size: 1.5rem;
+}
+
+nav ul .profile_avatar{
+  display: flex;
+  align-items: center;
+}
+nav ul .profile_avatar img{
+ width: 5rem;
+ padding-top: 0.5rem;
+}
+.dropdown-content {
+    color: black !important;
+    margin: 0;
+    min-width: 150px;
+    max-height: auto;
+    margin-left: -1px;
+    margin-top: 100px;
+    z-index: 1;
+    opacity: 0;
+    white-space: nowrap;
+    will-change: width, height;
+    display: none;
+  }

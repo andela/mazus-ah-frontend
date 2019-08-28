@@ -1,29 +1,36 @@
 {
-    "parser": "babel-eslint",
-    "extends": ["airbnb"],
-    "plugins": ["react-hooks", "cypress"],
-    "env": {
-      "browser": true,
-      "es6": true,
-      "jest": true,
-      "cypress/globals": true,
-    },
-    "globals": {
-      "mount": true,
-      "render": true,
-      "toJson": true,
-      "shallow": true,
-    },
-    "rules": {
-      "react/jsx-one-expression-per-line": 0,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [".js", ".jsx"]
-        }
-      ],
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn"
-    }
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "react-hooks",
+    "cypress"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "globals": {
+    "mount": true,
+    "render": true,
+    "toJson": true,
+    "shallow": true
+  },
+  "rules": {
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
-  
+}
