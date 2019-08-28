@@ -6,6 +6,9 @@
 
   ],
   "env": {
+    "APP_LOGO_WHITE": {
+      "required": true
+    }
   },
   "formation": {
   },

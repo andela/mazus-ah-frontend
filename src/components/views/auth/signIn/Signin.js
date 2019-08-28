@@ -59,7 +59,7 @@ const Signin = (props) => {
               </div>
               <div className="form-links">
                 <h5>
-                  <Link to="/forgotpassword">forgot password?</Link>
+                  <Link to="/forgot-password">forgot password?</Link>
                 </h5>
               </div>
             </div>

@@ -6,6 +6,7 @@
     "paths": {
       "@Redux/*": ["src/redux/*"],
       "@Common/*": ["src/components/common/*"],
+      "@Views/*": ["src/components/views/*"],
       "@Utils/*": ["utils/*"],
       "@Views/*": ["src/components/views/*"],
     }

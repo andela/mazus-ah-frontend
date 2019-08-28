@@ -27,6 +27,7 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@Redux/(.*)$': '<rootDir>/src/redux/$1',
     '^@Common/(.*)$': '<rootDir>/src/components/common/$1',
+    '^@Views/(.*)$': '<rootDir>/src/components/views/$1',
     '^@Utils/(.*)$': '<rootDir>/utils/$1',
     '^@Views/(.*)$': '<rootDir>/src/components/views/$1',
   },
