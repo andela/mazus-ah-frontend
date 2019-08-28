@@ -14,6 +14,8 @@ import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
 import setUser from '@Utils/setUser';
+
+import Profile from '@Views/Profile';
 import store from './redux/store';
 import './app.scss';
 
@@ -29,6 +31,7 @@ const App = () => (
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
+        <ContainerWrapper exact path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </Router>

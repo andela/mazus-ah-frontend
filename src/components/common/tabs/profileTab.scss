@@ -1,0 +1,22 @@
+div.profile-tab-container {
+  align-self: center;
+  margin: 5rem 0rem 0rem 0rem;
+
+  a {
+    color: #000000 !important;
+  }
+
+  .tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: transparent;
+    outline: none;
+    font-weight: bolder;
+  }
+
+  li.indicator {
+    background: #000000
+  }
+
+  // div.profile-articles {
+  //   margin-top: 5rem
+  // }
+}
