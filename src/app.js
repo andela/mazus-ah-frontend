@@ -5,7 +5,7 @@ import store from './redux/store';
 import './app.scss';
 import NotFound from './components/views/NotFound/NotFound';
 import Header from './components/common/header';
-import Card from './components/common/landingPage/cards';
+import LandingPage from './components/views/landingPage/LandingPage';
 
 const App = () => (
   <Provider store={store}>
@@ -13,7 +13,7 @@ const App = () => (
       <Header />
       <div className="container">
         <Switch>
-          <Route exact path="/" component={Card} />
+          <Route exact path="/" component={LandingPage} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
