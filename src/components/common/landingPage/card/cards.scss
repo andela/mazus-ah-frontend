@@ -1,18 +1,16 @@
   
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,600&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 .article-card {
-  max-width: 25rem;
+  max-width: 35rem;
   height: auto;
   font-family: 'Quicksand', sans-serif;
-
+  margin-left: 2rem;
   .article-section {
     max-height: 30rem;
 
     #article-img {
       width: 100%;
-      max-width: 400px;
+      max-width: 50rem;
     }
 
     #article-title {
@@ -49,12 +47,11 @@
         font-style: normal;
         font-weight: normal;
         font-size: 16px;
-        color: #8E8B8B;
       }
     }
     #author-avatar {
-      width: 4rem;
-      height: 4rem;
+      width: 6rem;
+      height: 6rem;
       border-radius: 100%;
     }
   }

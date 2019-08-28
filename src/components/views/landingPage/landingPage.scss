@@ -1,0 +1,25 @@
+.landingPage-container {
+  display: flex;
+  justify-content: space-between;
+  
+  .side-bar {
+    width: 40rem;
+    position: sticky;
+    // justify-content: flex-end;
+    top: 0;
+    height: 100vh;
+
+    h2 {
+      font-size: 24px;
+    }
+
+    .footer {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      
+    }
+  }
+}

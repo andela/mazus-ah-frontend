@@ -1,0 +1,30 @@
+.category-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 75rem;
+
+  .top-div {
+    display: flex;
+    justify-content: space-between;
+    margin:4rem 4rem 0rem 4rem;
+
+    p {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    #related-articles-btn, i {
+      font-size: 18px; 
+      margin-top: auto;
+      color: #2FB5EE;
+    }
+  }
+  .bottom-div {
+    display: flex;
+    padding: 1rem;
+    @media screen and (max-width: 580px) {
+      flex-wrap: wrap;
+      min-width: 30rem;
+    }
+  }
+}
