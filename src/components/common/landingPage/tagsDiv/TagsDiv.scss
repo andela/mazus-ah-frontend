@@ -1,0 +1,12 @@
+.tags-container {
+    width: 296px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    .article-tags {
+            width: 296px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+}
