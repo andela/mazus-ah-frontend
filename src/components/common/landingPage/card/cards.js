@@ -20,7 +20,7 @@ const Cards = () => (
       />
       <div>
         <p id="author-name">Amelia Tat</p>
-        <p id="article-details">Apr 3  •  6 min reada</p>
+        <p className="fade-text" id="article-details">Apr 3  •  6 min read</p>
       </div>
     </Link>
   </div>

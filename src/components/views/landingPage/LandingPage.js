@@ -1,15 +1,40 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Card from '../../common/landingPage/card/cards';
+import { Link } from 'react-router-dom';
 import TagsDiv from '../../common/landingPage/tagsDiv/TagsDiv';
+import Category from '../../common/landingPage/categories/categories';
+import Trending from '../../common/landingPage/trending/trending';
+import './landingPage.scss';
 
-const LandingPage = () => (
-  <div>
-    <Card />
-    <Router>
-      <TagsDiv />
-    </Router>
-  </div>
-);
-
+// eslint-disable-next-line arrow-body-style
+const LandingPage = () => {
+  return (
+    <div className="landingPage-container">
+      <div className="main-content">
+        <div><Category /></div>
+        <div><Category /></div>
+        <div><Category /></div>
+        <div><Category /></div>
+        <div><Category /></div>
+        <div><Category /></div>
+        <div><Category /></div>
+      </div>
+      <div className="side-bar">
+        <TagsDiv />
+        <div className="trending">
+          <h2>Trending</h2>
+          <hr />
+          <Trending />
+          <Trending />
+          <Trending />
+          <Trending />
+          <Trending />
+          <Trending />
+          <Trending />
+          <hr />
+          <div className="footer"><Link to="*">Home</Link>  <Link to="*">About</Link>  <Link to="*">Contact</Link>  <Link to="*">Privacy</Link>  </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default LandingPage;

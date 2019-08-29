@@ -9,11 +9,12 @@ const tagsInfo = [
   'shirt',
   'navyBlue',
   'vintage',
-  'adidas',
+  'nike',
   'yeezy',
   'rippedJean',
   'lifestyle',
   'urban',
+  'adidas',
 ];
 
 const TagsDiv = () => (

@@ -1,0 +1,31 @@
+.landingPage-container {
+  display: flex;
+  justify-content: space-between;
+  
+  .side-bar {
+    width: 40rem;
+    
+    .trending {
+      position: sticky;
+      padding-top: 2rem;
+      top: 0;
+    }
+    h2 {
+      font-size: 24px;
+    }
+
+    .footer {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      
+    }
+  }
+  @media screen and (max-width: 1800px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
