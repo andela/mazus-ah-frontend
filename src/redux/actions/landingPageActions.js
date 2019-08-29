@@ -1,4 +1,4 @@
-import GET_ARTICLES from './types/articleType';
+import GET_ARTICLES from './types/landingPage';
 
 const articles = [];
 

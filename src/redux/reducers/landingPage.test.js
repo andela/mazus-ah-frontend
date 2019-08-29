@@ -1,5 +1,5 @@
-import articleReducer from './articleReducer';
-import GET_ARTICLES from '../actions/types/articleType';
+import articleReducer from './landingPageReducer';
+import GET_ARTICLES from '../actions/types/landingPage';
 
 describe('test article reducer', () => {
   const initialState = {
