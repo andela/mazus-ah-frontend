@@ -1,2 +1,3 @@
-export const GET_ARTICLES = 'GETTING_ARTICLES';
-export const GET_TAGS = 'GETTING_TAGS';
+export const SET_ARTICLES = 'SETTING_ARTICLES';
+export const SET_TAGS = 'SETTING_TAGS';
+export const LOADING = 'LOADING';

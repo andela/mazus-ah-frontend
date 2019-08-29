@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getTags } from '../../../../redux/actions/landingPageActions';
 import Cards from '../card/cards';
 import './categories.scss';
 
 // eslint-disable-next-line arrow-body-style
-const Category = () => {
+const Category = (props) => {
+  const fetchTags = async () => {
+    await props.getTags();
+  };
+
+  useEffect(() => { fetchTags(); }, []);
   return (
     <div className="category-container">
       <div className="top-div">
@@ -13,10 +21,20 @@ const Category = () => {
       </div>
       <div className="bottom-div">
         <Cards />
-        <Cards />
       </div>
     </div>
   );
 };
 
-export default Category;
+Category.propTypes = {
+  getTags: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  tags: state.tags,
+});
+
+export default connect(
+  mapStateToProps,
+  { getTags },
+)(Category);

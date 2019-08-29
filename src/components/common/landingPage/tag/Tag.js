@@ -9,6 +9,6 @@ import './Tag.scss';
 const Tag = ({ tagName }) => <Link className="tagLink" to="*">{tagName}</Link>;
 
 Tag.propTypes = {
-  tagName: PropTypes.array.isRequired,
+  tagName: PropTypes.string.isRequired,
 };
 export default Tag;

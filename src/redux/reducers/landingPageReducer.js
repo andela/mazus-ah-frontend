@@ -1,23 +1,29 @@
-import { GET_ARTICLES, GET_TAGS } from '../actions/types/landingPage';
+import { SET_ARTICLES, SET_TAGS, LOADING } from '../actions/types/landingPage';
 
 const initialState = {
   articles: [],
   tags: [],
+  loading: false,
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case GET_ARTICLES:
+    case SET_ARTICLES:
       return {
         ...state,
         articles: payload,
       };
 
-    case GET_TAGS:
+    case SET_TAGS:
       return {
         ...state,
-        articles: payload,
+        tags: payload,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: payload,
       };
     default:
       return state;

@@ -1,29 +1,38 @@
-import React from 'react';
+/* eslint-disable react/forbid-prop-types */
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Tag from '../tag/Tag';
 import './TagsDiv.scss';
 
-const tagsInfo = [
-  'fashion',
-  'jean',
-  'denim',
-  'shirt',
-  'navyBlue',
-  'vintage',
-  'nike',
-  'yeezy',
-  'rippedJean',
-  'lifestyle',
-  'urban',
-  'adidas',
-];
+const TagsDiv = (props) => {
+  const { article: { tags } } = props;
+  const [allTags, setAllTags] = useState([]);
 
-const TagsDiv = () => (
-  <div className="tags-container">
-    <p>Tags</p>
-    <div className="article-tags">
-      {tagsInfo.map(tag => <Tag tagName={tag} />)}
+  useEffect(() => {
+    setAllTags(tags);
+  }, [tags]);
+
+  return (
+    <div className="tags-container">
+      <p>Tags</p>
+      <div className="article-tags">
+        {allTags.map(tag => <Tag key={tag} tagName={tag} />)}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default TagsDiv;
+
+TagsDiv.propTypes = {
+  article: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+  article: state.article,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(TagsDiv);

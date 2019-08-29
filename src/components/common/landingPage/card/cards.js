@@ -1,28 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './cards.scss';
 
-const Cards = () => (
+const Cards = ({
+  thumbnail,
+  title,
+  publishedDate,
+  readTime,
+  authorAvatar,
+  authorName,
+}) => (
   <div className="article-card">
-    <Link className="article-section" to="/">
+    <Link className="article-section" to="*">
       <img
-        src="https://res.cloudinary.com/mazus/image/upload/v1564080570/blog/2019-07-25T18:49:26.773Z.jpg"
+        src={thumbnail}
         alt="articleImg"
         id="article-img"
       />
-      <p id="article-title">Reality TV Turned These Kids into Villains</p>
+      <p id="article-title">{title}</p>
     </Link>
-    <Link className="author-section" to="/">
+    <Link className="author-section" to="*">
       <img
-        src="https://res.cloudinary.com/mazus/image/upload/v1564067470/blog/2019-07-25T15:11:05.731Z.png"
+        src={authorAvatar}
         alt="authorAvatar"
         id="author-avatar"
       />
       <div>
-        <p id="author-name">Amelia Tat</p>
-        <p className="fade-text" id="article-details">Apr 3  •  6 min read</p>
+        <p id="author-name">{authorName}</p>
+        <p className="fade-text" id="article-details">{publishedDate}  •  {readTime}</p>
       </div>
     </Link>
   </div>
 );
+
+Cards.propTypes = {
+  thumbnail: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  publishedDate: PropTypes.string.isRequired,
+  readTime: PropTypes.number.isRequired,
+  authorAvatar: PropTypes.string.isRequired,
+  authorName: PropTypes.string.isRequired,
+};
+
 export default Cards;

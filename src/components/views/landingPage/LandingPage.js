@@ -11,12 +11,6 @@ const LandingPage = () => {
     <div className="landingPage-container">
       <div className="main-content">
         <div><Category /></div>
-        <div><Category /></div>
-        <div><Category /></div>
-        <div><Category /></div>
-        <div><Category /></div>
-        <div><Category /></div>
-        <div><Category /></div>
       </div>
       <div className="side-bar">
         <TagsDiv />
