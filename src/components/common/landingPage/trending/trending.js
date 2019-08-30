@@ -1,16 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getTrendingArticles } from '../../../../redux/actions/landingPageActions';
 import './trending.scss';
 
-const TrendingArticles = () => (
-  <div className="trending-container">
-    <p id="article-number">01</p>
-    <div>
-      <Link id="trending-title" to="*"><h1>It’s time to embrace the sleep divorce</h1></Link>
-      <p>Angela Lashbrook in Elemental</p>
-      <p className="fade-text">Jul 18 • 4 min read</p>
-    </div>
-  </div>
-);
+const formatDate = (createdAt) => {
+  const date = new Date(createdAt);
+  return `${date.toLocaleString('default', { month: 'short' })} ${date.getDay()}`;
+};
 
-export default TrendingArticles;
+const TrendingArticles = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const { trends } = props;
+  useEffect(() => {
+    const fetchTrendingArticles = async () => {
+      await props.getTrendingArticles();
+    };
+    fetchTrendingArticles();
+  }, []);
+
+  return (
+    trends.articles ? trends.articles.map(singleArticle => (
+      <div className="trending-container">
+        <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
+        <div>
+          <Link id="trending-title" to="*"><h1>{singleArticle.title}</h1></Link>
+          <p>{singleArticle.description}</p>
+          <p className="fade-text">{formatDate(singleArticle.createdAt)}  •  {singleArticle.readTime} mins read</p>
+        </div>
+      </div>
+    )) : <p>Nothing to show</p>
+  );
+};
+
+
+TrendingArticles.propTypes = {
+  getTrendingArticles: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  trends: state.article.trends,
+});
+
+export default connect(
+  mapStateToProps,
+  { getTrendingArticles },
+)(TrendingArticles);
