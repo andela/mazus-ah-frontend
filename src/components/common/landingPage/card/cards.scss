@@ -1,10 +1,12 @@
-  
-
 .article-card {
   max-width: 35rem;
   height: auto;
   font-family: 'Quicksand', sans-serif;
   margin-right: 3rem;
+
+  @media screen and (max-width: 580px) {
+    margin-bottom: 2rem;
+  }
   .article-section {
     max-height: 30rem;
 

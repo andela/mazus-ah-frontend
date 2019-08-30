@@ -32,7 +32,7 @@ const Category = (props) => {
       return (
         <div key={categoryArticle.tagsList[0]} className="category-container">
           <div className="top-div">
-            <p>{categoryArticle.title}</p>
+            <p>{categoryArticle.tagsList[0]}</p>
             <p id="related-articles-btn"><Link to="*">related articles <i className="material-icons">navigate_next</i></Link></p>
           </div>
           <div className="bottom-div">

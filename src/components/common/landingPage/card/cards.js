@@ -25,7 +25,7 @@ const Cards = ({
     </Link>
     <Link className="author-section" to="*">
       <img
-        src={`//${author.profile.avatar}`}
+        src={author.profile.avatar}
         alt="authorAvatar"
         id="author-avatar"
         className="materialboxed"
