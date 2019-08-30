@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './cards.scss';
 
+const formatDate = (createdAt) => {
+  const date = new Date(createdAt);
+  return `${date.toLocaleString('default', { month: 'short' })} ${date.getDay()}`;
+};
 const Cards = ({
   thumbnail,
   title,
-  publishedDate,
+  createdAt,
   readTime,
-  authorAvatar,
-  authorName,
+  author,
 }) => (
   <div className="article-card">
     <Link className="article-section" to="*">
@@ -22,13 +25,14 @@ const Cards = ({
     </Link>
     <Link className="author-section" to="*">
       <img
-        src={authorAvatar}
+        src={`//${author.profile.avatar}`}
         alt="authorAvatar"
         id="author-avatar"
+        className="materialboxed"
       />
       <div>
-        <p id="author-name">{authorName}</p>
-        <p className="fade-text" id="article-details">{publishedDate}  •  {readTime}</p>
+        <p id="author-name">{author.firstName} {author.lastName}</p>
+        <p className="fade-text" id="article-details">{formatDate(createdAt)}  •  {readTime} mins read</p>
       </div>
     </Link>
   </div>
@@ -37,10 +41,9 @@ const Cards = ({
 Cards.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  publishedDate: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
   readTime: PropTypes.number.isRequired,
-  authorAvatar: PropTypes.string.isRequired,
-  authorName: PropTypes.string.isRequired,
+  author: PropTypes.shape({}).isRequired,
 };
 
 export default Cards;

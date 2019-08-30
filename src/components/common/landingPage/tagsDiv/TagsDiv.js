@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -25,7 +24,7 @@ const TagsDiv = (props) => {
 
 
 TagsDiv.propTypes = {
-  article: PropTypes.array.isRequired,
+  article: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({

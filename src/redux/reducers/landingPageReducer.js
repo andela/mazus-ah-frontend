@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
     case SET_ARTICLES:
       return {
         ...state,
-        articles: payload,
+        articles: [...state.articles, payload],
       };
 
     case SET_TAGS:
