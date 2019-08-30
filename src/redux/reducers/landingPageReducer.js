@@ -1,8 +1,11 @@
-import { SET_ARTICLES, SET_TAGS, LOADING } from '../actions/types/landingPage';
+import {
+  SET_ARTICLES, SET_TAGS, SET_TRENDING_ARTICLES, LOADING,
+} from '../actions/types/landingPage';
 
 const initialState = {
   articles: [],
   tags: [],
+  trends: [],
   loading: false,
 };
 
@@ -19,6 +22,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tags: payload,
+      };
+    case SET_TRENDING_ARTICLES:
+      return {
+        ...state,
+        trends: payload,
       };
     case LOADING:
       return {

@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import Toastr from 'toastr';
-import { SET_TAGS, LOADING, SET_ARTICLES } from './types/landingPage';
+import {
+  SET_TAGS, LOADING, SET_ARTICLES, SET_TRENDING_ARTICLES,
+} from './types/landingPage';
 
 const setTags = payload => ({
   type: SET_TAGS,
@@ -9,6 +11,10 @@ const setTags = payload => ({
 });
 const setArticles = payload => ({
   type: SET_ARTICLES,
+  payload,
+});
+const setTrendingArticles = payload => ({
+  type: SET_TRENDING_ARTICLES,
   payload,
 });
 
@@ -29,16 +35,26 @@ export const getTags = () => async (dispatch) => {
 
 export const getArticlesByCategory = tags => async (dispatch) => {
   try {
-    const response = tags.map(async (tag) => {
+    tags.map(async (tag) => {
       const url = `http://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}`;
       const res = await axios.get(url);
       dispatch(setArticles(res));
     });
-    return response;
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
     Toastr.error(message);
-    return true;
+  }
+};
+
+export const getTrendingArticles = () => async (dispatch) => {
+  try {
+    const response = await axios.get('http://mazus-ah-staging.herokuapp.com/api/v1/articles/trends');
+    const { trends } = response.data;
+    dispatch(setTrendingArticles(trends));
+  } catch (error) {
+    const { data: { errors } } = error.response;
+    const message = Object.values(errors)[0];
+    Toastr.error(message);
   }
 };
