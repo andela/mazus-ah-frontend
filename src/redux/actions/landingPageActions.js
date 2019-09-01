@@ -37,7 +37,7 @@ export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
   try {
     tags.map(async (tag) => {
       if (tags.indexOf(tag) >= tagsIndex && tags.indexOf(tag) <= tagsIndex + 9) {
-        const url = `http://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}&limit=2`;
+        const url = `https://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}&limit=2`;
         const res = await axios.get(url);
         dispatch(setArticles(res.data));
       }
@@ -51,7 +51,7 @@ export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
 
 export const getTrendingArticles = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://mazus-ah-staging.herokuapp.com/api/v1/articles/trends');
+    const response = await axios.get('https://mazus-ah-staging.herokuapp.com/api/v1/articles/trends');
     const { trends } = response.data;
     dispatch(setTrendingArticles(trends));
   } catch (error) {
