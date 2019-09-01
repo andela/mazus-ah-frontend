@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   max-width: 75rem;
-
+  @media screen and (max-width: 768px) {
+   padding-left: 1rem; 
+  }
   .top-div {
     display: flex;
     justify-content: space-between;
@@ -27,4 +29,8 @@
       min-width: 30rem;
     }
   }
+}
+
+.loadingIndicator {
+  margin: 1rem;
 }

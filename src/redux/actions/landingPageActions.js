@@ -33,12 +33,14 @@ export const getTags = () => async (dispatch) => {
   }
 };
 
-export const getArticlesByCategory = tags => async (dispatch) => {
+export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
   try {
     tags.map(async (tag) => {
-      const url = `http://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}`;
-      const res = await axios.get(url);
-      dispatch(setArticles(res));
+      if (tags.indexOf(tag) >= tagsIndex && tags.indexOf(tag) <= tagsIndex + 9) {
+        const url = `http://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}&limit=2`;
+        const res = await axios.get(url);
+        dispatch(setArticles(res.data));
+      }
     });
   } catch (error) {
     const { data: { errors } } = error.response;

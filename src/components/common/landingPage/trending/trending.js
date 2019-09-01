@@ -21,16 +21,21 @@ const TrendingArticles = (props) => {
   }, []);
 
   return (
-    trends.articles ? trends.articles.map(singleArticle => (
-      <div className="trending-container">
-        <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
-        <div>
-          <Link id="trending-title" to="*"><h1>{singleArticle.title}</h1></Link>
-          <p>{singleArticle.description}</p>
-          <p className="fade-text">{formatDate(singleArticle.createdAt)}  •  {singleArticle.readTime} mins read</p>
-        </div>
-      </div>
-    )) : <p>Nothing to show</p>
+    trends.articles ? trends.articles.map((singleArticle) => {
+      if (trends.articles.indexOf(singleArticle) <= 6) {
+        return (
+          <div className="trending-container">
+            <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
+            <div>
+              <Link id="trending-title" to="*"><h1>{singleArticle.title}</h1></Link>
+              <p>{singleArticle.description}</p>
+              <p className="fade-text">{formatDate(singleArticle.createdAt)}  •  {singleArticle.readTime} mins read</p>
+            </div>
+          </div>
+        );
+      }
+      return null;
+    }) : <p>Nothing to show</p>
   );
 };
 
