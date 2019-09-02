@@ -24,7 +24,7 @@ const TrendingArticles = (props) => {
     trends.articles ? trends.articles.map((singleArticle) => {
       if (trends.articles.indexOf(singleArticle) <= 6) {
         return (
-          <div className="trending-container">
+          <div key={singleArticle} className="trending-container">
             <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
             <div>
               <Link id="trending-title" to="*"><h1>{singleArticle.title}</h1></Link>
