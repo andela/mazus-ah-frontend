@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getTags, getArticlesByCategory } from '../../../../redux/actions/landingPageActions';
-import Cards from '../card/cards';
+import Cards from '../card/Cards';
 import './categories.scss';
 
 const Category = (props) => {
@@ -20,8 +20,8 @@ const Category = (props) => {
   // fetch tags and call the fetchArticle function on Mount
   useEffect(() => {
     const fetchTags = async () => {
-      const res = await props.getTags();
-      fetchArticles(res);
+      const tags = await props.getTags();
+      fetchArticles(tags);
     };
 
     fetchTags();
@@ -29,8 +29,8 @@ const Category = (props) => {
 
   // sets isfetching to true once user scrolls to the bottom
   function handleScroll() {
-    // eslint-disable-next-line max-len
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isFetching) return;
+    const { scrollTop, offsetHeight } = document.documentElement;
+    if (window.innerHeight + scrollTop !== offsetHeight || isFetching) return;
     setIsFetching(true);
   }
 
