@@ -17,7 +17,7 @@ const LandingPage = () => (
         <hr />
         <Trending />
         <hr />
-        <div className="footer"><Link to="*">Home</Link>  <Link to="*">About</Link>  <Link to="*">Contact</Link>  <Link to="*">Privacy</Link>  </div>
+        <div className="footer"><Link to="*">Home</Link>  <Link to="*">About</Link>  <Link to="*">Contact</Link>  </div>
       </div>
     </div>
   </div>
