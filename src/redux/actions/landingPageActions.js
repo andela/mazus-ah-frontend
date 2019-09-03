@@ -63,6 +63,7 @@ export const getTrendingArticles = () => async (dispatch) => {
   try {
     const response = await API_SERVICE.get('/articles/trends');
     const { trends } = response.data;
+    console.log('TRENDS FROM ACTION', trends);
     dispatch(setTrendingArticles(trends));
   } catch (error) {
     const { data: { errors } } = error.response;

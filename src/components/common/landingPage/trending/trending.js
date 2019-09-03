@@ -11,8 +11,8 @@ const formatDate = (createdAt) => {
 };
 
 const TrendingArticles = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { trends } = props;
+  console.log('TYPE OF TREND', typeof trends);
   useEffect(() => {
     const fetchTrendingArticles = async () => {
       await props.getTrendingArticles();
@@ -44,6 +44,7 @@ const TrendingArticles = (props) => {
 
 TrendingArticles.propTypes = {
   getTrendingArticles: PropTypes.func.isRequired,
+  trends: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({
