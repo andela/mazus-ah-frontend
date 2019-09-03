@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import readTimeFunc from '../../../../config/readTime';
 import './cards.scss';
 
 const formatDate = (createdAt) => {
@@ -32,7 +34,7 @@ const Cards = ({
       />
       <div>
         <p id="author-name">{author.firstName} {author.lastName}</p>
-        <p className="fade-text" id="article-details">{formatDate(createdAt)}  •  {readTime} mins read</p>
+        <p className="fade-text" id="article-details">{formatDate(createdAt)}  •  {readTimeFunc(readTime)}</p>
       </div>
     </Link>
   </div>

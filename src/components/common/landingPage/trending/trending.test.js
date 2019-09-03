@@ -3,7 +3,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import TrendingArticles from './trending';
+import TrendingArticles from './Trending';
 
 
 const defaultProps = {
@@ -61,7 +61,7 @@ describe('<TrendingArticles /> Component', () => {
     );
     expect(wrapper.find('p').length).toEqual(1);
   });
-  it('should render component with article', () => {
+  it('should render component with articles', () => {
     const wrapper = setUp(
       {},
       trendingArticles,
