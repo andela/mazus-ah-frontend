@@ -6,7 +6,7 @@ const initialState = {
   articles: [],
   tags: [],
   trends: [],
-  loading: false,
+  isLoading: true,
 };
 
 export default (state = initialState, action) => {
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     case LOADING:
       return {
         ...state,
-        loading: payload,
+        isLoading: payload,
       };
     default:
       return state;

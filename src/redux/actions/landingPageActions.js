@@ -19,7 +19,7 @@ const setTrendingArticles = payload => ({
 });
 
 export const getTags = () => async (dispatch) => {
-  dispatch({ type: LOADING, payload: true });
+  // dispatch({ type: LOADING, payload: true });
   try {
     const response = await API_SERVICE.get('/articles/tags');
     const { tags } = response.data;
@@ -33,16 +33,24 @@ export const getTags = () => async (dispatch) => {
   }
 };
 
+export const loaded = payload => (dispatch) => {
+  dispatch({
+    type: LOADING,
+    payload,
+  });
+};
+
 export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
   try {
     tags.map(async (tag) => {
       if (tags.indexOf(tag) >= tagsIndex && tags.indexOf(tag) <= tagsIndex + 9) {
-        await dispatch({ type: LOADING, payload: true });
         const url = `/articles?tag=${tag}&limit=2`;
         const res = await API_SERVICE.get(url);
         dispatch(setArticles(res.data));
+        if (tags.indexOf(tag) === 9) {
+          dispatch({ type: LOADING, payload: false });
+        }
       }
-      await dispatch({ type: LOADING, payload: false });
     });
   } catch (error) {
     const { data: { errors } } = error.response;

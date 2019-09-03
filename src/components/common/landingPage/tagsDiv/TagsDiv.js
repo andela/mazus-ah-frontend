@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Tag from '../tag/Tag';
-import './TagsDiv.scss';
+import './tagsDiv.scss';
 
 const TagsDiv = (props) => {
   const { article: { tags } } = props;

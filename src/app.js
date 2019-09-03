@@ -5,7 +5,7 @@ import store from './redux/store';
 import './app.scss';
 import NotFound from './components/views/NotFound/NotFound';
 import Header from './components/common/header';
-import LandingPage from './components/views/landingPage/LandingPage';
+import LandingPage from './components/views/LandingPage/LandingPage';
 
 const App = () => (
   <Provider store={store}>
