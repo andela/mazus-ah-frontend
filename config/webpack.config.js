@@ -41,10 +41,10 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, '../', 'src/'),
-      '@Redux': path.resolve(__dirname, '../', 'src/redux/'),
-      '@Common': path.resolve(__dirname, '../', 'src/components/common/'),
-      '@Utils': path.resolve(__dirname, '../', 'utils/'),
+      '@': path.resolve(__dirname, '../src/'),
+      '@Redux': path.resolve(__dirname, '../src/redux/'),
+      '@Common': path.resolve(__dirname, '../src/components/common/'),
+      '@Utils': path.resolve(__dirname, '../utils/'),
     },
   },
   node: {

@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const dotenv = require('dotenv');
-const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -26,7 +25,4 @@ module.exports = merge(config, {
   plugins: [
     new webpack.EnvironmentPlugin(env),
   ],
-  alias: {
-    components: path.resolve('src/components'),
-  },
 });

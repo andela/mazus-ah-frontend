@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from '@Redux/store/index';
+import InputField from '@Common/form/InputField';
 import Signin, { SigninComponent } from './Signin';
 
 const props = {
@@ -9,7 +10,7 @@ const props = {
   history: {
     push: jest.fn(),
   },
-  onSubmit: jest.fn(),
+  value: 'Some value',
 };
 
 describe('SignIn Component', () => {
@@ -32,47 +33,39 @@ describe('SignIn Component', () => {
     expect(component.find('input')).toHaveLength(2);
   });
 
-  it('should call on change props', () => {
+  it('email Input check', () => {
+    const onChange = jest.fn();
+    const handleSubmit = jest.fn();
     const event = {
-      preventDefault() { },
-      target: { value: 'johndoe@test.com', name: 'email' },
+      persist: jest.fn(),
+      target: { value: 'dave@gmail.com', name: 'email' },
     };
-    const mockOnSignUpFn = jest.fn();
-    const component = mount(
-      <SigninComponent onSignIn={mockOnSignUpFn} {...props} />,
-    );
-    const inputTag = component.find('input').at(0);
-    inputTag.simulate('change', event);
-    expect(mockOnSignUpFn.mock.calls.length).toBe(0);
-    component.unmount();
+    const wrapper = shallow(<SigninComponent onSubmit={handleSubmit} onChange={onChange} {...props} />);
+    wrapper.find('Input[type="email"]').simulate('change', event);
+    expect(wrapper.find('input[name="email"]')).toMatchSnapshot();
   });
-  it('should test that password is match is called', () => {
-    const mockOnSignInFn = jest.fn();
-    const component = mount(
-      <Router>
-        <SigninComponent onSignIn={mockOnSignInFn} {...props} />
-      </Router>,
-    );
-    const inputTag = component.find('input');
-    inputTag.at(0).simulate('change', {
-      target:
-        { name: 'email', value: 'johndoe@test.com' },
-    });
-    inputTag.at(1).simulate('change', {
-      target:
-        { name: 'password', value: 'P4ssw0rd' },
-    });
-    inputTag.at(1).simulate('change', {
-      target:
-        { name: 'password', value: 'P4ssw0rd' },
-    });
-    expect(mockOnSignInFn.mock.calls.length).toBe(0);
+
+  it('Password Input check', () => {
+    const onChange = jest.fn();
+    const handleSubmit = jest.fn();
+    const event = {
+      persist: jest.fn(),
+      target: { value: 'P455word', name: 'password' },
+    };
+    const wrapper = shallow(<SigninComponent onSubmit={handleSubmit} onChange={onChange} {...props} />);
+    wrapper.find('Input[type="password"]').simulate('change', event);
+    expect(wrapper.find('input[name="password"]')).toMatchSnapshot();
+  });
+  it('should call onChange prop with input value', () => {
+    const onChange = jest.fn();
+    const component = mount(<InputField value="custom email" type="email" name="email" onChange={onChange} />);
+    expect(component).toMatchSnapshot();
   });
   it('should call onSubmit prop function when form is submitted', () => {
     const handleSubmit = jest.fn();
     const wrapper = mount(<SigninComponent onSubmit={handleSubmit} {...props} />);
     const form = wrapper.find('form');
     form.simulate('submit');
-    expect(handleSubmit).toHaveBeenCalledTimes(0);
+    expect(handleSubmit).toHaveBeenCalledTimes(1);
   });
 });

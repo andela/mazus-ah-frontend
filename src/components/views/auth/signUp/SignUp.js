@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Toastr from 'toastr';
 import { registerAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
@@ -25,10 +24,6 @@ const SignUp = (props) => {
   };
   const registerUser = (event) => {
     event.preventDefault();
-    if (values.password !== values.confirmPassword) {
-      Toastr.error('Passwords do not match');
-      return;
-    }
     onSubmit(values, history);
   };
   return (
@@ -144,8 +139,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onSubmit: (newUser, history) => dispatch(registerAccount(newUser, history)),
 });
-
-// export const onRegisterUser = (newUser, history) => registerAccount(newUser, history);
 export const SignUpComponent = SignUp;
 
 export default connect(
