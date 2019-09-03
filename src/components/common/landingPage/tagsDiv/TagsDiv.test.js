@@ -40,6 +40,7 @@ const allTags = {
       'food',
       'nutrition',
       'health',
+      'drinks',
     ],
   },
 };
@@ -56,6 +57,10 @@ describe('<TrendingArticles /> Component', () => {
       {},
       allTags,
     );
-    expect(wrapper.find('Tag').length).toEqual(3);
+    expect(wrapper.find('Tag').length).toEqual(4);
+    expect(wrapper.find('Tag').at(0).text()).toEqual('food');
+    expect(wrapper.find('Tag').at(1).text()).toEqual('nutrition');
+    expect(wrapper.find('Tag').at(2).text()).toEqual('health');
+    expect(wrapper.find('Tag').at(3).text()).toEqual('drinks');
   });
 });

@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import axios from 'axios';
 import Toastr from 'toastr';
+import API_SERVICE from '../../config/API';
 import {
   SET_TAGS, LOADING, SET_ARTICLES, SET_TRENDING_ARTICLES,
 } from './types/landingPage';
@@ -21,7 +21,7 @@ const setTrendingArticles = payload => ({
 export const getTags = () => async (dispatch) => {
   dispatch({ type: LOADING, payload: true });
   try {
-    const response = await axios.get('https://mazus-ah-staging.herokuapp.com/api/v1/articles/tags');
+    const response = await API_SERVICE.get('/articles/tags');
     const { tags } = response.data;
     dispatch(setTags(tags));
     return tags;
@@ -37,10 +37,13 @@ export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
   try {
     tags.map(async (tag) => {
       if (tags.indexOf(tag) >= tagsIndex && tags.indexOf(tag) <= tagsIndex + 9) {
-        const url = `https://mazus-ah-staging.herokuapp.com/api/v1/articles?tag=${tag}&limit=2`;
-        const res = await axios.get(url);
+        await dispatch({ type: LOADING, payload: true });
+        const url = `/articles?tag=${tag}&limit=2`;
+        const res = await API_SERVICE.get(url);
+        console.log(res.data);
         dispatch(setArticles(res.data));
       }
+      await dispatch({ type: LOADING, payload: false });
     });
   } catch (error) {
     const { data: { errors } } = error.response;
@@ -51,7 +54,7 @@ export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
 
 export const getTrendingArticles = () => async (dispatch) => {
   try {
-    const response = await axios.get('https://mazus-ah-staging.herokuapp.com/api/v1/articles/trends');
+    const response = await API_SERVICE.get('/articles/trends');
     const { trends } = response.data;
     dispatch(setTrendingArticles(trends));
   } catch (error) {
