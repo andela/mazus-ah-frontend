@@ -1,8 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import store from '@Redux/store/index';
 import SignUp, { SignUpComponent } from './SignUp';
+
+const reduxStore = store;
 
 const props = {
   loading: false,
@@ -84,5 +87,21 @@ describe('SignUp Component', () => {
     const form = wrapper.find('form');
     form.simulate('submit');
     expect(registerUser).toHaveBeenCalledTimes(0);
+  });
+  it('should call history prop function to redirect users to dashboard on successful authentication', () => {
+    const history = {
+      push: jest.fn(),
+    };
+    const location = {
+      search: 'localhost:8080/signup?token=abc',
+    };
+    mount(
+      <Provider store={reduxStore}>
+        <Router>
+          <SignUp location={location} history={history} />
+        </Router>
+      </Provider>,
+    );
+    expect(history.push).toHaveBeenCalledTimes(2);
   });
 });
