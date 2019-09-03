@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getTrendingArticles } from '../../../../redux/actions/landingPageActions';
+import { getTrendingArticles } from '@Actions/landingPageActions';
 import './trending.scss';
 
 const formatDate = (createdAt) => {
@@ -12,7 +12,6 @@ const formatDate = (createdAt) => {
 
 const TrendingArticles = (props) => {
   const { trends } = props;
-  console.log('TYPE OF TREND', typeof trends);
   useEffect(() => {
     const fetchTrendingArticles = async () => {
       await props.getTrendingArticles();

@@ -1,6 +1,6 @@
 import {
   SET_ARTICLES, SET_TAGS, SET_TRENDING_ARTICLES, LOADING,
-} from '../actions/types/landingPage';
+} from '@Actions/types/landingPage';
 
 const initialState = {
   articles: [],

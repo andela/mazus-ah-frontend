@@ -39,10 +39,21 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src/'),
+      '@': path.resolve(__dirname, '../', 'src/'),
+      '@Config': path.resolve(__dirname, '../', 'src/config/'),
+      '@Redux': path.resolve(__dirname, '../', 'src/redux/'),
+      '@Actions': path.resolve(__dirname, '../', 'src/redux/actions'),
+      '@Reducers': path.resolve(__dirname, '../', 'src/redux/reducers'),
+      '@Types': path.resolve(__dirname, '../', 'src/redux/actions/types'),
+      '@Common': path.resolve(__dirname, '../', 'src/components/common/'),
+      '@Utils': path.resolve(__dirname, '../', 'utils/'),
+      '@Views': path.resolve(__dirname, '../', 'src/components/views'),
     },
+  },
+  node: {
+    fs: 'empty',
   },
   plugins: [
     new CleanWebpackPlugin(

@@ -1,7 +1,7 @@
-import articleReducer from '../landingPageReducer';
 import {
   SET_ARTICLES, SET_TAGS, SET_TRENDING_ARTICLES, LOADING,
-} from '../../actions/types/landingPage';
+} from '@Actions/types/landingPage';
+import articleReducer from '../landingPageReducer';
 
 describe('test article reducer at the initial state', () => {
   const initialState = {

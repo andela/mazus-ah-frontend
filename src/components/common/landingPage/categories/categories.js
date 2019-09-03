@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Loader from '../../loader/Loader';
+import Loader from '@Common/loader/Loader';
 
-import { getTags, getArticlesByCategory, loaded } from '../../../../redux/actions/landingPageActions';
-import Cards from '../card/Cards';
+import { getTags, getArticlesByCategory, loaded } from '@Actions/landingPageActions';
+import Cards from '@Common/landingPage/card/Cards';
 import './categories.scss';
 
 const Category = (props) => {

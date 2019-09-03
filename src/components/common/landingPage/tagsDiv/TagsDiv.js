@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Tag from '../tag/Tag';
+import Tag from '@Common/landingPage/tag/Tag';
 import './tagsDiv.scss';
 
 const TagsDiv = (props) => {

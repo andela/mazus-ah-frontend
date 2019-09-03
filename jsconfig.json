@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["utils/config/*"],
+      "@Config/*": ["utils/config/config/*"],
+      "@Redux/*": ["src/redux/*"],
+      "@Actions/*": ["src/redux/actions/*"],
+      "@Reducers/*": ["src/redux/reducers/*"],
+      "@Types/*": ["src/redux/actions/types/*"],
+      "@Common/*": ["src/components/common/*"],
+      "@Views/*": ["src/components/views/*"],
+      "@Utils/*": ["utils/*"],
+    }
+  },
+  "exclude": ["node_modules", "dist", "__tests__"]
+}

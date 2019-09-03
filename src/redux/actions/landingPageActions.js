@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import Toastr from 'toastr';
-import API_SERVICE from '../../config/API';
+import API_SERVICE from '@Config/API';
 import {
   SET_TAGS, LOADING, SET_ARTICLES, SET_TRENDING_ARTICLES,
-} from './types/landingPage';
+} from '@Types/landingPage';
 
 const setTags = payload => ({
   type: SET_TAGS,
@@ -19,7 +19,6 @@ const setTrendingArticles = payload => ({
 });
 
 export const getTags = () => async (dispatch) => {
-  // dispatch({ type: LOADING, payload: true });
   try {
     const response = await API_SERVICE.get('/articles/tags');
     const { tags } = response.data;
@@ -28,8 +27,7 @@ export const getTags = () => async (dispatch) => {
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
-    Toastr.error(message);
-    return true;
+    return Toastr.error(message);
   }
 };
 
@@ -63,7 +61,6 @@ export const getTrendingArticles = () => async (dispatch) => {
   try {
     const response = await API_SERVICE.get('/articles/trends');
     const { trends } = response.data;
-    console.log('TRENDS FROM ACTION', trends);
     dispatch(setTrendingArticles(trends));
   } catch (error) {
     const { data: { errors } } = error.response;
