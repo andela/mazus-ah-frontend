@@ -1,22 +1,78 @@
-div.profile-tab-container {
-  align-self: center;
-  margin: 5rem 0rem 0rem 0rem;
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-  a {
-    color: #000000 !important;
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: none;
+}
+
+.tab button.active {
+  border-bottom: 1.5px solid #000;
+  font-size: 15px;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+
+form {
+  .search_input_wrap {
+    display: flex;
+  
+    i#search__icon {
+      margin-top: 2rem;
+      border: 1px solid #8E8B8B;
+      border-radius: 1rem 0 0 1rem;
+      border-right: none;
+      padding-top: 0.2rem;
+    }
+    input.browser-default {
+    width: 40% !important;
+    height: 3rem;
+    border-left: none;
+    border: 1px solid #8E8B8B;
+    border-radius: 0 1rem 1rem 0;
+    border-left: none;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0 !important;
+    font-size: 10px;
+    }
+  }
+}
+
+.profileStories {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.singleStory {
+  width: 50%;
+  margin-top: 3rem;
+
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    font-size: 1px;
   }
 
-  .tabs .tab a:focus, .tabs .tab a:focus.active {
-    background-color: transparent;
-    outline: none;
-    font-weight: bolder;
+  @media screen and (max-width: 790px) {
+    width: 100%;
+    margin-left: 1rem;
   }
-
-  li.indicator {
-    background: #000000
-  }
-
-  // div.profile-articles {
-  //   margin-top: 5rem
-  // }
 }

@@ -16,12 +16,14 @@ div.profile-view {
   }
 }
 
-#profile-img-page {
+img#profile-img-page {
   max-width: 13rem;
+  max-height: 13rem;
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  margin-top: 1rem;
+  margin-top: .7rem;
+  border-radius: 100%;
 }
 
 .follower-stats {

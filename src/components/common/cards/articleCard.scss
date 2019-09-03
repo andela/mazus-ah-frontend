@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600|Quicksand:400,500,600&display=swap');
+
+.article-card {
+  max-width: 35rem;
+  height: auto;
+  font-family: 'Quicksand', sans-serif;
+  margin-right: 3rem;
+  .article-section {
+    max-height: 30rem;
+
+    #article-img {
+      width: 100%;
+      max-width: 50rem;
+
+      @media screen and (max-width: 400px) {
+        width: 100%;
+      }
+    }
+    img {
+      height: 22rem !important;
+    }
+    #article-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 30px;
+      color: black;
+      margin: 0.5rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 100%;
+      font-size: 1px;
+    }
+  }
+  .author-section {
+    max-height: 10rem;
+    display: flex;
+    margin-top: 0.8rem;
+    
+    color: #8E8B8B !important;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      p {
+        margin: 0;
+      }
+      #author-name {
+        color: #2FB5EE;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+      }
+      #article-details {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+      }
+    }
+    #author-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+    }
+  }
+}

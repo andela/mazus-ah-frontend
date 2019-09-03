@@ -67,6 +67,7 @@ const articleWithoutTags = {
 
 describe('Article component', () => {
   describe('View article component', () => {
+    window.scrollTo = () => {};
     it('should render a loading message when the article is loading', () => {
       const props = {
         singleArticle: {},
