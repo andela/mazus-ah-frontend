@@ -1,14 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const dotenv = require('dotenv');
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
 const config = require('./webpack.config.js');
 
 const env = dotenv.config().parsed;
-
 module.exports = merge(config, {
   mode: 'production',
   devtool: 'source-map',
@@ -25,4 +24,7 @@ module.exports = merge(config, {
   plugins: [
     new webpack.EnvironmentPlugin(env),
   ],
+  alias: {
+    components: path.resolve('src/components'),
+  },
 });

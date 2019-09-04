@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getTags, getArticlesByCategory } from '../../../../redux/actions/landingPageActions';
-import Cards from '../card/Cards';
+import Loader from '@Common/loader/Loader';
+
+import { getTags, getArticlesByCategory, loaded } from '@Actions/landingPageActions';
+import Cards from '@Common/landingPage/card/Cards';
 import './categories.scss';
 
 const Category = (props) => {
@@ -20,8 +22,9 @@ const Category = (props) => {
   // fetch tags and call the fetchArticle function on Mount
   useEffect(() => {
     const fetchTags = async () => {
+      props.loaded(true);
       const tags = await props.getTags();
-      fetchArticles(tags);
+      await fetchArticles(tags);
     };
 
     fetchTags();
@@ -49,15 +52,16 @@ const Category = (props) => {
 
   const { article: { articles } } = props;
 
-  return (
+  const { isLoading } = props;
+  return isLoading ? <Loader /> : (
     <div>
       {
       articles.map((singleCategory) => {
         let categoryArticle;
-        const cards = singleCategory.articles.allArticles.map((catAticle) => {
-          categoryArticle = catAticle;
+        const cards = singleCategory.articles.allArticles.map((catArticle) => {
+          categoryArticle = catArticle;
           return (
-            <Cards key={catAticle.title} {...catAticle} />
+            <Cards key={catArticle.title} {...catArticle} />
           );
         });
         return (
@@ -82,15 +86,18 @@ Category.propTypes = {
   getArticlesByCategory: PropTypes.func.isRequired,
   article: PropTypes.shape({}).isRequired,
   tags: PropTypes.array.isRequired,
+  loaded: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   tags: state.article.tags,
   article: state.article,
+  isLoading: state.article.isLoading,
 });
 
 
 export default connect(
   mapStateToProps,
-  { getTags, getArticlesByCategory },
+  { getTags, getArticlesByCategory, loaded },
 )(Category);

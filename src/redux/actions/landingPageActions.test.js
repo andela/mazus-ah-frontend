@@ -33,7 +33,7 @@ describe('Test fetch action', () => {
   });
   it('should successfully fetch articles by a category', () => {
     const articlesByCategory = {
-      data: { 
+      data: {
         articles: {
           allArticles: [
             {

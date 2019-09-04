@@ -1,12 +1,12 @@
-import articleReducer from '../landingPageReducer';
 import {
   SET_ARTICLES, SET_TAGS, SET_TRENDING_ARTICLES, LOADING,
-} from '../../actions/types/landingPage';
+} from '@Actions/types/landingPage';
+import articleReducer from '../landingPageReducer';
 
 describe('test article reducer at the initial state', () => {
   const initialState = {
     articles: [],
-    loading: false,
+    isLoading: true,
     tags: [],
     trends: [],
   };
@@ -26,7 +26,7 @@ describe('test article reducer at the initial state', () => {
       {
         tags: [],
         trends: [],
-        loading: false,
+        isLoading: true,
         articles: [
           {
             title: 'How to Catch Goat',
@@ -45,7 +45,7 @@ describe('test article reducer at the initial state', () => {
       {
         tags: ['goats'],
         trends: [],
-        loading: false,
+        isLoading: true,
         articles: [],
       },
     );
@@ -69,7 +69,7 @@ describe('test article reducer at the initial state', () => {
             description: 'Goats are very notorious herbivores',
           },
         ],
-        loading: false,
+        isLoading: true,
         articles: [],
       },
     );
@@ -83,7 +83,7 @@ describe('test article reducer at the initial state', () => {
       {
         tags: [],
         trends: [],
-        loading: true,
+        isLoading: true,
         articles: [],
       },
     );

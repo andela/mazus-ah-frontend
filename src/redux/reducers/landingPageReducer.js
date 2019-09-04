@@ -1,12 +1,12 @@
 import {
   SET_ARTICLES, SET_TAGS, SET_TRENDING_ARTICLES, LOADING,
-} from '../actions/types/landingPage';
+} from '@Actions/types/landingPage';
 
 const initialState = {
   articles: [],
   tags: [],
   trends: [],
-  loading: false,
+  isLoading: true,
 };
 
 export default (state = initialState, action) => {
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     case LOADING:
       return {
         ...state,
-        loading: payload,
+        isLoading: payload,
       };
     default:
       return state;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import formatDate from '../../../../utils/formatDate';
-import readTimeFunc from '../../../../config/readTime';
+import readTimeFunc from '../../../../utils/readTime';
 import './cards.scss';
 
 const Cards = ({

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getTrendingArticles } from '../../../../redux/actions/landingPageActions';
+import { getTrendingArticles } from '@Actions/landingPageActions';
 import './trending.scss';
 
 const formatDate = (createdAt) => {
@@ -11,7 +11,6 @@ const formatDate = (createdAt) => {
 };
 
 const TrendingArticles = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { trends } = props;
   useEffect(() => {
     const fetchTrendingArticles = async () => {
@@ -44,6 +43,7 @@ const TrendingArticles = (props) => {
 
 TrendingArticles.propTypes = {
   getTrendingArticles: PropTypes.func.isRequired,
+  trends: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({

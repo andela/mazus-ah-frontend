@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TagsDiv from '../../common/landingPage/tagsDiv/TagsDiv';
-import Category from '../../common/landingPage/categories/Categories';
-import Trending from '../../common/landingPage/trending/Trending';
+import TagsDiv from '@Common/landingPage/tagsDiv/TagsDiv';
+import Category from '@Common/landingPage/categories/Categories';
+import Trending from '@Common/landingPage/trending/Trending';
 import './landingPage.scss';
 
 const LandingPage = () => (

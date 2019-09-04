@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 import Toastr from 'toastr';
-import API_SERVICE from '../../config/API';
+import API_SERVICE from '@Config/API';
 import {
   SET_TAGS, LOADING, SET_ARTICLES, SET_TRENDING_ARTICLES,
-} from './types/landingPage';
+} from '@Types/landingPage';
 
 const setTags = payload => ({
   type: SET_TAGS,
@@ -19,7 +19,6 @@ const setTrendingArticles = payload => ({
 });
 
 export const getTags = () => async (dispatch) => {
-  dispatch({ type: LOADING, payload: true });
   try {
     const response = await API_SERVICE.get('/articles/tags');
     const { tags } = response.data;
@@ -28,22 +27,28 @@ export const getTags = () => async (dispatch) => {
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
-    Toastr.error(message);
-    return true;
+    return Toastr.error(message);
   }
+};
+
+export const loaded = payload => (dispatch) => {
+  dispatch({
+    type: LOADING,
+    payload,
+  });
 };
 
 export const getArticlesByCategory = (tags, tagsIndex) => async (dispatch) => {
   try {
     tags.map(async (tag) => {
       if (tags.indexOf(tag) >= tagsIndex && tags.indexOf(tag) <= tagsIndex + 9) {
-        await dispatch({ type: LOADING, payload: true });
         const url = `/articles?tag=${tag}&limit=2`;
         const res = await API_SERVICE.get(url);
-        console.log(res.data);
         dispatch(setArticles(res.data));
+        if (tags.indexOf(tag) === 9) {
+          dispatch({ type: LOADING, payload: false });
+        }
       }
-      await dispatch({ type: LOADING, payload: false });
     });
   } catch (error) {
     const { data: { errors } } = error.response;

@@ -10,12 +10,12 @@
         width: 90vw;
       }
     .article-tags {
-            width: 400px;
-            padding: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            @media screen and (max-width: 380px) {
-                width: 90vw;
-              }
+      width: 400px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      @media screen and (max-width: 380px) {
+          width: 90vw;
         }
+      }
 }

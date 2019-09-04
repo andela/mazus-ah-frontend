@@ -3,10 +3,6 @@
 exports[`Test fetch action should fetch all tags successfully 1`] = `
 Array [
   Object {
-    "payload": true,
-    "type": "LOADING",
-  },
-  Object {
     "payload": Array [
       "Fashion",
       "Design",
@@ -59,7 +55,7 @@ Array [
           "createdAt": "2019-08-29T16:04:58.809Z",
           "description": "Vegans beauty tips",
           "dislikes": 0,
-          "id": "aacd607a-4372-4595-af1a-b5aab1b40466",
+          "id": "aacd607a-4372-4595-af1a-b5aab1b40460",
           "isPaid": false,
           "likes": 0,
           "ratings": 0,
@@ -69,7 +65,7 @@ Array [
           "slug": "vegans-and-clear-skin-1567094698809-79498",
           "status": "published",
           "tagsList": Array [
-            "Fashion",
+            "Beauty",
           ],
           "thumbnail": "https://res.cloudinary.com/mazus/image/upload/v1567086471/Spicy-Vegan-Roasted-Vegetable-Quinoa-Salad-from-HeatherChristo.com__xzonxt.jpg",
           "title": "Vegans and clear Skin",
@@ -131,7 +127,7 @@ Array [
           "createdAt": "2019-08-29T16:04:58.809Z",
           "description": "Vegans beauty tips",
           "dislikes": 0,
-          "id": "aacd607a-4372-4595-af1a-b5aab1b40460",
+          "id": "aacd607a-4372-4595-af1a-b5aab1b40466",
           "isPaid": false,
           "likes": 0,
           "ratings": 0,
@@ -141,7 +137,7 @@ Array [
           "slug": "vegans-and-clear-skin-1567094698809-79498",
           "status": "published",
           "tagsList": Array [
-            "Beauty",
+            "Fashion",
           ],
           "thumbnail": "https://res.cloudinary.com/mazus/image/upload/v1567086471/Spicy-Vegan-Roasted-Vegetable-Quinoa-Salad-from-HeatherChristo.com__xzonxt.jpg",
           "title": "Vegans and clear Skin",
@@ -311,7 +307,7 @@ Array [
           "createdAt": "2019-08-29T15:59:39.329Z",
           "description": "Thanos is coming to town",
           "dislikes": 0,
-          "id": "27a73a9d-5ecb-4c89-868e-5ec8aefa8a6d",
+          "id": "27a73a9d-5ecb-4c89-868e-5ec8aefa8a1d",
           "isPaid": false,
           "likes": 0,
           "ratings": 0,
@@ -321,7 +317,7 @@ Array [
           "slug": "first-look-at-endgame-1567094379328-27562",
           "status": "published",
           "tagsList": Array [
-            "Films",
+            "Movies",
           ],
           "thumbnail": "https://res.cloudinary.com/mazus/image/upload/v1567085478/Avengers-Endgame-Banner_vbm2zh.jpg",
           "title": "First Look At Endgame",
@@ -347,7 +343,7 @@ Array [
           "createdAt": "2019-08-29T15:59:39.329Z",
           "description": "Thanos is coming to town",
           "dislikes": 0,
-          "id": "27a73a9d-5ecb-4c89-868e-5ec8aefa8a1d",
+          "id": "27a73a9d-5ecb-4c89-868e-5ec8aefa8a6d",
           "isPaid": false,
           "likes": 0,
           "ratings": 0,
@@ -357,7 +353,7 @@ Array [
           "slug": "first-look-at-endgame-1567094379328-27562",
           "status": "published",
           "tagsList": Array [
-            "Movies",
+            "Films",
           ],
           "thumbnail": "https://res.cloudinary.com/mazus/image/upload/v1567085478/Avengers-Endgame-Banner_vbm2zh.jpg",
           "title": "First Look At Endgame",

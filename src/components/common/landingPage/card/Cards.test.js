@@ -1,9 +1,9 @@
 import React from 'react';
-import Cards from './Cards';
+import Cards from './cards';
 import formatDate from '../../../../utils/formatDate';
 
 describe('Testing date formatting function', () => {
-  it('should fetch all tags successfully', () => {
+  it('should return a month-day time format', () => {
     expect(formatDate('2019-08-29T16:04:58.809Z')).toBe('Aug 4');
   });
 });
