@@ -1,7 +1,7 @@
 import React from 'react';
 import './loader.scss';
 
-const loader = () => (
+const Loader = () => (
   <div className="loader-container">
     <div className="preloader-wrapper big active">
       <div className="spinner-layer spinner-blue-only">
@@ -19,4 +19,4 @@ const loader = () => (
   </div>
 );
 
-export default loader;
+export default Loader;

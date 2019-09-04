@@ -1,14 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import readTimeFunc from '@Config/readTime';
+import formatDate from '../../../../utils/formatDate';
+import readTimeFunc from '../../../../utils/readTime';
 import './cards.scss';
 
-const formatDate = (createdAt) => {
-  const date = new Date(createdAt);
-  return `${date.toLocaleString('default', { month: 'short' })} ${date.getDay()}`;
-};
 const Cards = ({
   thumbnail,
   title,
