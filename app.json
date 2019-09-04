@@ -8,6 +8,9 @@
   "env": {
     "APP_LOGO_WHITE": {
       "required": true
+    },
+    "API_BASE_URL": {
+      "required": true
     }
   },
   "formation": {

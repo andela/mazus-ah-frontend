@@ -1,7 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Toastr from 'toastr';
+import { getToken, authorizeSocialUser } from '@Redux/actions/socialActions';
 import { registerAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
@@ -18,6 +20,16 @@ const SignUp = (props) => {
     password: '',
     confirmPassword: '',
   });
+  useEffect(() => {
+    const { location, socialSignOn, history } = props;
+    const tokenString = location && location.search;
+    if (tokenString) {
+      const token = getToken(tokenString);
+      socialSignOn(token);
+      history.push('/');
+      Toastr.success('Authentication was successful!');
+    }
+  }, [props]);
   const { loading, history, onSubmit } = props;
   const onChange = (event) => {
     event.persist();
@@ -141,9 +153,11 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.auth.errors,
   loading: state.auth.loading,
+  social: state.social,
 });
 const mapDispatchToProps = dispatch => ({
   onSubmit: (newUser, history) => dispatch(registerAccount(newUser, history)),
+  socialSignOn: token => dispatch(authorizeSocialUser(token)),
 });
 export const SignUpComponent = SignUp;
 

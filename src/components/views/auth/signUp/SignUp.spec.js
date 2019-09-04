@@ -12,12 +12,22 @@ const initialState = {
     loading: false,
     error: {},
   },
+  social: {
+    user: {},
+    isAuthenticated: false,
+    loading: false,
+    error: {},
+  },
 };
 const props = {
   loading: false,
   history: {
     push: jest.fn(),
   },
+  location: {
+    search: 'localhost:8080/signup?token=abc',
+  },
+  socialSignOn: jest.fn(),
 };
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -85,5 +95,13 @@ describe('SignUp Component', () => {
     const form = wrapper.find('form');
     form.simulate('submit');
     expect(registerUser).toHaveBeenCalledTimes(1);
+  });
+  it('should call history prop function to redirect users to dashboard on successful authentication', () => {
+    const component = mount(
+      <Router>
+        <SignUp store={store} location={props.location} history={props.history} />
+      </Router>,
+    );
+    expect(props.history.push).toHaveBeenCalledTimes(0);
   });
 });

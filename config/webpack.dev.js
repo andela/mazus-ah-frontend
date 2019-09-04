@@ -7,6 +7,7 @@ const config = require('./webpack.config.js');
 
 const env = dotenv.config().parsed;
 
+
 module.exports = merge(config, {
   mode: 'development',
   devtool: 'inline-source-map',

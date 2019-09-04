@@ -24,5 +24,8 @@ module.exports = merge(config, {
   },
   plugins: [
     new webpack.EnvironmentPlugin(env),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(env),
+    }),
   ],
 });
