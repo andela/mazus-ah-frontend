@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
 import './app.scss';
-import Welcome from './components/views/welcome/Welcome';
-import SignIn from './components/views/auth/signIn/Signin';
-import SignUp from './components/views/auth/signUp/SignUp';
-import NotFound from './components/views/notFound/NotFound';
+import Welcome from '@Views/welcome/Welcome';
+import SignIn from '@Views/auth/signIn/Signin';
+import SignUp from '@Views/auth/signUp/SignUp';
+import NotFound from '@Views/notFound/NotFound';
+import store from './redux/store';
+
 
 const App = () => (
   <Provider store={store}>

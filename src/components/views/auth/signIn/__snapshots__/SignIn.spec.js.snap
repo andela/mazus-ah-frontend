@@ -1,11 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignIn Component Password Input check 1`] = `ShallowWrapper {}`;
-
-exports[`SignIn Component email Input check 1`] = `ShallowWrapper {}`;
-
-exports[`SignIn Component should call onChange prop with input value 1`] = `ReactWrapper {}`;
-
-exports[`SignIn Component should render along with children component 1`] = `ReactWrapper {}`;
-
 exports[`SignIn Component should render without errors 1`] = `ShallowWrapper {}`;

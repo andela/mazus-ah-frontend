@@ -1,17 +1,27 @@
 import React from 'react';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
-import store from '@Redux/store/index';
-import InputField from '@Common/form/InputField';
 import SignUp, { SignUpComponent } from './SignUp';
 
+const initialState = {
+  auth: {
+    user: {},
+    isAuthenticated: false,
+    loading: false,
+    error: {},
+  },
+};
 const props = {
   loading: false,
   history: {
     push: jest.fn(),
   },
 };
-
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+const store = mockStore(initialState);
 describe('SignUp Component', () => {
   it('Should render without errors', () => {
     const component = shallow(
@@ -27,44 +37,51 @@ describe('SignUp Component', () => {
         <SignUp store={store} {...props} />
       </Router>,
     );
-    expect(component).toMatchSnapshot();
     expect(component.find('button')).toHaveLength(3);
     expect(component.find('input')).toHaveLength(5);
     expect(component.find('img')).toHaveLength(1);
   });
-
-  it('should call onChange prop with input value', () => {
-    const onChange = jest.fn();
-    const component = mount(<InputField value="custom email" type="email" name="email" onChange={onChange} />);
-    expect(component).toMatchSnapshot();
+  it('should call onChange props for email input', () => {
+    const wrapper = mount(
+      <Router>
+        <SignUp store={store} {...props} />
+      </Router>,
+    );
+    const emailInput = wrapper.find('input[type="email"]');
+    emailInput.simulate('change', {
+      persist: () => { },
+      target: {
+        name: 'email',
+        value: 'jandoe@test.com',
+      },
+    });
+    expect(wrapper.find('input[type="email"]').length).toEqual(1);
+    expect(emailInput.html()).toMatch('jandoe@test.com');
+    wrapper.unmount();
   });
 
-  it('email Input check', () => {
-    const onChange = jest.fn();
-    const registerUser = jest.fn();
-    const event = {
-      persist: jest.fn(),
-      target: { value: 'james@email.com', name: 'email' },
-    };
-    const wrapper = shallow(<SignUpComponent onSubmit={registerUser} onChange={onChange} {...props} />);
-    wrapper.find('Input[type="email"]').at(0).simulate('change', event);
-    expect(wrapper.find('input[name="email"]')).toMatchSnapshot();
-  });
-  it('Password Input check', () => {
-    const onChange = jest.fn();
-    const registerUser = jest.fn();
-    const event = {
-      persist: jest.fn(),
-      target: { value: 'P455word', name: 'password' },
-    };
-    const wrapper = shallow(<SignUpComponent onSubmit={registerUser} onChange={onChange} {...props} />);
-    wrapper.find('Input[type="password"]').at(0).simulate('change', event);
-    expect(wrapper.find('input[name="password"]')).toMatchSnapshot();
+  it('should call onChange props for password input', () => {
+    const wrapper = mount(
+      <Router>
+        <SignUp store={store} {...props} />
+      </Router>,
+    );
+    const passwordInput = wrapper.find('input[type="password"]').at(0);
+    passwordInput.simulate('change', {
+      persist: () => { },
+      target: {
+        name: 'password',
+        value: 'P4ssw0rd',
+      },
+    });
+    expect(wrapper.find('input[type="password"]').length).toEqual(2);
+    expect(passwordInput.html()).toMatch('P4ssw0rd');
+    wrapper.unmount();
   });
 
   it(' should call onSubmit prop function when form is submitted', () => {
     const registerUser = jest.fn();
-    const wrapper = mount(<SignUpComponent onSubmit={registerUser} {...props} />);
+    const wrapper = mount(<Router><SignUpComponent onSubmit={registerUser} {...props} /></Router>);
     const form = wrapper.find('form');
     form.simulate('submit');
     expect(registerUser).toHaveBeenCalledTimes(1);

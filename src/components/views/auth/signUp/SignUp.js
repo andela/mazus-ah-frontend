@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
@@ -114,6 +115,11 @@ const SignUp = (props) => {
             </h2>
           </div>
           <SocialButtons />
+          <div className="btn-top-margin navigate-link">
+            <h3>Already have an account?
+              <Link to="/signin">&nbsp;Sign In</Link>
+            </h3>
+          </div>
         </div>
       </div>
     </Fragment>
@@ -141,7 +147,7 @@ const mapDispatchToProps = dispatch => ({
 });
 export const SignUpComponent = SignUp;
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignUp);
+)(SignUp));

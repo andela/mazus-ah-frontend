@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signInAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
@@ -25,7 +25,6 @@ const Signin = (props) => {
     event.preventDefault();
     onSubmit(values, history);
   };
-
   return (
     <Fragment>
       <div className="container-body">
@@ -60,14 +59,12 @@ const Signin = (props) => {
               </div>
               <div className="form-links">
                 <h5>
-                  <Router>
-                    <Link to="/forgotpassword">forgot password?</Link>
-                  </Router>
+                  <Link to="/forgotpassword">forgot password?</Link>
                 </h5>
               </div>
             </div>
             <div className="input-field">
-              <button className="bttn bttn-primary btn-block bttn-large" type="submit" value="Sign in" disabled={loading}>{
+              <button className="bttn bttn-primary btn-block bttn-large" type="submit" value="Sign In" disabled={loading}>{
                 loading ? 'Loading...' : 'Sign In'
               }
                 <i className="arrow-forward material-icons">arrow_forward</i>
@@ -84,11 +81,9 @@ const Signin = (props) => {
             </h2>
           </div>
           <SocialButtons />
-          <div className="input-field btn-top-margin">
+          <div className="input-field btn-top-margin navigate-link">
             <h3>New to Authors Haven?
-              <Router>
-                <Link to="/signup">&nbsp;Sign Up</Link>
-              </Router>
+              <Link to="/signup">&nbsp;Sign Up</Link>
             </h3>
           </div>
         </div>
@@ -113,7 +108,7 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: (userData, history) => dispatch(signInAccount(userData, history)),
 });
 export const SigninComponent = Signin;
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Signin);
+)(Signin));

@@ -1,7 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import Toastr from 'toastr';
-// eslint-disable-next-line no-unused-vars
-import API_SERVICE, { API_URL } from '@Utils/API';
+import API_SERVICE from '@Utils/API';
 import setAuthTokenHeader from '@Utils/setAuthToken';
 
 import {
@@ -60,7 +59,7 @@ export const registerAccount = (userData, history) => async (dispatch) => {
   try {
     const newUser = await API_SERVICE.post('/auth/signup', userData);
     const { token } = newUser.data.user;
-    Toastr.success('Account succesfully created');
+    Toastr.success('Account Created! Check your inbox to verify your email');
     dispatch(authSuccess(token));
     return history.push('/signin');
   } catch (error) {

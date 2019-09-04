@@ -98,50 +98,53 @@ html {
 }
 .container-body {
   width: 100%;
-	height: 100%;
 	font-family: $font_family_1;
-  overflow: hidden;
-  position:fixed;
-  padding:0;
-  margin:0;
-  top:0;
-  left:0;
   display: flex;
+  height: 100vh;
+  @media screen and (max-height: 700px) {
+    height: 100%;
+  }
 }
 .left-block {
+  display: flex;
+  flex-direction: column;
   background: url('https://res.cloudinary.com/mazus/image/upload/v1567104377/Group_ud0sto.png') no-repeat center;
   background-size: cover;
   position: relative;
   width:50%;
-  .text-field{
-    width: 50%;
-    margin: 0 auto;
-    color: $color_2; 
-    padding-top: 0;
-    font-family: $font_family_1;
-    h1{
-      text-align: center;
-      width: 100%;
-      font-size: 2.5rem;
-      line-height: 1.1;
-      letter-spacing: .5rem;
+
+  .top-block{
+    flex: 1 0 auto;
+    .text-field{
+      width: 50%;
+      margin: 0 auto;
+      color: $color_2; 
+      padding-top: 0;
+      font-family: $font_family_1;
+      h1{
+        text-align: center;
+        width: 100%;
+        font-size: 2.5rem;
+        line-height: 1.1;
+        letter-spacing: .5rem;
+      }
     }
   }
-  .extra-text-field {
+
+.footer {
 text-align: center;
+width: 80%;
 margin: 0 auto;
 font-size: $default-font-size;
 color: #fff;
-position: absolute;
-transform: translate(-50%, -50%);
-left: 50%;
-right: 0;
-bottom: 0
+flex-shrink: 0;
+padding-bottom: 3rem;
   }
 
   @include respond(phone) {
     display: none;
-}}
+}
+}
 .right-block {
   width: 50%;
   height: 100%;
@@ -153,12 +156,17 @@ bottom: 0
 }
 .main-form {
   margin-top: 10rem;
+ 
   @include respond(phone) {
     margin-top: 3rem;
   }
 }
 .main-form-signup {
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   @include respond(phone) {
     margin-top: 3rem;
   }
@@ -238,6 +246,10 @@ input{
     // width: 80%;
   }
 }
+input::placeholder{
+  color: #c2b7b7;
+}
+
 .validateInput{
   width: 50%;
 	margin-bottom: 10px;
@@ -276,11 +288,14 @@ input{
 }
 
 .flex-input{
+  width:86%;
   display: flex;
-  margin-right: 4rem;
-  margin-left: 4rem;
+  @include respond(phone) {
+    flex-flow: row wrap;
+    width: 100%;
+  }
   .flex-field{
-    width: 50%;
+    width: 100%;
   }
 }
 .img-mobile-field {
@@ -380,4 +395,8 @@ input{
 }
 .btn-top-margin {
 	margin-top: 1rem;
+}
+.navigate-link h3{
+  font-size: 1.6rem;
+  text-align: center;
 }

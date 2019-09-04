@@ -45,6 +45,7 @@ module.exports = {
       '@Redux': path.resolve(__dirname, '../src/redux/'),
       '@Common': path.resolve(__dirname, '../src/components/common/'),
       '@Utils': path.resolve(__dirname, '../utils/'),
+      '@Views': path.resolve(__dirname, '../src/components/views/'),
     },
   },
   node: {

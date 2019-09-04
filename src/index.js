@@ -5,17 +5,17 @@ import App from './app';
 import '../node_modules/toastr/build/toastr.css';
 
 Toastr.options = {
-  closeButton: false,
+  closeButton: true,
   debug: false,
   newestOnTop: false,
   progressBar: false,
   positionClass: 'toast-top-center',
   preventDuplicates: false,
   onclick: null,
-  showDuration: '300',
-  hideDuration: '1000',
+  showDuration: '5000',
+  hideDuration: '3000',
   timeOut: '5000',
-  extendedTimeOut: '1000',
+  extendedTimeOut: '5000',
   showEasing: 'swing',
   hideEasing: 'linear',
   showMethod: 'fadeIn',
