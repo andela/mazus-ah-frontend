@@ -1,0 +1,67 @@
+.article-card {
+  max-width: 35rem;
+  height: auto;
+  font-family: 'Quicksand', sans-serif;
+  margin-right: 3rem;
+
+  @media screen and (max-width: 580px) {
+    margin: 0 0 3rem 0;
+  }
+  .article-section {
+    max-height: 30rem;
+
+    #article-img {
+      width: 100%;
+      max-width: 50rem;
+    }
+    img {
+      height: 22rem !important;
+    }
+    #article-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 30px;
+      color: black;
+      margin: 0.5rem;
+    }
+  }
+  .author-section {
+    max-height: 10rem;
+    display: flex;
+    margin-top: 0.8rem;
+
+
+    div {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      p {
+        margin: 0;
+      }
+      #author-name {
+        color: #2FB5EE;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+      }
+      #article-details {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+      }
+    }
+    #author-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+    }
+  }
+}
+
+.article-card:last-child {
+  @media screen and (max-width: 768px) {
+    margin: 0 0 3rem 0;
+  }
+} 

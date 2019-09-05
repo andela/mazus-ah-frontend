@@ -41,12 +41,15 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve(__dirname, '../src/'),
-      '@Redux': path.resolve(__dirname, '../src/redux/'),
-      '@Common': path.resolve(__dirname, '../src/components/common/'),
-      '@Views': path.resolve(__dirname, '../src/components/views/'),
-      '@Utils': path.resolve(__dirname, '../utils/'),
-      '@Views': path.resolve(__dirname, '../src/components/views/'),
+      '@': path.resolve(__dirname, '../', 'src/'),
+      '@Config': path.resolve(__dirname, '../', 'src/config/'),
+      '@Redux': path.resolve(__dirname, '../', 'src/redux/'),
+      '@Actions': path.resolve(__dirname, '../', 'src/redux/actions'),
+      '@Reducers': path.resolve(__dirname, '../', 'src/redux/reducers'),
+      '@Types': path.resolve(__dirname, '../', 'src/redux/actions/types'),
+      '@Common': path.resolve(__dirname, '../', 'src/components/common/'),
+      '@Utils': path.resolve(__dirname, '../', 'utils/'),
+      '@Views': path.resolve(__dirname, '../', 'src/components/views'),
     },
   },
   node: {

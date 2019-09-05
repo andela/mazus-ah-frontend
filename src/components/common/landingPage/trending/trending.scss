@@ -1,0 +1,22 @@
+.trending-container {
+  display: flex;
+  margin: 1rem 1rem 1rem 2rem;
+    #article-number {
+      color: #8E8B8B;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 30px;
+      margin: 0.4rem 1rem 0 0;
+    }
+    #trending-title h1{
+      color: black;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0 0 0.4rem 0;
+    }
+    p {
+      font-size: 16px;
+    }
+} 

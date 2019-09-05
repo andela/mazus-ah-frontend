@@ -1,0 +1,5 @@
+export const SET_ARTICLES = 'SETTING_ARTICLES';
+export const SET_TAGS = 'SETTING_TAGS';
+export const SET_TRENDING_ARTICLES = 'SET_TRENDING_ARTICLES';
+export const LOADING = 'LOADING';
+export const SET_ERROR = 'SETTING_ERROR';

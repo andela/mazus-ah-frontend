@@ -1,0 +1,36 @@
+.category-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70rem;
+  @media screen and (max-width: 768px) {
+   padding-left: 1rem; 
+  }
+  .top-div {
+    display: flex;
+    justify-content: space-between;
+    margin:4rem 4rem 0rem 1rem;
+
+    p {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    #related-articles-btn, i {
+      font-size: 18px; 
+      margin-top: auto;
+      color: #2FB5EE !important;
+    }
+  }
+  .bottom-div {
+    display: flex;
+    padding: 1rem;
+    @media screen and (max-width: 580px) {
+      flex-wrap: wrap;
+      min-width: 30rem;
+    }
+  }
+}
+
+.loadingIndicator {
+  margin: 1rem;
+} 
