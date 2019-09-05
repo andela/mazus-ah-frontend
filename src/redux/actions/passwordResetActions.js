@@ -1,4 +1,5 @@
-import Toastr from 'toastr';
+import { message as alert } from 'antd';
+import '@Common/antAlert.scss';
 import API_SERVICE, { API_URL } from '@Utils/API';
 
 import {
@@ -36,7 +37,7 @@ export const requestPasswordResetLink = email => async (dispatch) => {
     const result = await API_SERVICE.post(`${API_URL}/auth/forgotpassword`, { email });
     dispatch(success(result.data.auth.message));
   } catch (err) {
-    Toastr.error(err.response.data.errors.message);
+    alert.error(err.response.data.errors.message);
     dispatch(failed(''));
   }
 };
@@ -47,7 +48,7 @@ export const applyReset = (password, confirmPassword, token) => async (dispatch)
     const result = await API_SERVICE.patch(`${API_URL}/auth/resetpassword/${token}`, { password, confirmPassword });
     dispatch(success(result.data.auth.message));
   } catch (err) {
-    Toastr.error(err.response.data.errors.message);
+    alert.error(err.response.data.errors.message);
     dispatch(failed(''));
   }
 };

@@ -2,7 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Toastr from 'toastr';
+import { message as alert } from 'antd';
+import '@Common/antAlert.scss';
 import { getToken, authorizeSocialUser } from '@Redux/actions/socialActions';
 import { registerAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
@@ -27,7 +28,7 @@ const SignUp = (props) => {
       const token = getToken(tokenString);
       socialSignOn(token);
       history.push('/');
-      Toastr.success('Authentication was successful!');
+      alert.success('Authentication was successful!');
     }
   }, [props]);
   const { loading, history, onSubmit } = props;

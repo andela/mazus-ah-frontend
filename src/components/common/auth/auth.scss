@@ -118,7 +118,7 @@ html {
     .text-field{
       width: 50%;
       margin: 0 auto;
-      color: $color_2; 
+      color: $color_2 !important; 
       padding-top: 0;
       font-family: $font_family_1;
       h1{

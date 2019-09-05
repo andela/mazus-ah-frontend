@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
-import Toastr from 'toastr';
+import { message as alert } from 'antd';
+import '@Common/antAlert.scss';
 import API_SERVICE from '@Utils/API';
 import setAuthTokenHeader from '@Utils/setAuthToken';
 
@@ -42,13 +43,13 @@ export const signInAccount = (userData, history) => async (dispatch) => {
     localStorage.setItem('jwtToken', token);
     const user = jwtDecode(token);
     setAuthTokenHeader(token);
-    Toastr.success('User successfully logged in');
+    alert.success('User successfully logged in');
     dispatch(authSuccess(user));
     return history.push('/');
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
-    Toastr.error(message);
+    alert.error(message);
     return dispatch(authFailed(message));
   }
 };
@@ -59,13 +60,13 @@ export const registerAccount = (userData, history) => async (dispatch) => {
   try {
     const newUser = await API_SERVICE.post('/auth/signup', userData);
     const { token } = newUser.data.user;
-    Toastr.success('Account Created! Check your inbox to verify your email');
+    alert.success('Account Created! Check your inbox to verify your email');
     dispatch(authSuccess(token));
     return history.push('/signin');
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
-    Toastr.error(message);
+    alert.error(message);
     return dispatch(authFailed(message));
   }
 };
