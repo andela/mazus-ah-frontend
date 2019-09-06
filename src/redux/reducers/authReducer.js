@@ -25,6 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: payload.loading,
         user: payload.user,
+        isAuthenticated: true,
       };
     case AUTH_FAILED:
       return {

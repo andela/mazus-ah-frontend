@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import SignIn from '@Views/auth/signIn/Signin';
 import SignUp from '@Views/auth/signUp/SignUp';
@@ -7,9 +11,10 @@ import NotFound from '@Views/notFound/NotFound';
 import SubmitEmail from '@Views/passwordReset/SubmitEmail';
 import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
+import Article from '@Views/article/Article';
+import ContainerWrapper from '@Common/hoc/ContainerWrapper';
 import store from './redux/store';
 import './app.scss';
-
 
 const App = () => (
   <Provider store={store}>
@@ -19,8 +24,9 @@ const App = () => (
         <Route exact path="/signin" component={SignIn} />
         <Route path="/forgot-password" component={SubmitEmail} />
         <Route path="/reset-password/:token" component={PasswordResetForm} />
-        <Route exact path="/" component={LandingPage} />
-        <Route path="*" component={NotFound} />
+        <ContainerWrapper exact path="/" component={LandingPage} />
+        <ContainerWrapper exact path="/article/:slug" component={Article} />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   </Provider>

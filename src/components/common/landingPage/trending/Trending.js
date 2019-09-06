@@ -27,7 +27,7 @@ const TrendingArticles = (props) => {
           <div className="trending-container" key={singleArticle.id}>
             <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
             <div>
-              <Link id="trending-title" to="*"><h1>{singleArticle.title}</h1></Link>
+              <Link id="trending-title" to={`/article/${singleArticle.slug}`}><h1>{singleArticle.title}</h1></Link>
               <p>{singleArticle.description}</p>
               <p className="fade-text">{formatDate(singleArticle.createdAt)}  •  {singleArticle.readTime} mins read</p>
             </div>

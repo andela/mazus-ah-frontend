@@ -22,7 +22,5 @@ Toastr.options = {
   hideMethod: 'fadeOut',
 };
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<App />,
+  document.getElementById('root'));

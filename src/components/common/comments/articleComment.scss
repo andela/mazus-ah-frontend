@@ -1,0 +1,60 @@
+div.article__comments {
+  margin-bottom: 5rem;
+
+  div.article__comment_card {
+    margin-top: 5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+
+    .user__comment_info {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;;
+
+      p {
+        margin-left: 1.5rem;
+      }
+
+      .commenter__name {
+          font-size: 14px;
+          font-weight: 600;
+          color: #2FB5EE;
+        }
+        
+      .commenter__time {
+        color: #7E7C7C;
+        font-size: 11px;
+      }
+    }
+
+    div.comment__body {
+      padding: 1rem;
+
+      p {
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+      }
+    }
+
+    div.comment__likes {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding-right: 4rem;
+
+      p, i {
+        color: #7E7C7C;
+        padding-left: 1rem;
+      }
+
+      i#comment__likes__icon {
+        font-size: 18px;
+      }
+
+      p.comment__likes__count {
+        font-size: 12px;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -11,9 +11,10 @@ const Cards = ({
   createdAt,
   readTime,
   author,
+  slug,
 }) => (
   <div className="article-card">
-    <Link className="article-section" to="*">
+    <Link className="article-section" to={`/article/${slug}`}>
       <img
         src={thumbnail}
         alt="articleImg"
@@ -42,6 +43,7 @@ Cards.propTypes = {
   createdAt: PropTypes.string.isRequired,
   readTime: PropTypes.number.isRequired,
   author: PropTypes.shape({}).isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Cards;

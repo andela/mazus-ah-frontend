@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const config = require('./webpack.config.js');
@@ -14,10 +14,11 @@ module.exports = merge(config, {
   devtool: 'source-map',
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
+      new TerserPlugin({
         parallel: true,
-        sourceMap: true,
+        terserOptions: {
+          ecma: 6,
+        },
       }),
       new OptimizeCSSAssetsPlugin({}),
     ],

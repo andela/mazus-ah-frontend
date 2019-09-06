@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container wrapper higher order component should render the component without crashing 1`] = `ShallowWrapper {}`;

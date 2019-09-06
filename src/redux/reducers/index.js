@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
-import articleReducer from './landingPageReducer';
+import LandingPageReducer from './landingPageReducer';
 import authReducer from './authReducer';
 import passwordResetReducer from './passwordResetReducer';
 import socialReducer from './socialReducer';
+import singleArticleReducer from './articleReducer';
 
 
 export default combineReducers({
-  article: articleReducer,
+  article: LandingPageReducer,
   auth: authReducer,
   requestReset: passwordResetReducer,
   social: socialReducer,
+  singleArticle: singleArticleReducer,
 });
