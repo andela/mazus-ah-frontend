@@ -1,7 +1,6 @@
 .category-container {
   display: flex;
   flex-direction: column;
-  max-width: 70rem;
   @media screen and (max-width: 768px) {
    padding-left: 1rem; 
   }

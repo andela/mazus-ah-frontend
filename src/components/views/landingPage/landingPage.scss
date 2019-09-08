@@ -2,7 +2,11 @@
   display: flex;
   justify-content: space-between;
 
+  .main-content {
+    flex: 2;
+  }
   .side-bar {
+    flex: 1;
     .trending {
       position: sticky;
       padding-top: 2rem;
