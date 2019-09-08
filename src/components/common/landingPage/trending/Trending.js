@@ -22,13 +22,13 @@ const TrendingArticles = (props) => {
   return (
     trends.articles ? trends.articles.map((singleArticle) => {
       /* istanbul ignore next-line */
-      if (trends.articles.indexOf(singleArticle) <= 7) {
+      if (trends.articles.indexOf(singleArticle) <= 6) {
         return (
           <div className="trending-container" key={singleArticle.id}>
-            <p id="article-number">{trends.articles.indexOf(singleArticle) + 1}</p>
+            <p id="article-number">0{trends.articles.indexOf(singleArticle) + 1}</p>
             <div>
               <Link id="trending-title" to={`/article/${singleArticle.slug}`}><h1>{singleArticle.title}</h1></Link>
-              <p>{singleArticle.description}</p>
+              <p>{`${singleArticle.description.slice(0, 30)}. . .`}</p>
               <p className="fade-text">{formatDate(singleArticle.createdAt)}  •  {singleArticle.readTime} mins read</p>
             </div>
           </div>
