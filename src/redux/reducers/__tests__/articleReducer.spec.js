@@ -3,6 +3,7 @@ import {
   getSingleArticle,
   articleError,
   getArticles,
+  clearArticleError,
 } from '@Redux/actions/articleActions';
 import articleReducer, { initialState } from '../articleReducer';
 
@@ -82,5 +83,12 @@ describe('Article reducer', () => {
     expect(type).toEqual('GET_ARTICLES');
     expect(payload.loading).toEqual(false);
     expect(payload.articles).toEqual([]);
+  });
+
+  it('it should handle an action with type CLEAR_ARTICLE_ERROR', () => {
+    const { type, payload } = clearArticleError();
+    newState = articleReducer(initialState, { type, payload });
+    expect(type).toEqual('CLEARING ARTICLE ERROR');
+    expect(payload.error).toEqual({});
   });
 });

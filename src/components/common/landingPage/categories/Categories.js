@@ -64,7 +64,7 @@ const Category = (props) => {
           <div key={categoryArticle.tagsList[0]} className="category-container">
             <div className="top-div">
               <p>{categoryArticle.tagsList[0]}</p>
-              <p id="related-articles-btn"><Link to="*">related articles <i className="material-icons">navigate_next</i></Link></p>
+              <p id="related-articles-btn"><Link to="*">related articles <i id="naviagte_next_icon" className="material-icons">navigate_next</i></Link></p>
             </div>
             <div className="bottom-div">
               {cards}

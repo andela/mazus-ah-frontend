@@ -5,6 +5,7 @@ import {
   GET_ARTICLE_ERROR,
   GET_SINGLE_ARTICLE,
   ARTICLE_LOADING,
+  CLEAR_ARTICLE_ERROR,
 } from './types/articleType';
 
 const articles = [];
@@ -32,7 +33,15 @@ export const articleError = error => ({
   },
 });
 
+export const clearArticleError = () => ({
+  type: CLEAR_ARTICLE_ERROR,
+  payload: {
+    error: {},
+  },
+});
+
 export const getArticleBySlug = slug => async (dispatch) => {
+  dispatch(clearArticleError());
   dispatch(articleLoading());
   try {
     const fetchArticle = await API_SERVICE.get(`/articles/${slug}`);
