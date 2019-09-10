@@ -1,8 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { logoutAccount } from '@Redux/actions/authActions';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 import Materialize from 'materialize-css';
 
-export default () => {
+const AuthenticatedHeader = ({ logout, history }) => {
   useEffect(() => {
     const dropDownElems = document.querySelectorAll('.dropdown-trigger');
     const sideNavElems = document.querySelectorAll('.sidenav');
@@ -10,14 +13,17 @@ export default () => {
     Materialize.Dropdown.init(dropDownElems);
   });
 
+  const logoutUser = () => {
+    logout(logoutAccount(history));
+  };
+
   return (
-    <Fragment>
+    <div>
       <ul id="dropdown1" className="dropdown-content">
         <li><Link to="*"><i className="material-icons">post_add</i>New article</Link></li>
         <li><Link to="*"><i className="material-icons">account_circle</i>Profile</Link></li>
-        <li><a href="#!"><i className="material-icons">exit_to_app</i>Sign out</a></li>
+        <li><Link to="#*" onClick={logoutUser}><i className="material-icons">exit_to_app</i>Sign out</Link></li>
       </ul>
-
       <nav className="nav-extended">
         <div className="nav-wrapper">
           <Link to="/">
@@ -38,11 +44,10 @@ export default () => {
           </ul>
         </div>
       </nav>
-
       <ul className="sidenav" id="mobile-demo">
         <li><Link to="*"><i className="material-icons">post_add</i>New article</Link></li>
         <li><Link to="*"><i className="material-icons">account_circle</i>Profile</Link></li>
-        <li><a href="#!"><i className="material-icons">exit_to_app</i>Sign out</a></li>
+        <li><Link to="#*" onClick={logoutUser}><i className="material-icons">exit_to_app</i>Sign out</Link></li>
         <li className="divider" tabIndex="-1" />
         <li><Link to="/">HOME</Link></li>
         <li><Link to="*">BUSINESS</Link></li>
@@ -50,6 +55,25 @@ export default () => {
         <li><Link to="*">CULTURE</Link></li>
         <li><Link to="*">MORE...</Link></li>
       </ul>
-    </Fragment>
+    </div>
   );
 };
+
+AuthenticatedHeader.propTypes = {
+  auth: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({}).isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = dispatch => ({
+  logout: action => dispatch(action),
+});
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AuthenticatedHeader));

@@ -9,8 +9,9 @@ import {
   AUTH_FAILED,
   AUTH_LOADING,
   AUTH_SUCCESS,
+  LOGOUT,
 } from './types/authType';
-import { registerAccount, signInAccount } from './authActions';
+import { registerAccount, signInAccount, logoutAccount } from './authActions';
 
 const mockStore = configureMockStore([thunk]);
 const userData = {
@@ -209,6 +210,24 @@ describe('Signin User actions', () => {
 
     axios.post.mockRejectedValue(failedRequest);
     await store.dispatch(signInAccount(userData, props.history));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
+  it('should dispatch LOGOUT when user logs out', async () => {
+    const successfulRequest = {
+      response: {
+        data: {
+          message: 'Successfully logged out',
+        },
+      },
+    };
+    const expectedActions = [
+      {
+        type: LOGOUT,
+      },
+    ];
+    axios.post.mockResolvedValue(successfulRequest);
+    await store.dispatch(logoutAccount(props.history));
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });

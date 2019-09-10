@@ -2,12 +2,12 @@ import jwtDecode from 'jwt-decode';
 import { message as alert } from 'antd';
 import '@Common/antAlert.scss';
 import API_SERVICE from '@Utils/API';
-import setAuthTokenHeader from '@Utils/setAuthToken';
 
 import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
+  LOGOUT,
 } from './types/authType';
 
 
@@ -42,7 +42,6 @@ export const signInAccount = (userData, history) => async (dispatch) => {
     const { token } = logInUser.data.user;
     localStorage.setItem('jwtToken', token);
     const user = jwtDecode(token);
-    setAuthTokenHeader(token);
     alert.success('User successfully logged in');
     dispatch(authSuccess(user));
     return history.push('/');
@@ -67,6 +66,24 @@ export const registerAccount = (userData, history) => async (dispatch) => {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];
     alert.error(message);
+    return dispatch(authFailed(message));
+  }
+};
+
+export const logout = () => ({
+  type: LOGOUT,
+});
+
+export const logoutAccount = history => async (dispatch) => {
+  try {
+    await API_SERVICE.post('/auth/logout');
+    dispatch(logout());
+    localStorage.removeItem('jwtToken');
+    alert.success('You have successfully signed out!');
+    return history.push('/');
+  } catch (error) {
+    const { data: { errors } } = error.response;
+    const message = Object.values(errors)[0];
     return dispatch(authFailed(message));
   }
 };

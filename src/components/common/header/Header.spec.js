@@ -1,13 +1,27 @@
+/* eslint-disable max-len */
 import React from 'react';
+import configureMockStore from 'redux-mock-store';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { HeaderComponent } from './Header';
+import ConnectedHeader, { HeaderComponent } from './Header';
 import AuthenticatedHeader from './AuthenticatedHeader';
 import UnauthenticatedHeader from './UnauthenticatedHeader';
 
+const initialState = {
+  auth: {
+    user: {},
+    isAuthenticated: false,
+    loading: false,
+    error: {},
+  },
+};
+
+const mockStore = configureMockStore();
+const store = mockStore(initialState);
+
 describe('<AuthenticatedHeader /> Component', () => {
   it('should render the Authenticated Header without crashing', () => {
-    const wrapper = shallow(<AuthenticatedHeader />);
-    expect(wrapper.find('div').length).toEqual(1);
+    const wrapper = mount(<Router><AuthenticatedHeader store={store} /></Router>);
+    expect(wrapper.find('div').length).toEqual(2);
     expect(wrapper.find('nav').length).toEqual(1);
   });
 });
@@ -45,13 +59,13 @@ describe('<Header /> Component', () => {
 
     const wrapper = mount(
       <Router>
-        <HeaderComponent {...props} />
+        <ConnectedHeader store={store} {...props} />
       </Router>,
     );
     expect(wrapper.find('div').length).toEqual(1);
     expect(wrapper.find('nav').length).toEqual(1);
-    expect(wrapper.find('Link').length).toEqual(16);
-    expect(wrapper.find('img').length).toEqual(2);
+    expect(wrapper.find('Link').length).toEqual(15);
+    expect(wrapper.find('img').length).toEqual(1);
     wrapper.unmount();
   });
 });
