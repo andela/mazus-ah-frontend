@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import ContainerWrapper from './ContainerWrapper';
-import ArticleComment from '../comments/ArticleComment';
+import ArticleComment from '../comments/ArticleCommentList';
 
 const initialState = {
   auth: {
@@ -18,8 +18,18 @@ const mockStore = configureMockStore(middlewares);
 const store = mockStore(initialState);
 
 describe('Container wrapper higher order component', () => {
+  const user = {
+    id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+    firstName: 'Tunji',
+    lastName: 'Abioye',
+    profile: {
+      title: 'The Curious Case of Benjamin Buttons',
+      avatar: 'getting-started-with-nodejs-&-express-1564498223366-74536',
+    },
+  };
   const props = {
-    component: () => <ArticleComment />,
+
+    component: () => <ArticleComment user={user} />,
     render: () => ({}),
   };
 

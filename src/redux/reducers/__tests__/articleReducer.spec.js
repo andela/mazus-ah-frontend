@@ -4,6 +4,7 @@ import {
   articleError,
   getArticles,
   clearArticleError,
+  createArticleComment,
 } from '@Redux/actions/articleActions';
 import articleReducer, { initialState } from '../articleReducer';
 
@@ -27,6 +28,77 @@ const article = {
   createdAt: '2019-07-30T14:50:23.368Z',
   updatedAt: 'Unknown Type: date',
   author: {
+    id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+    firstName: 'Darth',
+    lastName: 'Vader',
+    email: 'darthssvader@gmail.com',
+    profile: {
+      id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+      userId: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+      bio: 'I am just a guy who loves to code, bro',
+      avatar: 'https://www.instagram.com/darth_vader/img.jpg',
+      createdAt: '2019-07-30T14:00:23.458Z',
+      updatedAt: 'Unknown Type: date',
+    },
+  },
+};
+
+const stateArticle = {
+  id: 'c7baa165-6142-4b4c-b60a-bdfb277d1bf1',
+  title: 'A 5-Minute Ride Proves the Future of Air Travel Is Already Here',
+  slug: 'a-5-minute-ride-proves-the-future-of-air-travel-is-already-here-1568051107848',
+  body: '{"time":1568051107848,"blocks":[{"type":"image","data":{"url":"https://miro.medium.com/max/2048/1*rATi2Mvr9c0lMt_r4zbZcQ.jpeg",over we know is going to be a reality. It’s not an if, it’s a when.”"}}],"version":"2.15.0"}',
+  description: 'It’s fast — and expensive',
+  isPaid: false,
+  userId: 'fdfe8617-208d-4b87-a000-5d6840786ab8',
+  createdAt: '2019-09-09T14:33:53.037Z',
+  updatedAt: '2019-09-13T07:32:44.414Z',
+  author: {
+    id: 'fdfe8617-208d-4b87-a000-5d6840786ab8',
+    firstName: 'Mike',
+    lastName: 'Mike',
+    email: 'mikemike@test.com',
+    profile: {
+      id: 'fdfe8317-208d-4b87-a000-5d6840186ab8',
+      userId: 'fdfe8617-208d-4b87-a000-5d6840786ab8',
+      bio: 'i think we all loving coding and little faffing',
+      avatar: 'https://image.flaticon.com/icons/svg/147/147144.svg',
+      createdAt: '2019-09-09T14:33:55.282Z',
+      updatedAt: '2019-09-09T14:33:55.282Z',
+    },
+  },
+  articlecomment: [
+    {
+      id: 'c44dbc94-38c7-4638-bd7b-94f65cd43d6b',
+      body: 'james',
+      likes: 0,
+      highlightedText: null,
+      containsHighlightedText: false,
+      createdAt: '2019-09-11T18:54:42.691Z',
+      updatedAt: '2019-09-11T18:54:42.691Z',
+      user: {
+        firstName: 'John',
+        lastName: 'Done',
+        email: 'johndoe@test.com',
+        id: 'ffe25dbe-29ea-4759-8461-ed116f6739dd',
+        profile: {
+          id: 'ffe23dbe-19ea-4759-8461-ed116f6739dd',
+          userId: 'ffe25dbe-29ea-4759-8461-ed116f6739dd',
+          bio: 'i think we all loving coding and little faffing',
+          avatar: 'https://image.flaticon.com/icons/svg/147/147144.svg',
+          createdAt: '2019-09-09T14:33:55.282Z',
+          updatedAt: '2019-09-09T14:33:55.282Z',
+        },
+      },
+    },
+  ],
+};
+
+const comment = {
+  id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+  likes: 0,
+  user: {
     id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
     firstName: 'Darth',
     lastName: 'Vader',
@@ -66,6 +138,16 @@ describe('Article reducer', () => {
     newState = articleReducer(initialState, { type, payload });
     expect(type).toEqual('GETTING SINGLE ARTICLE');
     expect(payload.article).toEqual(article);
+    expect(payload.loading).toEqual(false);
+  });
+
+  it('should handle an create comment action with type CREATE COMMENT', () => {
+    const { type, payload } = createArticleComment(comment);
+    initialState.article = stateArticle;
+    newState = articleReducer(initialState, { type, payload });
+    expect(newState).toMatchSnapshot();
+    expect(type).toEqual('CREATE_COMMENT');
+    expect(payload.comment).toEqual(comment);
     expect(payload.loading).toEqual(false);
   });
 
