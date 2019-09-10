@@ -33,7 +33,7 @@ describe('<SubmitEmail /> Component', () => {
     );
     const emailInput = wrapper.find('#email-input').at(0);
     expect(emailInput.length).toEqual(1);
-    
+ 
     emailInput.simulate('change', {
       persist: () => {},
       target: {
@@ -50,7 +50,7 @@ describe('<SubmitEmail /> Component', () => {
   it('should display loading on submit', () => {
     const wrapper = mount(
       <Router>
-        <SubmitEmailComponent loading />
+        <SubmitEmailComponent loading message="" success={false} requestResetLink={jest.fn()} />
       </Router>,
     );
     expect(wrapper.find('.loading').length).toEqual(1);
@@ -112,7 +112,7 @@ describe('<NewPassword /> Component', () => {
   it('should display loading on submit', () => {
     const wrapper = mount(
       <Router>
-        <ResetPasswordComponent loading match={props.match} />
+        <ResetPasswordComponent loading match={props.match} success={false} message="" resetPassword={jest.fn()} />
       </Router>,
     );
     expect(wrapper.find('.loading').length).toEqual(1);

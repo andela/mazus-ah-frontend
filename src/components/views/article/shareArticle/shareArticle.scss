@@ -1,0 +1,14 @@
+.article__interaction {
+  position: relative;
+}
+.material-icons:hover, .icon:hover {
+  cursor: pointer;
+}
+
+.share-icons-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 10.5rem; 
+  padding-top: 1rem;
+}
