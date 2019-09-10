@@ -8,6 +8,10 @@ import Tag from '@Common/tags/Tag';
 import ArticleComment from '@Common/comments/ArticleComment';
 import Loader from '@Common/loader/Loader';
 import parseDataFromJSON from '@Utils/parseEditorData';
+import Card from '@Common/landingPage/card/Cards';
+import isEmpty from '@Utils/isEmpty';
+import readTimeFunc from '@Utils/readTime';
+
 import './article.scss';
 
 const Article = ({
@@ -16,6 +20,7 @@ const Article = ({
   singleArticle,
   loading,
   error,
+  relatedArticles,
 }) => {
   useEffect(() => {
     const getArticle = async () => {
@@ -23,8 +28,8 @@ const Article = ({
     };
 
     getArticle();
+    window.scrollTo(0, 0);
   }, [match, fetchSingleArticleBySlug]);
-
   return (
     <Fragment>
       <div className="article__container">
@@ -52,7 +57,7 @@ const Article = ({
               </div>
             </div>
             <div className="article__content">
-              <p className="article__read__time">{singleArticle.readTime} Min Read</p>
+              <p className="article__read__time">{readTimeFunc(singleArticle.readTime)}</p>
               <h1 className="article__title">{singleArticle.title}</h1>
               <p className="article__description">
                 {singleArticle.description}
@@ -86,6 +91,22 @@ const Article = ({
               <ArticleComment />
               <div className="article__related__articles">
                 <h3>Related Articles</h3>
+                <div className="article__divider" />
+                <div className="related__article__container">
+                  {
+                  !isEmpty(relatedArticles) ? relatedArticles.map((related) => {
+                    if (related.id !== singleArticle.id) {
+                      return (
+                        <Card
+                          key={related.id}
+                          {...related}
+                        />
+                      );
+                    }
+                    return null;
+                  }) : <h2>There are currently no related articles to this article</h2>
+                }
+                </div>
               </div>
             </div>
           </div>
@@ -102,17 +123,20 @@ Article.propTypes = {
   singleArticle: PropTypes.shape({}),
   error: PropTypes.shape({}),
   loading: PropTypes.bool.isRequired,
+  relatedArticles: PropTypes.shape([]),
 };
 
 Article.defaultProps = {
   singleArticle: {},
   error: {},
+  relatedArticles: [],
 };
 
 const mapStateToProps = state => ({
   singleArticle: state.singleArticle.article,
   loading: state.singleArticle.loading,
   error: state.singleArticle.error,
+  relatedArticles: state.singleArticle.article.relatedArticles,
 });
 
 export const ArticleComponent = Article;
