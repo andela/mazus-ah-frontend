@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 
 export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/v1' : 'https://mazus-ah-staging.herokuapp.com/api/v1';
@@ -6,11 +7,10 @@ export const instance = axios.create({
   baseURL: API_URL,
 });
 
-const token = localStorage.getItem('jwtToken');
-
-if (token) {
-  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-}
+instance.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem('jwtToken')}`;
+  return config;
+});
 
 const API_SERVICE = {
   get(endpoint) {

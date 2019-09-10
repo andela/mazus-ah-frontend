@@ -2,6 +2,7 @@ import {
   authLoading,
   authFailed,
   authSuccess,
+  logout,
 } from '@Redux/actions/authActions';
 import authReducer, { initialState } from '../authReducer';
 
@@ -44,5 +45,10 @@ describe('Auth Reducer', () => {
     expect(type).toEqual('AUTH_FAILED');
     expect(payload.loading).toEqual(false);
     expect(payload.error).toEqual(error);
+  });
+  it('should handle action with type LOGOUT', () => {
+    const { type } = logout();
+    newState = authReducer(initialState, { type });
+    expect(type).toEqual('LOGOUT');
   });
 });

@@ -3,6 +3,7 @@ import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
+  LOGOUT,
 } from '../actions/types/authType';
 
 export const initialState = {
@@ -32,6 +33,13 @@ export default (state = initialState, action) => {
         ...state,
         loading: payload.loading,
         error: payload.error,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        user: {},
+        isAuthenticated: false,
+        loading: false,
       };
     default:
       return state;
