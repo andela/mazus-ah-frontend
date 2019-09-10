@@ -126,7 +126,7 @@ html {
         width: 100%;
         font-size: 2.5rem;
         line-height: 1.1;
-        letter-spacing: .5rem;
+        letter-spacing: .2rem;
       }
     }
   }
@@ -146,7 +146,7 @@ padding-bottom: 3rem;
 }
 }
 .right-block {
-  width: 50%;
+  width:50%;
   height: 100%;
   padding: 3rem;
   background-color: $color_2;
@@ -186,6 +186,10 @@ padding-bottom: 3rem;
   border-radius: 4px;
   resize: vertical;
   font-size: $default-font-size;
+}
+.passwordError {
+  font-size: 1.4rem;
+  width: 79% !important;
 }
 .input-field {
   width: 100%;
@@ -238,10 +242,11 @@ label{
   font-size: 1.5rem;
 }
 input{
-	border: 1px solid $color_3 !important;
+	border: 1px solid #c2b7b7 !important;
   width: 75% !important;
   margin-bottom: 2rem !important;
   padding:.5rem 1rem !important;
+  height: 3rem !important;
   @include respond(phone) {
     // width: 80%;
   }
@@ -249,7 +254,12 @@ input{
 input::placeholder{
   color: #c2b7b7;
 }
-
+.form-input:focus{
+  border:1px solid $color_3 !important;
+}
+.error:focus {
+  border: 1px red solid !important;
+}
 .validateInput{
   width: 50%;
 	margin-bottom: 10px;
@@ -400,3 +410,4 @@ input::placeholder{
   font-size: 1.6rem;
   text-align: center;
 }
+

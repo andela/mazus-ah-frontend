@@ -10,9 +10,13 @@ import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
 import SocialButtons from '@Common/auth/buttons';
 import { signupText } from '@Common/auth/leftDivText';
+import { passwordMatch, validatePassword } from '@Utils/validatePassword';
 import '@Common/auth/auth.scss';
 
+
 const SignUp = (props) => {
+  const { loading, history, onSubmit } = props;
+
   const [values, setValues] = useState({
     firstName: '',
     lastName: '',
@@ -20,9 +24,34 @@ const SignUp = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
+    error: '',
   });
+
+  const onChange = (event) => {
+    event.persist();
+    setValues(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+  };
+
+  const registerUser = (event) => {
+    event.preventDefault();
+    onSubmit(values, history);
+  };
+
+  const passwordValidation = (event) => {
+    event.persist();
+    const status = validatePassword(event.target.value);
+    setValues(prevState => ({ ...prevState, error: !status ? 'Password must contain at least one uppercase letter, one lowercase letter and one numeric digit' : '' }));
+    setValues(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+    return status;
+  };
+
+  const confirmPassworValidation = (event) => {
+    event.persist();
+    setValues(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+  };
+
   useEffect(() => {
-    const { location, socialSignOn, history } = props;
+    const { location, socialSignOn } = props;
     const tokenString = location && location.search;
     if (tokenString) {
       const token = getToken(tokenString);
@@ -31,16 +60,14 @@ const SignUp = (props) => {
       alert.success('Authentication was successful!');
     }
   }, [props]);
-  const { loading, history, onSubmit } = props;
-  const onChange = (event) => {
-    event.persist();
-    setValues(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
-  };
-  const registerUser = (event) => {
-    event.preventDefault();
-    onSubmit(values, history);
-  };
+
+  useEffect(() => {
+    const isMatch = passwordMatch(values);
+    setValues(prevState => ({ ...prevState, error: !isMatch ? 'Password does not match' : '' }));
+  }, [values.confirmPassword]);
+
   return (
+
     <Fragment>
       <div className="container-body">
         <LeftDiv text={signupText} />
@@ -88,14 +115,17 @@ const SignUp = (props) => {
                 required
               />
             </div>
+            <div className="passwordError">
+              {values.error}
+            </div>
             <div className="input-field">
               <InputField
                 type="password"
                 value={values.password}
-                onChange={onChange}
+                onChange={passwordValidation}
                 name="password"
                 placeholder="Password"
-                className="form-input"
+                className={`form-input ${values.error && 'error'}`}
                 required
               />
             </div>
@@ -103,15 +133,15 @@ const SignUp = (props) => {
               <InputField
                 type="password"
                 value={values.confirmPassword}
-                onChange={onChange}
+                onChange={confirmPassworValidation}
                 name="confirmPassword"
                 placeholder="Confirm Password"
-                className="form-input"
+                className={`form-input ${values.error && 'error'}`}
                 required
               />
             </div>
             <div className="input-field">
-              <button className="btn--block bttn-primary btn-submit" type="submit" value="Sign up" disabled={loading}> {
+              <button className="btn--block bttn-primary btn-submit" type="submit" value="Sign up" disabled={!!values.error}> {
                 loading ? 'Loading...' : 'Create your free account'
               }
                 <i className="arrow-forward material-icons">arrow_forward</i>
