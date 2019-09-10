@@ -268,4 +268,28 @@ describe('Signin User actions', () => {
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });
+  it('should dispatch Error is something is wrong when user logs out', async () => {
+    const failedRequest = {
+      response: {
+        data: {
+          errors: {
+            message: 'Something went wrong, we are working on a fix',
+          },
+        },
+      },
+    };
+    const expectedActions = [
+      {
+        type: AUTH_FAILED,
+        payload: {
+          loading: false,
+          error: 'Something went wrong, we are working on a fix',
+        },
+      },
+    ];
+    await axios.post.mockRejectedValue(failedRequest);
+    await store.dispatch(logoutAccount());
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
 });
