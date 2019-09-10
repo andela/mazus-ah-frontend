@@ -10,12 +10,14 @@ import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   LOGOUT,
+  SOCIAL_LOGIN_SUCCESS,
 } from './types/authType';
 import {
   registerAccount,
   signInAccount,
   logoutAccount,
   getCurrentUserProfile,
+  authorizeSocialUser,
 } from './authActions';
 
 const mockStore = configureMockStore([thunk]);
@@ -155,7 +157,7 @@ describe('Signin User actions', () => {
     localStorage.clear();
   });
 
-  it('should dispatch AUTH_LOADING and AUTH_SUCCESS for login', async () => {
+  it('should dispatch AUTH_LOADING and AUTH_SUCCESS for login with a userData', async () => {
     const successfulRequest = {
       data: {
         user: {
@@ -185,7 +187,36 @@ describe('Signin User actions', () => {
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });
+  it('should dispatch AUTH_LOADING and AUTH_SUCCESS for login without a userData', async () => {
+    const successfulRequest = {
+      data: {
+        user: {
+          token: 'jkdbfjdsbfkbdskjfglkdsflksdbfjbsdfbsdjb',
+        },
+      },
+    };
 
+    const expectedActions = [
+      {
+        type: AUTH_LOADING,
+        payload: {
+          loading: true,
+        },
+      },
+      {
+        type: AUTH_SUCCESS,
+        payload: {
+          loading: false,
+          user: authResponse,
+        },
+      },
+    ];
+
+    axios.post.mockResolvedValue(successfulRequest);
+    await store.dispatch(signInAccount(null, props.history));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
   it('should dispatch AUTH_LOADING and AUTH_FAILED for login', async () => {
     const failedRequest = {
       response: {
@@ -289,6 +320,27 @@ describe('Signin User actions', () => {
     ];
     await axios.post.mockRejectedValue(failedRequest);
     await store.dispatch(logoutAccount());
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
+  it('should signin a user using social login', async () => {
+    const successfulRequest = {
+      data: {
+        user: {
+          token: 'jkdbfjdsbfkbdskjfglkdsflksdbfjbsdfbsdjb',
+        },
+      },
+    };
+    const expectedActions = [
+      {
+        type: SOCIAL_LOGIN_SUCCESS,
+        payload: {
+          ...authResponse,
+        },
+      },
+    ];
+    axios.post.mockResolvedValue(successfulRequest);
+    await store.dispatch(authorizeSocialUser());
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });

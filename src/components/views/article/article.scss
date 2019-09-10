@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700|Quicksand:400,500,600,700&display=swap');
 
+
+
 .article__container {
   margin-top: 3rem;
 
@@ -215,4 +217,21 @@
       }
     }
   }
+}
+
+.like-dislike-reaction{
+display: flex;
+align-content: space-between;
+justify-content: space-evenly;
+margin-top: 2rem;
+}
+.like-dislike-reaction #like_btn {
+  cursor: pointer;
+}
+.like-dislike-reaction .liked {
+  color: goldenrod;
+}
+.like-dislike-reaction span{
+  font-size: 1.3rem;
+  padding: 0 1rem;
 }

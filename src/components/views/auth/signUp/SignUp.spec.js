@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
@@ -37,9 +38,11 @@ describe('SignUp Component', () => {
   });
   it('Should render along with children component', () => {
     const component = mount(
-      <Router>
-        <SignUp store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <SignUp {...props} />
+        </Router>
+      </Provider>,
     );
     expect(component.find('button')).toHaveLength(3);
     expect(component.find('input')).toHaveLength(5);
@@ -47,9 +50,11 @@ describe('SignUp Component', () => {
   });
   it('should call onChange props for email input', () => {
     const wrapper = mount(
-      <Router>
-        <SignUp store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <SignUp {...props} />
+        </Router>
+      </Provider>,
     );
     const emailInput = wrapper.find('input[type="email"]');
     emailInput.simulate('change', {
@@ -66,9 +71,11 @@ describe('SignUp Component', () => {
 
   it('should call onChange props for password input', () => {
     const wrapper = mount(
-      <Router>
-        <SignUp store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <SignUp {...props} />
+        </Router>
+      </Provider>,
     );
     const passwordInput = wrapper.find('input[type="password"]').at(0);
     passwordInput.simulate('change', {
@@ -83,19 +90,46 @@ describe('SignUp Component', () => {
     wrapper.unmount();
   });
 
+  it('should call onChange props for comfirmPassword input', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router>
+          <SignUp {...props} />
+        </Router>
+      </Provider>,
+    );
+    const passwordInput = wrapper.find('input[type="password"]').at(1);
+    passwordInput.simulate('change', {
+      persist: () => { },
+      target: {
+        name: 'password',
+        value: 'P4ssw0rd',
+      },
+    });
+    expect(wrapper.find('input[type="password"]').length).toEqual(2);
+    wrapper.unmount();
+  });
   it(' should call onSubmit prop function when form is submitted', () => {
     const registerUser = jest.fn();
-    const wrapper = mount(<Router><SignUpComponent onSubmit={registerUser} {...props} /></Router>);
-    const form = wrapper.find('form');
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router>
+          <SignUpComponent {...props} onSubmit={registerUser} />
+        </Router>
+      </Provider>,
+    ); const form = wrapper.find('form');
     form.simulate('submit');
     expect(registerUser).toHaveBeenCalledTimes(1);
   });
   it('should call history prop function to redirect users to dashboard on successful authentication', () => {
     const component = mount(
-      <Router>
-        <SignUp store={store} location={props.location} history={props.history} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <SignUp location={props.location} history={props.history} />
+        </Router>
+      </Provider>,
     );
     expect(props.history.push).toHaveBeenCalledTimes(0);
+    component.unmount();
   });
 });

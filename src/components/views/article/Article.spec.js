@@ -1,12 +1,29 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ArticleComponent } from './Article';
+import Article, { ArticleComponent } from './Article';
 
-const mockStore = configureMockStore();
-const store = mockStore({});
 
+const initialState = {
+  singleArticle: {
+    articles: [],
+    article: {},
+    articleStat: {},
+    loading: false,
+    error: {},
+  },
+  auth: {
+    user: {},
+    isAuthenticated: false,
+    loading: false,
+    error: {},
+  },
+};
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+const store = mockStore(initialState);
 
 const articleBody = { time: 1567744869596, blocks: [{ type: 'header', data: { text: 'Hey Panini', level: 3 } }, { type: 'paragraph', data: { text: '<i>This could be a</i>&nbsp;<i><b>quoted text</b></i>' } }, { type: 'paragraph', data: { text: 'This is a sample article for the test to render' } }, { type: 'paragraph', data: { text: 'Mic check' } }, { type: 'list', data: { style: 'unordered', items: ['Unordered 1', 'Order'] } }], version: '2.15.0' };
 const article = {
@@ -76,11 +93,7 @@ describe('Article component', () => {
     window.scrollTo = () => {};
     it('should render a loading message when the article is loading', () => {
       const props = {
-        singleArticle: {
-          error: {
-
-          },
-        },
+        singleArticle: {},
         loading: true,
         error: {},
         getArticleBySlug: jest.fn(),
@@ -90,23 +103,19 @@ describe('Article component', () => {
       };
 
       const component = mount(
-        <Provider store={store}>
-          <Router>
-            <ArticleComponent {...props} />
-          </Router>
-        </Provider>,
+        <Router>
+          <ArticleComponent {...props} />
+        </Router>,
       );
       expect(component.find('center').length).toEqual(1);
       expect(component.find('Loader').length).toEqual(1);
+      component.unmount();
     });
   });
 
   it('should render an error message when the article is not found', () => {
     const props = {
-      singleArticle: {
-        error: {
-        },
-      },
+      singleArticle: {},
       loading: false,
       error: {
         article: 'Article does not exist',
@@ -118,14 +127,13 @@ describe('Article component', () => {
     };
 
     const component = mount(
-      <Provider store={store}>
-        <Router>
-          <ArticleComponent {...props} />
-        </Router>
-      </Provider>,
+      <Router>
+        <ArticleComponent {...props} />
+      </Router>,
     );
     expect(component.find('.article__notfound').length).toEqual(1);
     expect(component.find('h1').length).toEqual(1);
+    component.unmount();
   });
 
   it('should render an article successfully', () => {
@@ -137,18 +145,22 @@ describe('Article component', () => {
       match: {
         params: { slug: 'some-slug' },
       },
+      dislikes: jest.fn(),
+      likes: jest.fn(),
+      isLiked: jest.fn(),
     };
 
     const component = mount(
       <Provider store={store}>
         <Router>
-          <ArticleComponent {...props} />
+          <Article {...props} />
         </Router>
       </Provider>,
     );
     expect(component.find('.article_title__row').length).toEqual(1);
     expect(component.find('.article__author__details').length).toEqual(1);
     expect(component.find('.article__description').length).toEqual(1);
+    component.unmount();
   });
 
   it('should render an article without tags and a body successfully with a message', () => {
@@ -160,6 +172,36 @@ describe('Article component', () => {
       match: {
         params: { slug: 'some-slug' },
       },
+      userData: {},
+      dislikes: 0,
+      likes: 0,
+      isLiked: null,
+    };
+
+    const component = mount(
+      <Provider store={store}>
+        <Router>
+          <Article {...props} />
+        </Router>
+      </Provider>,
+    );
+    expect(component.find('.article_title__row').length).toEqual(1);
+    expect(component.find('.article__author__details').length).toEqual(1);
+    expect(component.find('.article__description').length).toEqual(1);
+    expect(component.find('.article__no__tags').length).toEqual(1);
+    component.unmount();
+  });
+
+  it('should render related articles', () => {
+    const props = {
+      signleArticle: articleWithoutTags,
+      loading: false,
+      error: {},
+      getArticleBySlug: jest.fn(),
+      match: {
+        params: { slug: 'some-slug' },
+      },
+      relatedArticles: [article],
     };
 
     const component = mount(
@@ -169,51 +211,7 @@ describe('Article component', () => {
         </Router>
       </Provider>,
     );
-    expect(component.find('.article_title__row').length).toEqual(1);
-    expect(component.find('.article__author__details').length).toEqual(1);
-    expect(component.find('.article__description').length).toEqual(1);
-    expect(component.find('.article__no__tags').length).toEqual(1);
-    expect(component.find('.article__no__comments').length).toEqual(1);
-  });
 
-  it('should render related articles', () => {
-    const props = {
-      signleArticle: articleWithoutTags,
-      loading: false,
-      error: {},
-      getArticleBySlug: jest.fn(),
-      match: {
-        params: { slug: 'some-slug' },
-      },
-      relatedArticles: [article],
-    };
-
-    const component = mount(
-      <Router>
-        <ArticleComponent {...props} />
-      </Router>,
-    );
-
-    const relatedArticleContainer = component.find('.related__article__container');
-    const articleTitle = relatedArticleContainer.find('#article-title');
-    expect(articleTitle.html()).toEqual('<p id="article-title">The Curious Case of Benjamin Buttons</p>');
-  });
-  it('should render related articles', () => {
-    const props = {
-      signleArticle: articleWithoutTags,
-      loading: false,
-      error: {},
-      getArticleBySlug: jest.fn(),
-      match: {
-        params: { slug: 'some-slug' },
-      },
-      relatedArticles: [article],
-    };
-    const component = mount(
-      <Router>
-        <ArticleComponent {...props} />
-      </Router>,
-    );
     const relatedArticleContainer = component.find('.related__article__container');
     const articleTitle = relatedArticleContainer.find('#article-title');
     expect(articleTitle.html()).toEqual('<p id="article-title">The Curious Case of Benjamin Buttons</p>');
