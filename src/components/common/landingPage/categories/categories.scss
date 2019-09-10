@@ -1,7 +1,6 @@
 .category-container {
   display: flex;
   flex-direction: column;
-  max-width: 70rem;
   @media screen and (max-width: 768px) {
    padding-left: 1rem; 
   }
@@ -9,16 +8,23 @@
     display: flex;
     justify-content: space-between;
     margin:4rem 4rem 0rem 1rem;
-
+    @media screen and (max-width: 768px) {
+      margin:0.5rem 1rem 0rem 1rem;
+    }
     p {
       font-style: normal;
       font-weight: bold;
       font-size: 30px;
     }
     #related-articles-btn, i {
+      position: relative;
       font-size: 18px; 
-      margin-top: auto;
+      margin-top: 0.6rem;
+      padding-right: 13px;
       color: #2FB5EE !important;
+      #naviagte_next_icon {
+        position: absolute;
+      }
     }
   }
   .bottom-div {

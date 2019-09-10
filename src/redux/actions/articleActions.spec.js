@@ -8,6 +8,7 @@ import {
   GET_SINGLE_ARTICLE,
   ARTICLE_LOADING,
   GET_ARTICLE_ERROR,
+  CLEAR_ARTICLE_ERROR,
 } from './types/articleType';
 import { getArticleBySlug } from './articleActions';
 
@@ -76,6 +77,12 @@ describe('Get single article action', () => {
 
     const expectedActions = [
       {
+        type: CLEAR_ARTICLE_ERROR,
+        payload: {
+          error: {},
+        },
+      },
+      {
         type: ARTICLE_LOADING,
         payload: { loading: true },
       },
@@ -106,6 +113,12 @@ describe('Get single article action', () => {
     };
 
     const expectedActions = [
+      {
+        type: CLEAR_ARTICLE_ERROR,
+        payload: {
+          error: {},
+        },
+      },
       {
         type: ARTICLE_LOADING,
         payload: {

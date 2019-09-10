@@ -67,9 +67,9 @@ describe('<TrendingArticles /> Component', () => {
     );
     expect(wrapper.find('.trending-container')).toBeTruthy();
     expect(wrapper.find('.trending-container').length).toEqual(1);
-    expect(wrapper.find('#article-number').text()).toEqual('1');
+    expect(wrapper.find('#article-number').text()).toEqual('01');
     expect(wrapper.find('Link').text()).toEqual('How to Catch a Goat');
     expect(wrapper.find('p').length).toEqual(3);
-    expect(wrapper.find('p').at(1).text()).toEqual('Goats are very notorious herbivores');
+    expect(wrapper.find('p').at(1).text()).toEqual('Goats are very notorious herbi. . .');
   });
 });

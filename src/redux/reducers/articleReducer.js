@@ -3,7 +3,8 @@ import {
   GET_ARTICLE_ERROR,
   ARTICLE_LOADING,
   GET_SINGLE_ARTICLE,
-} from '../actions/types/articleType';
+  CLEAR_ARTICLE_ERROR,
+} from '@Actions/types/articleType';
 
 export const initialState = {
   articles: [],
@@ -36,6 +37,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: payload.loading,
+        error: payload.error,
+      };
+    case CLEAR_ARTICLE_ERROR:
+      return {
+        ...state,
         error: payload.error,
       };
     default:
