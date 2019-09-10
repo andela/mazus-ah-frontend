@@ -80,3 +80,13 @@ export const getArticles = () => ({
   type: GET_ARTICLES,
   payload: { articles, loading: false },
 });
+
+export const rateArticle = (rate, slug) => async () => {
+  try {
+    await API_SERVICE.post(`/articles/${slug}/ratings`, rate);
+  } catch (error) {
+    const { data: { errors } } = error.response;
+    const message = Object.values(errors)[0];
+    alert.error(message);
+  }
+};
