@@ -14,7 +14,7 @@ import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
-import starRating from '@Common/starRating/starRating';
+import starRating from '@Common/starRating/StarRating';
 import setUser from '@Utils/setUser';
 import Profile from '@Views/profile';
 import store from './redux/store';

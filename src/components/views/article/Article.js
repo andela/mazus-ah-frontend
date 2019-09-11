@@ -1,5 +1,5 @@
 
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,6 +10,7 @@ import ArticleCommentList from '@Common/comments/ArticleCommentList';
 import ArticleCommentForm from '@Common/comments/ArticleCommentForm';
 import Loader from '@Common/loader/Loader';
 import parseDataFromJSON from '@Utils/parseEditorData';
+import StarRating from '@Common/starRating/StarRating';
 import Card from '@Common/landingPage/card/Cards';
 import isEmpty from '@Utils/isEmpty';
 import readTimeFunc from '@Utils/readTime';
@@ -24,10 +25,20 @@ const Article = ({
   error,
   relatedArticles,
   authenticatedUser,
+  userData,
+  articleStat,
 }) => {
+  const [articleStatistics, setArticleStatistics] = useState({});
+  const articleSlug = match.params.slug;
+  useEffect(() => {
+    const allStat = articleStat;
+    setArticleStatistics(allStat);
+  }, [articleStat]);
+
   useEffect(() => {
     const getArticle = async () => {
-      await fetchSingleArticleBySlug(match.params.slug);
+      const userId = userData && userData.id;
+      await fetchSingleArticleBySlug(articleSlug, userId);
     };
     getArticle();
     window.scrollTo(0, 0);
@@ -79,11 +90,7 @@ const Article = ({
               <div className="article__divider" />
               <div className="article__actions">
                 <div className="article__ratings">
-                  <i className="material-icons">star_border</i>
-                  <i className="material-icons">star_border</i>
-                  <i className="material-icons">star_border</i>
-                  <i className="material-icons">star_border</i>
-                  <i className="material-icons">star_border</i>
+                  <StarRating slug={articleSlug} rate={`${articleStatistics.rate}`} />
                 </div>
                 <div className="article__interaction">
                   <i className="material-icons">bookmark_border</i>
@@ -148,6 +155,8 @@ Article.propTypes = {
   loading: PropTypes.bool.isRequired,
   relatedArticles: PropTypes.shape([]),
   authenticatedUser: PropTypes.bool.isRequired,
+  userData: PropTypes.shape({}).isRequired,
+  articleStat: PropTypes.shape({}).isRequired,
 };
 
 Article.defaultProps = {
@@ -162,6 +171,8 @@ const mapStateToProps = state => ({
   error: state.singleArticle.error,
   relatedArticles: state.singleArticle.article.relatedArticles,
   authenticatedUser: state.auth.isAuthenticated,
+  userData: state.auth.user,
+  articleStat: state.singleArticle.articleStat,
 });
 
 export const ArticleComponent = Article;

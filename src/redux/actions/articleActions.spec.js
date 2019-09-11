@@ -10,6 +10,7 @@ import {
   GET_ARTICLE_ERROR,
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
+  GET_ARTICLE_STAT,
 } from './types/articleType';
 import { getArticleBySlug, createArticleOnComment } from './articleActions';
 
@@ -252,5 +253,55 @@ describe('Get single article action', () => {
     await store.dispatch(createArticleOnComment());
     const response = store.getActions();
     expect(response).toEqual(expectedAction);
+  });
+
+  it('should dispatch ARTICLE STAT when getting an articleStat', async () => {
+    const successfulRequest = {
+      data: {
+        article: { ...articleResponse, tagList: ['tag'] },
+      },
+    };
+
+    const expectedArticleStat = {
+      like: null,
+      rate: null,
+      follwedAuthor: false,
+      bookmarkedArticle: true,
+    };
+    const expectedActions = [
+      {
+        type: CLEAR_ARTICLE_ERROR,
+        payload: {
+          error: {},
+        },
+      },
+      {
+        type: ARTICLE_LOADING,
+        payload: { loading: true },
+      },
+      {
+        type: GET_SINGLE_ARTICLE,
+        payload: {
+          loading: false,
+          article: { ...articleResponse, tagList: ['tag'] },
+        },
+      },
+      {
+        type: GET_ARTICLE_STAT,
+        payload: expectedArticleStat,
+      },
+    ];
+    const expectedResponse = {
+      data: {
+        articleStat: {
+          articleStat: expectedArticleStat,
+        },
+      },
+    };
+    axios.get.mockResolvedValue(successfulRequest);
+    axios.post.mockResolvedValue(expectedResponse);
+    await store.dispatch(getArticleBySlug('getting-started-with-nodejs-&-express-1564498223366-74536', '10ba038e-48da-487b-96e8-8d3b99b6d18a'));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
   });
 });

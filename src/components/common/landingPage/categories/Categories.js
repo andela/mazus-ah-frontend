@@ -57,7 +57,7 @@ const Category = (props) => {
         const cards = singleCategory.articles.allArticles.map((singleCartigoryArticle) => {
           categoryArticle = singleCartigoryArticle;
           return (
-            <Cards key={singleCartigoryArticle.title} {...singleCartigoryArticle} />
+            <Cards key={singleCartigoryArticle.slug} {...singleCartigoryArticle} />
           );
         });
         return (

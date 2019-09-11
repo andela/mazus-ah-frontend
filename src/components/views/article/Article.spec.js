@@ -1,12 +1,24 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { act } from 'react-dom/test-utils';
+import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ArticleComponent } from './Article';
 
-const mockStore = configureMockStore();
-const store = mockStore({});
+const initialState = {
+  singleArticle: {
+    article: [],
+    articles: {},
+    articleStat: {},
+    loading: false,
+    error: {},
+  },
+};
 
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+const store = mockStore(initialState);
 
 const articleBody = { time: 1567744869596, blocks: [{ type: 'header', data: { text: 'Hey Panini', level: 3 } }, { type: 'paragraph', data: { text: '<i>This could be a</i>&nbsp;<i><b>quoted text</b></i>' } }, { type: 'paragraph', data: { text: 'This is a sample article for the test to render' } }, { type: 'paragraph', data: { text: 'Mic check' } }, { type: 'list', data: { style: 'unordered', items: ['Unordered 1', 'Order'] } }], version: '2.15.0' };
 const article = {
@@ -137,15 +149,21 @@ describe('Article component', () => {
       match: {
         params: { slug: 'some-slug' },
       },
+      articleStat: {
+        like: 0,
+        rate: 5,
+      },
     };
-
-    const component = mount(
-      <Provider store={store}>
-        <Router>
-          <ArticleComponent {...props} />
-        </Router>
-      </Provider>,
-    );
+    let component;
+    act(() => {
+      component = mount(
+        <Provider store={store}>
+          <Router>
+            <ArticleComponent {...props} />
+          </Router>
+        </Provider>,
+      );
+    });
     expect(component.find('.article_title__row').length).toEqual(1);
     expect(component.find('.article__author__details').length).toEqual(1);
     expect(component.find('.article__description').length).toEqual(1);
@@ -160,15 +178,21 @@ describe('Article component', () => {
       match: {
         params: { slug: 'some-slug' },
       },
+      articleStat: {
+        like: 0,
+        rate: 5,
+      },
     };
-
-    const component = mount(
-      <Provider store={store}>
-        <Router>
-          <ArticleComponent {...props} />
-        </Router>
-      </Provider>,
-    );
+    let component;
+    act(() => {
+      component = mount(
+        <Provider store={store}>
+          <Router>
+            <ArticleComponent store={store} {...props} rate={4} />
+          </Router>
+        </Provider>,
+      );
+    });
     expect(component.find('.article_title__row').length).toEqual(1);
     expect(component.find('.article__author__details').length).toEqual(1);
     expect(component.find('.article__description').length).toEqual(1);

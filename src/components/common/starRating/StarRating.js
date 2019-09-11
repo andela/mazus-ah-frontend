@@ -4,15 +4,19 @@ import { connect } from 'react-redux';
 import StarRatingComponent from 'react-star-rating-component';
 import { rateArticle } from '@Actions/articleActions';
 
-const RateComponent = ({ rateArticle: rateFunction }) => {
+const RateComponent = ({ rateArticle: rateFunction, slug, rate }) => {
   const [currentUserRate, setCurrentUserRate] = useState(0);
-
   useEffect(() => {
     const sendRating = async () => {
-      await rateFunction({ rate: currentUserRate }, 'the-mindset-that-makes-you-better-with-money-1568053851989');
+      await rateFunction({ rate: currentUserRate }, slug);
     };
     if (currentUserRate > 0) sendRating();
   }, [currentUserRate]);
+
+  useEffect(() => {
+    const previousRate = (rate === undefined || rate === 'null') ? 0 : rate;
+    setCurrentUserRate(previousRate);
+  }, [rate]);
 
   const updateCurrentUserRate = (newValue) => {
     setCurrentUserRate(newValue);
@@ -22,7 +26,7 @@ const RateComponent = ({ rateArticle: rateFunction }) => {
       <StarRatingComponent
         name="articleRate"
         starCount={5}
-        value={currentUserRate}
+        value={parseInt(currentUserRate, 10)}
         onStarClick={updateCurrentUserRate}
         starColor="#FFCC00"
         emptyStarColor="grey"
@@ -33,13 +37,11 @@ const RateComponent = ({ rateArticle: rateFunction }) => {
 
 RateComponent.propTypes = {
   rateArticle: PropTypes.func.isRequired,
+  slug: PropTypes.string.isRequired,
+  rate: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  state,
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { rateArticle },
 )(RateComponent);
