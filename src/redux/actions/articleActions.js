@@ -1,5 +1,6 @@
 
 import API_SERVICE from '@Utils/API';
+import isEmpty from '@Utils/isEmpty';
 import {
   GET_ARTICLES,
   GET_ARTICLE_ERROR,
@@ -44,8 +45,14 @@ export const getArticleBySlug = slug => async (dispatch) => {
   dispatch(clearArticleError());
   dispatch(articleLoading());
   try {
-    const fetchArticle = await API_SERVICE.get(`/articles/${slug}`);
-    dispatch(getSingleArticle(fetchArticle.data.article));
+    const fetchedArticle = await API_SERVICE.get(`/articles/${slug}`);
+    const { tagsList } = fetchedArticle.data.article;
+    if (!isEmpty(tagsList)) {
+      const randomTag = tagsList[Math.floor(Math.random() * tagsList.length)];
+      const relatedArticles = await API_SERVICE.get(`/search?keyword=${randomTag}`);
+      fetchedArticle.data.article.relatedArticles = relatedArticles.data.matches.tags;
+    }
+    dispatch(getSingleArticle(fetchedArticle.data.article));
   } catch (error) {
     dispatch(articleError(error.response.data.errors));
   }

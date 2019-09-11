@@ -13,8 +13,11 @@ import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
+import setUser from '@Utils/setUser';
 import store from './redux/store';
 import './app.scss';
+
+setUser();
 
 const App = () => (
   <Provider store={store}>
