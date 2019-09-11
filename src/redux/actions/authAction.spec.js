@@ -209,7 +209,7 @@ describe('Signin User actions', () => {
     ];
 
     axios.post.mockRejectedValue(failedRequest);
-    await store.dispatch(signInAccount(userData, props.history));
+    await store.dispatch(signInAccount(userData, props.history, null));
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });

@@ -152,4 +152,27 @@ describe('Article component', () => {
     expect(component.find('.article__description').length).toEqual(1);
     expect(component.find('.article__no__tags').length).toEqual(1);
   });
+
+  it('should render related articles', () => {
+    const props = {
+      signleArticle: articleWithoutTags,
+      loading: false,
+      error: {},
+      getArticleBySlug: jest.fn(),
+      match: {
+        params: { slug: 'some-slug' },
+      },
+      relatedArticles: [article],
+    };
+
+    const component = mount(
+      <Router>
+        <ArticleComponent {...props} />
+      </Router>,
+    );
+
+    const relatedArticleContainer = component.find('.related__article__container');
+    const articleTitle = relatedArticleContainer.find('#article-title');
+    expect(articleTitle.html()).toEqual('<p id="article-title">The Curious Case of Benjamin Buttons</p>');
+  });
 });
