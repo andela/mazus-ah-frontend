@@ -12,6 +12,7 @@ import SubmitEmail from '@Views/passwordReset/SubmitEmail';
 import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
+import NewArticle from '@Views/article/newArticle/NewArticle';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
 import setUser from '@Utils/setUser';
 import store from './redux/store';
@@ -29,6 +30,7 @@ const App = () => (
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
+        <ContainerWrapper exact path="/articles" component={NewArticle} />
         <Route component={NotFound} />
       </Switch>
     </Router>
