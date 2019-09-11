@@ -8,7 +8,9 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('jwtToken')}`;
+  if (localStorage.jwtToken) {
+    config.headers.Authorization = `Bearer ${localStorage.jwtToken}`;
+  }
   return config;
 });
 
