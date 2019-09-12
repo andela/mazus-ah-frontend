@@ -11,7 +11,7 @@ import parseDataFromJSON from '@Utils/parseEditorData';
 import Card from '@Common/landingPage/card/Cards';
 import isEmpty from '@Utils/isEmpty';
 import readTimeFunc from '@Utils/readTime';
-import ShareArticle from './shareArticle/ShareArticle';
+
 import './article.scss';
 
 const Article = ({
@@ -84,10 +84,7 @@ const Article = ({
                 </div>
                 <div className="article__interaction">
                   <i className="material-icons">bookmark_border</i>
-                  <ShareArticle
-                    title={singleArticle?.title}
-                    author={singleArticle?.author}
-                  />
+                  <i className="material-icons">share</i>
                   <i className="material-icons">report</i>
                 </div>
               </div>
