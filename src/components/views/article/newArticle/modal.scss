@@ -24,44 +24,40 @@
 }
 
   #description {
-    width: 400px !important;
-    height: 150px; 
     border-radius: 8px;
+    border: solid 1px #2FB5EE;
+    font-size: 18px;
+    height: 15rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
   }
   
   .desc-tags {
     margin-right: 3rem;
   }
 
-  .thumbnail {
-    width: 327px;
-    height: 354px;
-  }
-
   .action-btn {
-    padding: 6rem;
+    width: 400px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   .publish-btn {
-        width: 10rem;
+        width: 180px;
         height: 5rem;
-        border-radius: 10px;
         background-color: #2FB5EE;
         border: none;
         color: white;
-        font-size: 1.3rem;
+        font-size: 2rem;
         border-radius: 8px;
   }
   .draft-btn {
-        width: 10rem;
+        width: 180px;
         height: 5rem;
-        border-radius: 10px;
         background-color: white;
-        border: 1px solid gray;
-        color: black;
-        font-size: 1.3rem;
+        border: 1px solid #717171;
+        color: #717171;
+        font-size: 2rem;
         border-radius: 8px;
   }
 

@@ -1,3 +1,0 @@
-export const POSTING_ARTICLE = 'POSTING_ARTICLE';
-export const POST_SUCCESS = 'POST_SUCCESS';
-export const POST_FAILURE = 'POST_FAILURE';

@@ -4,6 +4,7 @@ import authReducer from './authReducer';
 import passwordResetReducer from './passwordResetReducer';
 import socialReducer from './socialReducer';
 import singleArticleReducer from './articleReducer';
+import newArticleReducer from './newArticleReducer';
 
 
 export default combineReducers({
@@ -12,4 +13,5 @@ export default combineReducers({
   requestReset: passwordResetReducer,
   social: socialReducer,
   singleArticle: singleArticleReducer,
+  newArticle: newArticleReducer,
 });
