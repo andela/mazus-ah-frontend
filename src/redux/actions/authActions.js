@@ -8,7 +8,6 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   LOGOUT,
-  SOCIAL_LOGIN_SUCCESS,
 } from './types/authType';
 
 
@@ -87,32 +86,4 @@ export const logoutAccount = history => async (dispatch) => {
     const message = Object.values(errors)[0];
     return dispatch(authFailed(message));
   }
-};
-
-
-export const socialLoginSuccess = decoded => ({
-  type: SOCIAL_LOGIN_SUCCESS,
-  payload: decoded,
-});
-export const authorizeSocialUser = token => async (dispatch) => {
-  try {
-    localStorage.setItem('jwtToken', token);
-    const decoded = jwtDecode(token);
-    dispatch(socialLoginSuccess(decoded));
-  } catch (error) {
-    const { data: { errors } } = error.response;
-    const message = Object.values(errors)[0];
-    alert.error(message);
-    dispatch(authFailed(message));
-  }
-};
-
-export const getToken = (tokenString) => {
-  const startIndex = tokenString.indexOf('=') + 1;
-  const token = tokenString.slice(startIndex);
-  return token;
-};
-
-export const socialLink = (type) => {
-  window.location.href = `https://mazus-ah-staging.herokuapp.com/api/v1/auth/${type}`;
 };

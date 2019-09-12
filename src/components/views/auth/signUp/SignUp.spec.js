@@ -12,6 +12,12 @@ const initialState = {
     loading: false,
     error: {},
   },
+  social: {
+    user: {},
+    isAuthenticated: false,
+    loading: false,
+    error: {},
+  },
 };
 const props = {
   loading: false,
