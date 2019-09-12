@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { message as alert } from 'antd';
 import '@Common/antAlert.scss';
-import { registerAccount, getToken, authorizeSocialUser } from '@Redux/actions/authActions';
+import { getToken, authorizeSocialUser } from '@Redux/actions/socialActions';
+import { registerAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
 import SocialButtons from '@Common/auth/buttons';
@@ -183,6 +184,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.auth.errors,
   loading: state.auth.loading,
+  social: state.social,
 });
 const mapDispatchToProps = dispatch => ({
   onSubmit: (newUser, history) => dispatch(registerAccount(newUser, history)),

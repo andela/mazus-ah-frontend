@@ -5,7 +5,7 @@ import {
   faGoogle,
   faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
-import { socialLink } from '@Redux/actions/authActions';
+import { socialLink } from '@Redux/actions/socialActions';
 
 const Button = () => (
 
