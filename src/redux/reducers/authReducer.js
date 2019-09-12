@@ -3,6 +3,7 @@ import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
+  SOCIAL_LOGIN_SUCCESS,
   LOGOUT,
 } from '../actions/types/authType';
 
@@ -26,6 +27,13 @@ export default (state = initialState, action) => {
         ...state,
         loading: payload.loading,
         user: payload.user,
+        isAuthenticated: true,
+      };
+    case SOCIAL_LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: payload.loading,
+        user: payload,
         isAuthenticated: true,
       };
     case AUTH_FAILED:

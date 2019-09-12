@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { initialState } from '@Redux/reducers/socialReducer';
-import * as actions from '@Redux/actions/socialActions';
-import { SOCIAL_LOGIN_SUCCESS } from '@Redux/actions/types/socialType';
+import { initialState } from '@Redux/reducers/authReducer';
+import * as actions from '@Redux/actions/authActions';
+import { SOCIAL_LOGIN_SUCCESS } from '@Redux/actions/types/authType';
 
 
 const mockStore = configureMockStore([thunk]);
@@ -43,12 +43,6 @@ describe('Social Action tests', () => {
     const decoded = authResponse;
     const action = actions.socialLoginSuccess(decoded);
     expect(action).toEqual({ type: 'SOCIAL_LOGIN_SUCCESS', payload: decoded });
-  });
-  it('should return an error object and action type of SOCIAL_LOGIN_FAILURE to the action payload on failure', () => {
-    const { authorizeSocialUser } = actions;
-    const error = authorizeSocialUser();
-    const action = actions.socialLoginFailure(error);
-    expect(action).toEqual({ type: 'SOCIAL_LOGIN_FAILURE', payload: error });
   });
 
   it('should return striped token from URL', () => {
