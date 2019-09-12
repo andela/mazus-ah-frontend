@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,6 +6,7 @@ import { signInAccount } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
 import SocialButtons from '@Common/auth/buttons';
+import { getToken } from '@Redux/actions/socialActions';
 import { signinText } from '@Common/auth/leftDivText';
 import '@Common/auth/auth.scss';
 
@@ -16,6 +17,17 @@ const Signin = (props) => {
   });
   const { loading, history, onSubmit } = props;
 
+  useEffect(() => {
+    const { location } = props;
+    const tokenString = location && location.search;
+    if (tokenString) {
+      const token = getToken(tokenString);
+      const userData = null;
+      onSubmit(userData, history, token);
+      history.push('/');
+    }
+  }, [props]);
+
   const onChange = (event) => {
     event.persist();
     setValues(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
@@ -23,7 +35,8 @@ const Signin = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(values, history);
+    const accountVerificationToken = null;
+    onSubmit(values, history, accountVerificationToken);
   };
   return (
     <Fragment>
@@ -105,7 +118,7 @@ const mapStateToProps = state => ({
   loading: state.auth.loading,
 });
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (userData, history) => dispatch(signInAccount(userData, history)),
+  onSubmit: (userData, history, token) => dispatch(signInAccount(userData, history, token)),
 });
 export const SigninComponent = Signin;
 export default withRouter(connect(

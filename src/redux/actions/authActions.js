@@ -35,14 +35,20 @@ export const authFailed = error => ({
   },
 });
 
-export const signInAccount = (userData, history) => async (dispatch) => {
+export const signInAccount = (userData, history, accountVerificationToken) => async (dispatch) => {
   dispatch(authLoading());
   try {
-    const logInUser = await API_SERVICE.post('/auth/signin', userData);
-    const { token } = logInUser.data.user;
-    localStorage.setItem('jwtToken', token);
-    const user = jwtDecode(token);
-    alert.success('User successfully logged in');
+    let userToken;
+    if (userData !== null) {
+      const logInUser = await API_SERVICE.post('/auth/signin', userData);
+      const { token } = logInUser.data.user;
+      userToken = token;
+    } else userToken = accountVerificationToken;
+
+    localStorage.setItem('jwtToken', userToken);
+    const user = jwtDecode(userToken);
+    const successMessage = accountVerificationToken ? 'Your account is successfully verified' : 'User successfully logged in';
+    alert.success(successMessage);
     dispatch(authSuccess(user));
     return history.push('/');
   } catch (error) {
