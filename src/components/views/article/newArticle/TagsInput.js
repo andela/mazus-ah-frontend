@@ -29,7 +29,7 @@ const TagsInput = (props) => {
         value={tagInput}
         onChange={e => setTag(e.target.value)}
         onKeyUp={event => addTags(event)}
-        placeholder="Press enter to add at most 10 Tags"
+        placeholder="Add Tags"
       />
       <div className="tags" tags={tags}>
         {tags.map((tag, index) => (

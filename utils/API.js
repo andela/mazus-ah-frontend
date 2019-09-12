@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
 
-export const API_URL = process.env.NODE_ENV === 'production' ? 'http://localhost:3000/api/v1' : 'https://mazus-ah-staging.herokuapp.com/api/v1';
+export const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/v1' : 'https://mazus-ah-staging.herokuapp.com/api/v1';
 
 export const instance = axios.create({
   baseURL: API_URL,

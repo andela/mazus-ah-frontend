@@ -1,6 +1,6 @@
 .tags {
     width: 400px;
-    padding: 10px;
+    padding-bottom: 6rem;
     display: flex;
     flex-wrap: wrap;
 }
@@ -13,9 +13,17 @@
   font-weight: normal;
   font-size: 20px;
   margin: 0.2rem;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }
 
 #tag-input {
-    width: 400px !important; 
+    width: 18rem !important; 
     border-radius: 8px;
+    font-size: 18px;
+}
+
+.material-icons {
+  cursor: pointer;
 }
