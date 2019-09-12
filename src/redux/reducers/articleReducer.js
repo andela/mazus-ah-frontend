@@ -6,6 +6,7 @@ import {
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
   GET_ARTICLE_STAT,
+  SET_ARTICLE_RATE,
 } from '../actions/types/articleType';
 
 export const initialState = {
@@ -60,6 +61,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         articleStat: payload,
+      };
+    case SET_ARTICLE_RATE:
+      return {
+        ...state,
+        article: { ...state.article, ratings: payload },
       };
     default:
       return state;

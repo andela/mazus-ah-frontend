@@ -29,6 +29,7 @@ const Article = ({
   articleStat,
 }) => {
   const [articleStatistics, setArticleStatistics] = useState({});
+  const [averageRating, setAverageRating] = useState(0);
   const articleSlug = match.params.slug;
   useEffect(() => {
     const allStat = articleStat;
@@ -43,6 +44,9 @@ const Article = ({
     getArticle();
     window.scrollTo(0, 0);
   }, [match, fetchSingleArticleBySlug]);
+  useEffect(() => {
+    setAverageRating(singleArticle.ratings > 0 ? singleArticle.ratings : 0);
+  }, [singleArticle]);
   return (
     <Fragment>
       <div className="article__container">
@@ -68,6 +72,7 @@ const Article = ({
                 <h5 className="author__name">{singleArticle?.author?.firstName} {singleArticle?.author?.lastName}</h5>
                 <button className="follow__button" type="button">Follow</button>
                 <div className="user__comment_info"><i className="material-icons">comment</i><span>{singleArticle?.articlecomment?.length}</span></div>
+                <StarRating slug={articleSlug} rate={`${averageRating}`} editable={false} />
               </div>
             </div>
             <div className="article__content">
@@ -90,7 +95,7 @@ const Article = ({
               <div className="article__divider" />
               <div className="article__actions">
                 <div className="article__ratings">
-                  <StarRating slug={articleSlug} rate={`${articleStatistics.rate}`} />
+                  <StarRating slug={articleSlug} rate={`${articleStatistics.rate}`} editable />
                 </div>
                 <div className="article__interaction">
                   <i className="material-icons">bookmark_border</i>

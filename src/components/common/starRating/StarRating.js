@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import StarRatingComponent from 'react-star-rating-component';
 import { rateArticle } from '@Actions/articleActions';
 
-const RateComponent = ({ rateArticle: rateFunction, slug, rate }) => {
+const RateComponent = ({
+  rateArticle: rateFunction,
+  slug,
+  rate,
+  editable,
+}) => {
   const [currentUserRate, setCurrentUserRate] = useState(0);
   useEffect(() => {
     const sendRating = async () => {
@@ -30,6 +35,7 @@ const RateComponent = ({ rateArticle: rateFunction, slug, rate }) => {
         onStarClick={updateCurrentUserRate}
         starColor="#FFCC00"
         emptyStarColor="grey"
+        editing={editable}
       />
     </div>
   );
@@ -39,6 +45,7 @@ RateComponent.propTypes = {
   rateArticle: PropTypes.func.isRequired,
   slug: PropTypes.string.isRequired,
   rate: PropTypes.string.isRequired,
+  editable: PropTypes.bool.isRequired,
 };
 
 export default connect(

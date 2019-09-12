@@ -10,6 +10,7 @@ import {
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
   GET_ARTICLE_STAT,
+  SET_ARTICLE_RATE,
 } from './types/articleType';
 
 const articles = [];
@@ -57,6 +58,11 @@ export const articleStat = payload => ({
   payload,
 });
 
+export const setRate = payload => ({
+  type: SET_ARTICLE_RATE,
+  payload,
+});
+
 export const getArticleBySlug = (slug, userId) => async (dispatch) => {
   dispatch(clearArticleError());
   dispatch(articleLoading());
@@ -101,9 +107,12 @@ export const getArticles = () => ({
   payload: { articles, loading: false },
 });
 
-export const rateArticle = (rate, slug) => async () => {
+export const rateArticle = (rate, slug) => async (dispatch) => {
   try {
     await API_SERVICE.post(`/articles/${slug}/ratings`, rate);
+    await API_SERVICE.get(`/articles/${slug}/ratings`);
+    const fetchedArticle = await API_SERVICE.get(`/articles/${slug}`);
+    dispatch(setRate(fetchedArticle.data.article.ratings));
   } catch (error) {
     authenticationErrorAlert(error.response.data.errors.message);
   }

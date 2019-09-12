@@ -210,12 +210,19 @@ describe('Article component', () => {
         params: { slug: 'some-slug' },
       },
       relatedArticles: [article],
+      articleStat: {
+        like: null,
+        rate: null,
+        followedAuthor: false,
+      },
     };
 
     const component = mount(
-      <Router>
-        <ArticleComponent {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <ArticleComponent {...props} />
+        </Router>
+      </Provider>,
     );
 
     const relatedArticleContainer = component.find('.related__article__container');
