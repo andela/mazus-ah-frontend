@@ -12,7 +12,7 @@
       "@Types/*": ["src/redux/actions/types/*"],
       "@Common/*": ["src/components/common/*"],
       "@Views/*": ["src/components/views/*"],
-      "@Utils/*": ["utils/*"],
+      "@Utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules", "dist", "__tests__"]

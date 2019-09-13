@@ -4,7 +4,8 @@ import {
   ARTICLE_LOADING,
   GET_SINGLE_ARTICLE,
   CLEAR_ARTICLE_ERROR,
-} from '@Actions/types/articleType';
+  CREATE_COMMENT,
+} from '../actions/types/articleType';
 
 export const initialState = {
   articles: [],
@@ -32,6 +33,15 @@ export default (state = initialState, action) => {
         ...state,
         loading: payload.loading,
         article: payload.article,
+      };
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        loading: payload.loading,
+        article: {
+          ...state.article,
+          articlecomment: [...state.article.articlecomment, payload.comment],
+        },
       };
     case GET_ARTICLE_ERROR:
       return {

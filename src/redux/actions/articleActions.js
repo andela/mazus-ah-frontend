@@ -7,6 +7,7 @@ import {
   GET_SINGLE_ARTICLE,
   ARTICLE_LOADING,
   CLEAR_ARTICLE_ERROR,
+  CREATE_COMMENT,
 } from './types/articleType';
 
 const articles = [];
@@ -23,6 +24,14 @@ export const getSingleArticle = article => ({
   payload: {
     loading: false,
     article,
+  },
+});
+
+export const createArticleComment = comment => ({
+  type: CREATE_COMMENT,
+  payload: {
+    loading: false,
+    comment,
   },
 });
 
@@ -53,6 +62,15 @@ export const getArticleBySlug = slug => async (dispatch) => {
       fetchedArticle.data.article.relatedArticles = relatedArticles.data.matches.tags;
     }
     dispatch(getSingleArticle(fetchedArticle.data.article));
+  } catch (error) {
+    dispatch(articleError(error.response.data.errors));
+  }
+};
+
+export const createArticleOnComment = (slug, comment) => async (dispatch) => {
+  try {
+    const postComment = await API_SERVICE.post(`/articles/${slug}/comments`, comment);
+    dispatch(createArticleComment(postComment.data.comment));
   } catch (error) {
     dispatch(articleError(error.response.data.errors));
   }

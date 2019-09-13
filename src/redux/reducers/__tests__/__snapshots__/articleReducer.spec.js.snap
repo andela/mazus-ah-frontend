@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Article reducer should handle an create comment action with type CREATE COMMENT 1`] = `
+Object {
+  "article": Object {
+    "articlecomment": Array [
+      Object {
+        "body": "james",
+        "containsHighlightedText": false,
+        "createdAt": "2019-09-11T18:54:42.691Z",
+        "highlightedText": null,
+        "id": "c44dbc94-38c7-4638-bd7b-94f65cd43d6b",
+        "likes": 0,
+        "updatedAt": "2019-09-11T18:54:42.691Z",
+        "user": Object {
+          "email": "johndoe@test.com",
+          "firstName": "John",
+          "id": "ffe25dbe-29ea-4759-8461-ed116f6739dd",
+          "lastName": "Done",
+          "profile": Object {
+            "avatar": "https://image.flaticon.com/icons/svg/147/147144.svg",
+            "bio": "i think we all loving coding and little faffing",
+            "createdAt": "2019-09-09T14:33:55.282Z",
+            "id": "ffe23dbe-19ea-4759-8461-ed116f6739dd",
+            "updatedAt": "2019-09-09T14:33:55.282Z",
+            "userId": "ffe25dbe-29ea-4759-8461-ed116f6739dd",
+          },
+        },
+      },
+      Object {
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing",
+        "id": "10ba038e-48da-487b-96e8-8d3b99b6d18a",
+        "likes": 0,
+        "user": Object {
+          "email": "darthssvader@gmail.com",
+          "firstName": "Darth",
+          "id": "10ba038e-48da-487b-96e8-8d3b99b6d18a",
+          "lastName": "Vader",
+          "profile": Object {
+            "avatar": "https://www.instagram.com/darth_vader/img.jpg",
+            "bio": "I am just a guy who loves to code, bro",
+            "createdAt": "2019-07-30T14:00:23.458Z",
+            "id": "10ba038e-48da-487b-96e8-8d3b99b6d18a",
+            "updatedAt": "Unknown Type: date",
+            "userId": "10ba038e-48da-487b-96e8-8d3b99b6d18a",
+          },
+        },
+      },
+    ],
+    "author": Object {
+      "email": "mikemike@test.com",
+      "firstName": "Mike",
+      "id": "fdfe8617-208d-4b87-a000-5d6840786ab8",
+      "lastName": "Mike",
+      "profile": Object {
+        "avatar": "https://image.flaticon.com/icons/svg/147/147144.svg",
+        "bio": "i think we all loving coding and little faffing",
+        "createdAt": "2019-09-09T14:33:55.282Z",
+        "id": "fdfe8317-208d-4b87-a000-5d6840186ab8",
+        "updatedAt": "2019-09-09T14:33:55.282Z",
+        "userId": "fdfe8617-208d-4b87-a000-5d6840786ab8",
+      },
+    },
+    "body": "{\\"time\\":1568051107848,\\"blocks\\":[{\\"type\\":\\"image\\",\\"data\\":{\\"url\\":\\"https://miro.medium.com/max/2048/1*rATi2Mvr9c0lMt_r4zbZcQ.jpeg\\",over we know is going to be a reality. It’s not an if, it’s a when.”\\"}}],\\"version\\":\\"2.15.0\\"}",
+    "createdAt": "2019-09-09T14:33:53.037Z",
+    "description": "It’s fast — and expensive",
+    "id": "c7baa165-6142-4b4c-b60a-bdfb277d1bf1",
+    "isPaid": false,
+    "slug": "a-5-minute-ride-proves-the-future-of-air-travel-is-already-here-1568051107848",
+    "title": "A 5-Minute Ride Proves the Future of Air Travel Is Already Here",
+    "updatedAt": "2019-09-13T07:32:44.414Z",
+    "userId": "fdfe8617-208d-4b87-a000-5d6840786ab8",
+  },
+  "articles": Array [],
+  "error": Object {},
+  "loading": false,
+}
+`;

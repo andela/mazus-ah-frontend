@@ -33,18 +33,15 @@ describe('Social Action tests', () => {
   beforeEach(() => {
     store.clearActions();
   });
-
   it('should successfully dispatch an object when token is decoded', () => {
     const { authorizeSocialUser } = actions;
     expect(typeof authorizeSocialUser(authResponse)(dispatch)).toEqual('object');
   });
-
   it('should return a decoded object and an action type of SOCIAL_LOGIN_SUCCESS to the action on success', () => {
     const decoded = authResponse;
     const action = actions.socialLoginSuccess(decoded);
     expect(action).toEqual({ type: 'SOCIAL_LOGIN_SUCCESS', payload: decoded });
   });
-
   it('should return striped token from URL', () => {
     const tokenString = 'localhost:8080/signup?token=abc';
     const token = actions.getToken(tokenString);

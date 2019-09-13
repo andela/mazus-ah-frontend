@@ -3,9 +3,11 @@ import React, { Fragment, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getArticleBySlug } from '@Redux/actions/articleActions';
 import Tag from '@Common/tags/Tag';
-import ArticleComment from '@Common/comments/ArticleComment';
+import ArticleCommentList from '@Common/comments/ArticleCommentList';
+import ArticleCommentForm from '@Common/comments/ArticleCommentForm';
 import Loader from '@Common/loader/Loader';
 import parseDataFromJSON from '@Utils/parseEditorData';
 import Card from '@Common/landingPage/card/Cards';
@@ -21,12 +23,12 @@ const Article = ({
   loading,
   error,
   relatedArticles,
+  authenticatedUser,
 }) => {
   useEffect(() => {
     const getArticle = async () => {
       await fetchSingleArticleBySlug(match.params.slug);
     };
-
     getArticle();
     window.scrollTo(0, 0);
   }, [match, fetchSingleArticleBySlug]);
@@ -54,6 +56,7 @@ const Article = ({
               <div id="author__profile__div">
                 <h5 className="author__name">{singleArticle?.author?.firstName} {singleArticle?.author?.lastName}</h5>
                 <button className="follow__button" type="button">Follow</button>
+                <div className="user__comment_info"><i className="material-icons">comment</i><span>{singleArticle?.articlecomment?.length}</span></div>
               </div>
             </div>
             <div className="article__content">
@@ -88,7 +91,24 @@ const Article = ({
                   <i className="material-icons">report</i>
                 </div>
               </div>
-              <ArticleComment />
+              {authenticatedUser ? (
+                <ArticleCommentForm match={match} />
+              ) : ''
+              }
+              {singleArticle?.articlecomment?.length > 0 ? singleArticle.articlecomment.map(
+                comment => (
+                  <ArticleCommentList
+                    key={comment.id}
+                    {...comment}
+                  />
+                ),
+              ) : <p className="article__no__comments">No Comments for this article</p>}
+              {authenticatedUser ? (
+                ''
+              )
+                : (<Link to="/signin"><button type="button" className="comment_load_more">Sign in to Comment</button></Link>)
+                }
+
               <div className="article__related__articles">
                 <h3>Related Articles</h3>
                 <div className="article__divider" />
@@ -124,6 +144,7 @@ Article.propTypes = {
   error: PropTypes.shape({}),
   loading: PropTypes.bool.isRequired,
   relatedArticles: PropTypes.shape([]),
+  authenticatedUser: PropTypes.bool.isRequired,
 };
 
 Article.defaultProps = {
@@ -137,6 +158,7 @@ const mapStateToProps = state => ({
   loading: state.singleArticle.loading,
   error: state.singleArticle.error,
   relatedArticles: state.singleArticle.article.relatedArticles,
+  authenticatedUser: state.auth.isAuthenticated,
 });
 
 export const ArticleComponent = Article;

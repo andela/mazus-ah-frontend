@@ -1,8 +1,12 @@
+$color_1: #2FB5EE;
+$color_2: #fff;
+
+
 div.article__comments {
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 
   div.article__comment_card {
-    margin-top: 5rem;
+    margin-top: 2rem;
     padding: 2rem;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 
@@ -28,7 +32,7 @@ div.article__comments {
     }
 
     div.comment__body {
-      padding: 1rem;
+      padding: 0 6.5rem;
 
       p {
         font-size: 14px;
@@ -57,4 +61,64 @@ div.article__comments {
       }
     }
   }
+}
+
+div.article__comment_input {
+  margin-top: 6rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+
+  .user__comment_input {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    vertical-align: 11rem;
+    .comment_form{
+      width: 100%;
+      .row {
+        display: flex;
+        flex-direction: row;
+        .comment_input_field{
+          width: 94% !important;
+          margin-left: 2%;
+          margin-top: 2rem;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom-color: $color_1;
+          font-size: 1.5rem;
+          resize: vertical;
+          overflow: auto;
+          height: 4rem;
+          &:focus {
+            outline: none;
+          }
+        }
+        .column1 {
+          width: 90%;
+          height: 6rem;
+        }
+        .column2 {
+          width: 10%;
+          height: 6rem;
+          padding-top: 3rem;
+          .comment_btn {
+            border: none;
+            width: 1rem;
+            color: $color_1;
+          }
+        }
+      } 
+    }
+  }
+}
+.comment_load_more {
+  width: 15rem;
+  height: 4rem;
+  margin-left: 37%;
+  border-radius: 1rem;
+  background-color: $color_1;
+  margin-top: 2rem;
+  color: $color_2;
+  font-size: 1.3rem;
 }
