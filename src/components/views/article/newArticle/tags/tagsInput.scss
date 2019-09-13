@@ -16,12 +16,14 @@
   display: flex;
   align-items: center;
   font-size: 16px;
+  font-weight: bold;
 }
 
 #tag-input {
     width: 18rem !important; 
     border-radius: 8px;
     font-size: 18px;
+    border: 1px #2FB5EE solid !important;
 }
 
 .material-icons {

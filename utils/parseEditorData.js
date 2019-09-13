@@ -15,7 +15,7 @@ const parseDataFromJSON = (json) => {
         html += '<hr />';
         break;
       case 'image':
-        html += `<img src="${block.data.url}" title="${
+        html += `<img src="${block.data.url || block.data.file.url}" title="${
           block.data.caption
         }" /><br /><em>${block.data.caption}</em>`;
         break;

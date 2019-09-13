@@ -34,12 +34,12 @@ const Thumbnail = (props) => {
       { !newThumbnail ? (
         <label htmlFor="upload-thumbnail">
           { !loader ? <img className="thumbnail" alt="upload" src={uploadIcon} /> : <img className="thumbnail" src={cloudyLoader} alt="cloudy" /> }
-          <input type="file" id="upload-thumbnail" onChange={e => uploadThumbnail(e)} />
+          <input type="file" id="upload-thumbnail" accept="image/*" onChange={e => uploadThumbnail(e)} />
         </label>
       ) : (
         <label htmlFor="upload-thumbnail">
           <img className="thumbnail" alt="newThumbnail" src={thumbnail} />
-          <input type="file" id="upload-thumbnail" onChange={e => uploadThumbnail(e)} />
+          <input type="file" id="upload-thumbnail" accept="image/*" onChange={e => uploadThumbnail(e)} />
         </label>
       )}
     </div>

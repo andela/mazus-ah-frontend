@@ -30,7 +30,7 @@ const App = () => (
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
-        <ContainerWrapper exact path="/articles" component={NewArticle} />
+        <ContainerWrapper exact path="/new-article" component={NewArticle} />
         <Route component={NotFound} />
       </Switch>
     </Router>

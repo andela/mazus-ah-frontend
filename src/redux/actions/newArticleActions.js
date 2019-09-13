@@ -8,18 +8,18 @@ import {
   PUBLISH_FAILURE,
 } from './types/newArticleType';
 
-export const publishArticle = () => ({
+export const publishingArticle = () => ({
   type: PUBLISHING_ARTICLE,
   payload: {
     loading: true,
   },
 });
 
-export const publishSuccess = article => ({
+export const publishSuccess = newArticle => ({
   type: PUBLISH_SUCCESS,
   payload: {
     loading: false,
-    article,
+    newArticle,
   },
 });
 
@@ -31,13 +31,21 @@ export const publishFail = error => ({
   },
 });
 
-export const publishNewArticle = (articleData, history) => async (dispatch) => {
-  dispatch(publishArticle());
+export const publishNewArticle = (status, articleData, history) => async (dispatch) => {
+  const articles = articleData;
+  dispatch(publishingArticle());
   try {
+    articles.status = status;
     const newArticle = await API_SERVICE.post('/articles', articleData);
-    alert.success('Article Successfully Created');
-    dispatch(publishArticle(newArticle));
-    return history.push('/');
+    const articleStatus = newArticle.data.article.status;
+    if (articleStatus === 'published') {
+      alert.success('Article Successfully Created');
+      dispatch(publishSuccess(newArticle.data.article));
+      return history.push(`/article/${newArticle.data.article.slug}`);
+    }
+    alert.success('Article Saved to Drafts');
+    dispatch(publishSuccess(newArticle.data.article));
+    return history.push('*');
   } catch (error) {
     const { data: { errors } } = error.response;
     const message = Object.values(errors)[0];

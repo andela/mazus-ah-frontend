@@ -5,7 +5,7 @@ import {
 } from '@Types/newArticleType';
 
 export const initialState = {
-  newArticle: {},
+  article: {},
   loading: false,
   error: {},
 };
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: payload.loading,
-        newArticle: payload.newArticle,
+        article: payload.newArticle,
       };
     case PUBLISH_FAILURE:
       return {
