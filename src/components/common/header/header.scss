@@ -71,3 +71,7 @@ nav ul .profile_avatar img{
     will-change: width, height;
     display: none;
   }
+
+  .dropdown-content li>a, .dropdown-content li>span {
+    color: $primary-color;
+  }

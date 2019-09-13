@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
 import setUser from '@Utils/setUser';
+import Profile from '@Views/profile';
 import store from './redux/store';
 import './app.scss';
 
@@ -29,6 +31,7 @@ const App = () => (
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
+        <ContainerWrapper exact path="/profile/:userId" component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </Router>

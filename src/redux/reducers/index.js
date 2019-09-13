@@ -4,7 +4,7 @@ import authReducer from './authReducer';
 import passwordResetReducer from './passwordResetReducer';
 import socialReducer from './socialReducer';
 import singleArticleReducer from './articleReducer';
-
+import profileReducer from './profileReducer';
 
 export default combineReducers({
   article: LandingPageReducer,
@@ -12,4 +12,5 @@ export default combineReducers({
   requestReset: passwordResetReducer,
   social: socialReducer,
   singleArticle: singleArticleReducer,
+  profile: profileReducer,
 });

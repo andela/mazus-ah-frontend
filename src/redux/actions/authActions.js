@@ -76,6 +76,21 @@ export const registerAccount = (userData, history) => async (dispatch) => {
   }
 };
 
+export const getCurrentUserProfile = () => async (dispatch, getState) => {
+  dispatch(authLoading());
+  try {
+    const { auth } = getState();
+    const userProfile = await API_SERVICE.get(`/profiles/${auth.user.id}`);
+    const newUserState = {
+      ...getState().auth.user,
+      avatar: userProfile.data.profile.profile.avatar,
+    };
+    dispatch(authSuccess(newUserState));
+  } catch (error) {
+    alert.error('There was a problem while fetching your profile');
+  }
+};
+
 export const logout = () => ({
   type: LOGOUT,
 });

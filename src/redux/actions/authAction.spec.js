@@ -11,7 +11,12 @@ import {
   AUTH_SUCCESS,
   LOGOUT,
 } from './types/authType';
-import { registerAccount, signInAccount, logoutAccount } from './authActions';
+import {
+  registerAccount,
+  signInAccount,
+  logoutAccount,
+  getCurrentUserProfile,
+} from './authActions';
 
 const mockStore = configureMockStore([thunk]);
 const userData = {
@@ -228,6 +233,38 @@ describe('Signin User actions', () => {
     ];
     axios.post.mockResolvedValue(successfulRequest);
     await store.dispatch(logoutAccount(props.history));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
+
+  it('should dispatch AUTH_LOADING and AUTH_SUCCESS when fethcing the current users profile', async () => {
+    const successfulRequest = {
+      data: {
+        message: 'Profile fetched sucessfully',
+        profile: {
+          firstName: 'Mike',
+          lastName: 'Will',
+          id: '98739473-7fd9-08e4',
+          profile: {
+            id: '98739473-7fd9-08e4',
+            bio: 'I love eating beans',
+            avatar: 'https://res.cloudinary.com/mazus/image/upload/v1564080294/blog/2019-07-25T18:44:50.301Z.jpg',
+          },
+        },
+      },
+    };
+
+    const expectedActions = [
+      {
+        type: AUTH_LOADING,
+        payload: {
+          loading: true,
+        },
+      },
+    ];
+
+    axios.post.mockResolvedValue(successfulRequest);
+    await store.dispatch(getCurrentUserProfile());
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });
