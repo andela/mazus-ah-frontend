@@ -2,11 +2,10 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { signInAccount } from '@Redux/actions/authActions';
+import { signInAccount, getToken } from '@Redux/actions/authActions';
 import InputField from '@Common/form/InputField';
 import LeftDiv from '@Common/auth/leftDiv';
 import SocialButtons from '@Common/auth/buttons';
-import { getToken } from '@Redux/actions/socialActions';
 import { signinText } from '@Common/auth/leftDivText';
 import '@Common/auth/auth.scss';
 

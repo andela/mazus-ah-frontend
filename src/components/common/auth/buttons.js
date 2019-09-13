@@ -5,11 +5,11 @@ import {
   faGoogle,
   faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
-import { socialLink } from '@Redux/actions/socialActions';
+import { socialLink } from '@Redux/actions/authActions';
 
 const Button = () => (
 
-  <div>
+  <div data-test="buttonTest">
     <div className="input-field">
       <button className="btn--block btn-google" type="submit" value="Sign in" onClick={() => socialLink('google')}>
         <span className="social-icon-left"><FontAwesomeIcon icon={faGoogle} /></span>
