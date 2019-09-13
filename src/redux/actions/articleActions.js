@@ -1,6 +1,6 @@
-
 import API_SERVICE from '@Utils/API';
 import isEmpty from '@Utils/isEmpty';
+import likeAuthenticationError from '@Utils/likeAuthenticationError';
 import {
   GET_ARTICLES,
   GET_ARTICLE_ERROR,
@@ -8,7 +8,9 @@ import {
   ARTICLE_LOADING,
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
+  CREATE_LIKE,
 } from './types/articleType';
+
 
 const articles = [];
 
@@ -80,3 +82,21 @@ export const getArticles = () => ({
   type: GET_ARTICLES,
   payload: { articles, loading: false },
 });
+
+export const createLikeAction = payload => ({
+  type: CREATE_LIKE,
+  payload,
+});
+export const likeComment = commentId => async (dispatch) => {
+  try {
+    const postLike = await API_SERVICE.post(`/comments/likes/${commentId}`);
+    const payload = {
+      id: commentId,
+      like: postLike.data.comment.like === undefined ? false : postLike.data.comment.like.like,
+      updatedAt: postLike.data.comment.like === undefined ? '' : postLike.data.comment.like.updatedAt,
+    };
+    dispatch(createLikeAction(payload));
+  } catch (error) {
+    likeAuthenticationError(error.response.data.errors.message);
+  }
+};

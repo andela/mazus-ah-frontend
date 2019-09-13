@@ -59,6 +59,12 @@ div.article__comments {
         font-size: 12px;
         margin: 0;
       }
+      .material-icons:focus,
+      .material-icons:hover {
+        background-color: none;
+        outline: none;
+        cursor: pointer;
+      }
     }
   }
 }

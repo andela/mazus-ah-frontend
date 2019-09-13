@@ -10,8 +10,9 @@ import {
   GET_ARTICLE_ERROR,
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
+  CREATE_LIKE,
 } from './types/articleType';
-import { getArticleBySlug, createArticleOnComment } from './articleActions';
+import { getArticleBySlug, createArticleOnComment, likeComment } from './articleActions';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -252,5 +253,53 @@ describe('Get single article action', () => {
     await store.dispatch(createArticleOnComment());
     const response = store.getActions();
     expect(response).toEqual(expectedAction);
+  });
+  it('should dispatch CREATE_LIKE when user likes a comment', async () => {
+    const commentId = '10ba038e-48da-487b-96e8-8d3b99b6d28b';
+    const successResponse = {
+      response: {
+        data: {
+          comment: {
+            message: 'Comment liked',
+            like: {
+              id: '10ba038e-48da-487b-96e8-8d3b99b6d28b',
+              like: true,
+              updatedAt: 'Unknown Type: date',
+            },
+          },
+        },
+      },
+    };
+
+    const expectedActions = [
+      {
+        type: CREATE_LIKE,
+        payload: {
+          id: '10ba038e-48da-487b-96e8-8d3b99b6d28b',
+          like: true,
+          updatedAt: 'Unknown Type: date',
+        },
+      },
+    ];
+
+    axios.post.mockResolvedValue(successResponse.response);
+    await store.dispatch(likeComment(commentId));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
+  it('should dispatch error when there is an authenticated user tries to like a comment', async () => {
+    const failedResponse = {
+      response: {
+        data: {
+          errors: {
+            message: 'No Token Provided',
+          },
+        },
+      },
+    };
+    axios.post.mockRejectedValue(failedResponse);
+    await store.dispatch(likeComment('10ba038e-48da-487b-96e8-8d3b99b6d28b'));
+    const response = store.getActions();
+    expect(response).toEqual([]);
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import ArticleComment from './ArticleCommentList';
+import ArticleCommentList, { ArticleComment } from './ArticleCommentList';
 import { ArticleCommentFormComponent } from './ArticleCommentForm';
 
 const mockStore = configureMockStore();
@@ -22,8 +22,28 @@ describe('Article comment component', () => {
       },
       createdAt: '',
     };
-    const component = shallow(<ArticleComment {...props} />);
+    const component = mount(<ArticleCommentList store={store} {...props} />);
     expect(component.find('img')).toHaveLength(1);
+  });
+  it('should call the likeComment method when a user likes a comment', () => {
+    const props = {
+      body: '',
+      likes: 10,
+      user: {
+        id: '10ba038e-48da-487b-96e8-8d3b99b6d18a',
+        firstName: 'Tunji',
+        lastName: 'Abioye',
+        profile: {
+          title: 'The Curious Case of Benjamin Buttons',
+          avatar: 'getting-started-with-nodejs-&-express-1564498223366-74536',
+        },
+      },
+      createdAt: '',
+      likeComment: jest.fn(),
+    };
+    const component = mount(<ArticleComment {...props} />);
+    component.find('i').simulate('click');
+    expect(props.likeComment).toHaveBeenCalledTimes(1);
   });
 
   it('should render the component without crashing', () => {
