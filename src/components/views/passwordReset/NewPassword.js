@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { applyReset } from '@Redux/actions/passwordResetActions';
 import InputField from '@Common/form/InputField';
+import { passwordMatch, validatePassword } from '@Utils/validatePassword';
 
 
 const ResetPassword = ({
@@ -12,10 +13,28 @@ const ResetPassword = ({
   const [formData, setFormData] = useState({
     password: '',
     confirmPassword: '',
+    errorMessage: '',
   });
 
-  const { password, confirmPassword } = formData;
-  const onChange = event => setFormData({ ...formData, [event.target.name]: event.target.value });
+  const { password, confirmPassword, errorMessage } = formData;
+
+  const passwordValidation = (event) => {
+    event.persist();
+    const status = validatePassword(event.target.value);
+    setFormData(prevState => ({ ...prevState, errorMessage: !status ? 'Password must contain at least one uppercase letter, one lowercase letter and one numeric digit' : '' }));
+    setFormData(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+    return status;
+  };
+
+  const confirmPassworValidation = (event) => {
+    event.persist();
+    setFormData(prevState => ({ ...prevState, [event.target.name]: event.target.value }));
+  };
+
+  useEffect(() => {
+    const isMatch = passwordMatch(formData);
+    setFormData(prevState => ({ ...prevState, errorMessage: !isMatch ? 'Password does not match' : '' }));
+  }, [confirmPassword]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,18 +53,22 @@ const ResetPassword = ({
         !success ? (
           <form onSubmit={handleSubmit}>
             <h4>Create New Password</h4>
+            <div className="newPasswordError">
+              {errorMessage}
+            </div>
             <div>
               <p>Enter New Password</p>
               <InputField
                 id="password-input"
                 type="password"
                 value={password}
-                onChange={onChange}
+                onChange={passwordValidation}
                 name="password"
                 placeholder="Password"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="8 Characters with uppercase, lowercase and numbers"
                 minLength="8"
+                className={`form-input ${errorMessage && 'error'}`}
                 required
               />
             </div>
@@ -56,12 +79,13 @@ const ResetPassword = ({
                 id="confirm-password"
                 name="confirmPassword"
                 type="password"
-                onChange={onChange}
+                onChange={confirmPassworValidation}
                 value={confirmPassword}
                 placeholder="Password"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="8 Characters with uppercase, lowercase and numbers"
                 minLength="8"
+                className={`form-input ${errorMessage && 'error'}`}
                 required
               />
             </div>
