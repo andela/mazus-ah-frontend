@@ -32,11 +32,8 @@ const App = () => (
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
-<<<<<<< HEAD
         <ContainerWrapper exact path="/profile/:userId" component={Profile} />
-=======
-        <ContainerWrapper exact path="/articles" component={NewArticle} />
->>>>>>> feature(article): create new article
+        <ContainerWrapper exact path="/new-article" component={NewArticle} />
         <Route component={NotFound} />
       </Switch>
     </Router>

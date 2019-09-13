@@ -31,6 +31,8 @@ const AuthenticatedHeader = ({
       <ul id="dropdown1" className="dropdown-content">
         <li><Link to="*"><i className="material-icons">post_add</i>New article</Link></li>
         <li><Link to={`/profile/${id}`}><i className="material-icons">account_circle</i>Profile</Link></li>
+        <li><Link to="/new-article"><i className="material-icons">post_add</i>New article</Link></li>
+        <li><Link to="*"><i className="material-icons">account_circle</i>Profile</Link></li>
         <li><Link to="#*" onClick={logoutUser}><i className="material-icons">exit_to_app</i>Sign out</Link></li>
       </ul>
       <nav className="nav-extended">

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import TagsInput from '@Views/article/newArticle/TagsInput';
-import Thumbnail from '@Views/article/newArticle/Thumbnail';
+import TagsInput from '@Views/article/newArticle/tags/TagsInput';
+import Thumbnail from '@Views/article/newArticle/thumbnail/Thumbnail';
 import { publishNewArticle } from '@Actions/newArticleActions';
 import PropTypes from 'prop-types';
 import './modal.scss';
 
-
+const defaultThumbnail = 'https://res.cloudinary.com/mazus/image/upload/v1566988928/default-article-image-large_eeu8ov.gif';
 const Modal = (
   {
     showModal,
@@ -29,15 +29,19 @@ const Modal = (
     setArticleThumbnail(thumbnail);
     return articleThumbnail;
   };
-  const publish = () => {
-    const fullArticle = {
-      title,
-      description,
-      body,
-      tags: articleTags,
-      thumbnail: articleThumbnail,
-    };
-    onClick(fullArticle, history);
+  const fullArticle = {
+    title,
+    description,
+    body,
+    tags: articleTags,
+    status: '',
+    thumbnail: articleThumbnail,
+  };
+  const publish = (status) => {
+    if (!articleThumbnail) {
+      fullArticle.thumbnail = `${defaultThumbnail}`;
+    }
+    onClick(status, fullArticle, history);
   };
   return (
     <div className="overlay">
@@ -51,8 +55,8 @@ const Modal = (
           />
           <TagsInput selectedTags={selectedTags} />
           <div className="action-btn">
-            <button className="publish-btn" type="button" onClick={publish} disabled={loading}>PUBLISH</button>
-            <button className="draft-btn" type="button">SAVE DRAFT</button>
+            <button className="publish-btn" type="button" onClick={() => publish('published')} disabled={loading}>PUBLISH</button>
+            <button className="draft-btn" type="button" onClick={() => publish('draft')}>SAVE DRAFT</button>
           </div>
         </div>
         <Thumbnail getThumbnail={getThumbnail} />
@@ -78,11 +82,15 @@ Modal.propTypes = {
 };
 const mapStateToProps = state => ({
   newArticle: state.newArticle,
-  errors: state.newArticle.errors,
-  loading: state.newArticle.loading,
+  errors: state.article.errors,
+  loading: state.article.loading,
 });
 const mapDispatchToProps = dispatch => ({
-  onClick: (articleData, history) => dispatch(publishNewArticle(articleData, history)),
+  onClick: (
+    status,
+    articleData,
+    history,
+  ) => dispatch(publishNewArticle(status, articleData, history)),
 });
 
 export const publishModal = Modal;

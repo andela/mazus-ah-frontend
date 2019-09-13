@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Modal from '@Views/article/newArticle/Modal';
-import editor from '@Views/article/newArticle/articleEditor';
+import Modal from '@Views/article/newArticle/modal/Modal';
+import editor from '@Utils/articleEditor';
 import '@Views/article/newArticle/newArticle.scss';
 
 const NewArticle = () => {
@@ -35,7 +35,7 @@ const NewArticle = () => {
           <div id="editorjs" />
         </div>
         <span id="done_btn">
-          <button type="submit" onClick={show}>Done?</button>
+          <button className="done" type="submit" onClick={show}>Done?</button>
         </span>
       </div>{showModal ? <Modal showModal={show} title={title} body={JSON.stringify(body)} /> : ''}
 
