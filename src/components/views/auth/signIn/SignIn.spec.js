@@ -85,4 +85,15 @@ describe('SignIn Component', () => {
     form.simulate('submit');
     expect(handleSubmit).toHaveBeenCalledTimes(1);
   });
+  it('should not call history if token string is empty', () => {
+    const handleSubmit = jest.fn();
+    const history = {
+      push: jest.fn()
+    }
+   const location = {
+    search: 'localhost:8080/signup?token',
+  };
+    const wrapper = mount(<Router><SigninComponent store={store} onSubmit={handleSubmit} location={location} history={history} {...props} /></Router>);
+    expect(history.push).toHaveBeenCalledTimes(0);
+  });
 });

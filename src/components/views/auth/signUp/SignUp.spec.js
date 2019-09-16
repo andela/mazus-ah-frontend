@@ -64,6 +64,26 @@ describe('SignUp Component', () => {
     wrapper.unmount();
   });
 
+
+  it('should call onChange props for confirmPassword input', () => {
+    const wrapper = mount(
+      <Router>
+        <SignUp store={store} {...props} />
+      </Router>,
+    );
+    const confirmPasswordInput = wrapper.find('input[name="confirmPassword"]');
+    confirmPasswordInput.simulate('change', {
+      persist: () => { },
+      target: {
+        name: 'confirmPassword',
+        value: 'john',
+      },
+    });
+    expect(wrapper.find('input[name="confirmPassword"]').length).toEqual(1);
+    expect(confirmPasswordInput.html()).toMatch('john');
+    wrapper.unmount();
+  });
+
   it('should call onChange props for password input', () => {
     const wrapper = mount(
       <Router>

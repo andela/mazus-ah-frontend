@@ -1,15 +1,25 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { likeComment } from '@Redux/actions/articleActions';
 import './articleComment.scss';
 
-const ArticleComment = ({
+export const ArticleComment = ({
+  id,
   body,
   likes,
   user,
   createdAt,
+  likeComment: commentLike,
 }) => {
   const date = moment(createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a');
+
+  const onLikeSubmit = async (event) => {
+    event.preventDefault();
+    await commentLike(id);
+  };
 
   return (
     <div className="article__comments">
@@ -32,7 +42,7 @@ const ArticleComment = ({
           </p>
         </div>
         <div className="comment__likes">
-          <i id="comment__likes__icon" className="material-icons">favorite_border</i>
+          <i className="material-icons" onClick={onLikeSubmit} role="button" tabIndex="0" style={{ color: likes >= 1 && 'red' }}>favorite</i>
           <p className="comment__likes__count">{likes}</p>
         </div>
       </div>
@@ -45,6 +55,15 @@ ArticleComment.propTypes = {
   likes: PropTypes.number.isRequired,
   user: PropTypes.shape({}).isRequired,
   createdAt: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  likeComment: PropTypes.func.isRequired,
 };
 
-export default ArticleComment;
+const mapStateToProps = state => ({
+  like: state.like,
+});
+
+export default connect(
+  mapStateToProps,
+  { likeComment },
+)(ArticleComment);

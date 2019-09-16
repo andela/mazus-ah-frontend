@@ -75,4 +75,14 @@ describe('<Header /> Component', () => {
     expect(wrapper.find('img').length).toEqual(1);
     wrapper.unmount();
   });
+  it('should call logout prop when the user clicks sign out', () => {
+    const logout = jest.fn();
+    const props = {
+      history: { push: jest.fn() },
+      user: { id: '66fusd6-ksjdkj-78', avatar: 'https://google.com/i.png' },
+    };
+    const wrapper = mount(<Router><AuthenticatedHeaderComponent getProfile={jest.fn()} store={store} logout={logout} {...props} /></Router>);
+    wrapper.find('Link').at(2).simulate('click');
+    expect(logout).toHaveBeenCalledTimes(1);
+  });
 });

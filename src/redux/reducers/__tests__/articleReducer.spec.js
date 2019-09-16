@@ -5,6 +5,7 @@ import {
   getArticles,
   clearArticleError,
   createArticleComment,
+  createLikeAction,
 } from '@Redux/actions/articleActions';
 import articleReducer, { initialState } from '../articleReducer';
 
@@ -113,6 +114,13 @@ const comment = {
     },
   },
 };
+
+const like = {
+  id: '10ba038e-48da-487b-96e8-8d3b99b6d28a',
+  like: true,
+  updatedAt: 'Unknown Type: date',
+};
+
 const error = 'Article not found';
 
 describe('Article reducer', () => {
@@ -172,5 +180,23 @@ describe('Article reducer', () => {
     newState = articleReducer(initialState, { type, payload });
     expect(type).toEqual('CLEARING ARTICLE ERROR');
     expect(payload.error).toEqual({});
+  });
+  it('should handle an action with type CREAT_LIKES', () => {
+    const { type, payload } = createLikeAction(like);
+    newState = articleReducer({
+      article: {
+        articlecomment: [
+          {
+            id: 0,
+            likes: 0,
+          },
+        ],
+      },
+      loading: false,
+      error: {},
+      newComment: {},
+      like: {},
+    }, { type, payload });
+    expect(type).toEqual('CREATE_LIKE');
   });
 });
