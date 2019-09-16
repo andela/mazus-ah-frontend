@@ -4,14 +4,16 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import axios from 'axios';
 import { instance } from '@Utils/API';
+import { getArticleBySlug, createArticleOnComment, likeArticle } from '@Actions/articleActions';
 import {
   GET_SINGLE_ARTICLE,
   ARTICLE_LOADING,
   GET_ARTICLE_ERROR,
+  GET_ARTICLE_STAT,
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
+  SET_ARTICLE_REACTION,
 } from './types/articleType';
-import { getArticleBySlug, createArticleOnComment } from './articleActions';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -44,7 +46,7 @@ const articleResponse = {
       updatedAt: 'Unknown Type: date',
     },
   },
-  likes: 1,
+  likes: 0,
   dislikes: 0,
   relatedArticles: [],
 };
@@ -102,6 +104,15 @@ const commentResponse = {
     highlightedText: null,
   },
 };
+const expectedArticleStat = {
+  like: null,
+  rate: null,
+  follwedAuthor: false,
+  bookmarkedArticle: true,
+};
+const authorId = '10ba038e-48da-487b-96e8-8d3b99b6d18a';
+const articleId = '10ba038e-48da-487b-96e8-8d3b99b6d18a';
+const userId = '10ba038e-48da-487b-96e8-8d3b99b6d18a';
 
 jest.mock('axios');
 
@@ -124,7 +135,6 @@ describe('Get single article action', () => {
   afterEach(() => {
     moxios.uninstall(instance);
   });
-
   it('should dispatch ARTICLE LOADING and GETTING SINGLE ARTICLE when getting an article by slug', async () => {
     const successfulRequest = {
       data: {
@@ -162,7 +172,6 @@ describe('Get single article action', () => {
     const response = store.getActions();
     expect(response).toEqual(expectedActions);
   });
-
   it('should dispatch ARTICLE LOADING and GET_ARTICLE_ERROR for an errored request', async () => {
     const failedRequest = {
       response: {
@@ -252,5 +261,77 @@ describe('Get single article action', () => {
     await store.dispatch(createArticleOnComment());
     const response = store.getActions();
     expect(response).toEqual(expectedAction);
+  });
+  it('should dispatch ARTICLE STAT when getting an articleStat', async () => {
+    const successfulRequest = {
+      data: {
+        article: articleResponse,
+      },
+    };
+
+    const successfulRelatedArticlesRequest = {
+      data: relatedArticlesResponse,
+    };
+    const successfulArticleStat = {
+      data: expectedArticleStat,
+    };
+    const expectedActions = [
+      {
+        type: CLEAR_ARTICLE_ERROR,
+        payload: {
+          error: {},
+        },
+      },
+      {
+        type: ARTICLE_LOADING,
+        payload: { loading: true },
+      },
+      {
+        type: GET_SINGLE_ARTICLE,
+        payload: {
+          loading: false,
+          article: articleResponse,
+        },
+      },
+    ];
+
+    axios.get.mockResolvedValueOnce(successfulRequest);
+    axios.get.mockResolvedValueOnce(successfulRelatedArticlesRequest);
+    axios.post.mockResolvedValueOnce(successfulArticleStat);
+    await store.dispatch(getArticleBySlug());
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
+  });
+  it('should dispatch ARTICLE STAT and GETTING SINGLE ARTICLE when liking an article by slug', async () => {
+    const successfulRequest = {
+      data: {
+        article: articleResponse,
+      },
+    };
+    const expectedActions = [
+      {
+        type: SET_ARTICLE_REACTION,
+        payload: {
+          likes: 0,
+          dislikes: 0,
+        },
+      },
+      {
+        type: GET_ARTICLE_STAT,
+        payload: expectedArticleStat,
+      },
+    ];
+    const expectedResponse = {
+      data: {
+        articleStat: {
+          articleStat: expectedArticleStat,
+        },
+      },
+    };
+    axios.post.mockResolvedValueOnce(expectedResponse);
+    axios.get.mockResolvedValueOnce(successfulRequest);
+    await store.dispatch(likeArticle('getting-started-with-nodejs-&-express-1564498223366-74536', authorId, articleId, userId));
+    const response = store.getActions();
+    expect(response).toEqual(expectedActions);
   });
 });

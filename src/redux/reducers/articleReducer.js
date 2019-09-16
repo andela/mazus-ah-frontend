@@ -5,11 +5,15 @@ import {
   GET_SINGLE_ARTICLE,
   CLEAR_ARTICLE_ERROR,
   CREATE_COMMENT,
-} from '../actions/types/articleType';
+  GET_ARTICLE_STAT,
+  SET_ARTICLE_REACTION,
+} from '@Actions/types/articleType';
+
 
 export const initialState = {
   articles: [],
   article: {},
+  articleStat: {},
   loading: false,
   error: {},
 };
@@ -53,6 +57,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: payload.error,
+      };
+    case GET_ARTICLE_STAT:
+      return {
+        ...state,
+        articleStat: payload,
+      };
+    case SET_ARTICLE_REACTION:
+      return {
+        ...state,
+        article: { ...state.article, likes: payload.likes, dislikes: payload.dislikes },
       };
     default:
       return state;

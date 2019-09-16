@@ -5,6 +5,8 @@ import {
   getArticles,
   clearArticleError,
   createArticleComment,
+  articleStat,
+  setArticleReaction,
 } from '@Redux/actions/articleActions';
 import articleReducer, { initialState } from '../articleReducer';
 
@@ -114,6 +116,10 @@ const comment = {
   },
 };
 const error = 'Article not found';
+const reaction = {
+  likes: 0,
+  dislikes: 0,
+};
 
 describe('Article reducer', () => {
   it('should return the initial state for an unknown action type', () => {
@@ -172,5 +178,17 @@ describe('Article reducer', () => {
     newState = articleReducer(initialState, { type, payload });
     expect(type).toEqual('CLEARING ARTICLE ERROR');
     expect(payload.error).toEqual({});
+  });
+  it('it should handle an action with type GET_ARTICLE_STAT', () => {
+    const { type, payload } = articleStat();
+    newState = articleReducer(initialState, { type, payload });
+    expect(type).toEqual('GET_ARTICLE_STAT');
+  });
+  it('it should handle an action with type SET_ARTICLE_LIKE', () => {
+    const { type, payload } = setArticleReaction(reaction);
+    initialState.article = stateArticle;
+    newState = articleReducer(initialState, { type, payload });
+    expect(type).toEqual('SET_ARTICLE_REACTION');
+    expect(payload).toEqual(reaction);
   });
 });

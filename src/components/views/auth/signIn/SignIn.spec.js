@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { shallow, mount } from 'enzyme';
@@ -34,18 +35,22 @@ describe('SignIn Component', () => {
   });
   it('should render along with children component', () => {
     const component = mount(
-      <Router>
-        <Signin store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Signin {...props} />
+        </Router>
+      </Provider>,
     );
     expect(component.find('button')).toHaveLength(3);
     expect(component.find('input')).toHaveLength(2);
   });
   it('should call onChange props for email input', () => {
     const wrapper = mount(
-      <Router>
-        <Signin store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Signin {...props} />
+        </Router>
+      </Provider>,
     );
     const emailInput = wrapper.find('input[type="email"]');
     emailInput.simulate('change', {
@@ -62,9 +67,11 @@ describe('SignIn Component', () => {
 
   it('should call onChange props for password input', () => {
     const wrapper = mount(
-      <Router>
-        <Signin store={store} {...props} />
-      </Router>,
+      <Provider store={store}>
+        <Router>
+          <Signin {...props} />
+        </Router>
+      </Provider>,
     );
     const passwordInput = wrapper.find('input[type="password"]').at(0);
     passwordInput.simulate('change', {
@@ -78,9 +85,16 @@ describe('SignIn Component', () => {
     expect(passwordInput.html()).toMatch('P4ssw0rd');
     wrapper.unmount();
   });
+
   it('should call onSubmit prop function when form is submitted', () => {
     const handleSubmit = jest.fn();
-    const wrapper = mount(<Router><SigninComponent onSubmit={handleSubmit} {...props} /></Router>);
+    const wrapper = mount(
+      <Provider store={store}>
+        <Router>
+          <SigninComponent {...props} onSubmit={handleSubmit} />
+        </Router>
+      </Provider>,
+    );
     const form = wrapper.find('form');
     form.simulate('submit');
     expect(handleSubmit).toHaveBeenCalledTimes(1);

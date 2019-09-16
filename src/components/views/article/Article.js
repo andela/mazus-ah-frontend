@@ -1,4 +1,3 @@
-
 import React, { Fragment, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { connect } from 'react-redux';
@@ -13,7 +12,9 @@ import parseDataFromJSON from '@Utils/parseEditorData';
 import Card from '@Common/landingPage/card/Cards';
 import isEmpty from '@Utils/isEmpty';
 import readTimeFunc from '@Utils/readTime';
+import LikeArticle from '@Common/likes/Like';
 import ShareArticle from './shareArticle/ShareArticle';
+
 import './article.scss';
 
 const Article = ({
@@ -24,10 +25,16 @@ const Article = ({
   error,
   relatedArticles,
   authenticatedUser,
+  userData,
+  likes,
+  dislikes,
+  isLiked,
 }) => {
+  const articleSlug = match.params.slug;
+  const userId = userData && userData.id;
   useEffect(() => {
     const getArticle = async () => {
-      await fetchSingleArticleBySlug(match.params.slug);
+      await fetchSingleArticleBySlug(articleSlug, userId);
     };
     getArticle();
     window.scrollTo(0, 0);
@@ -35,11 +42,12 @@ const Article = ({
   return (
     <Fragment>
       <div className="article__container">
+
         {loading
           && (
-          <center>
-            <Loader />
-          </center>
+            <center>
+              <Loader />
+            </center>
           )}
         {!loading && Object.keys(error).length > 0 && (
           <div className="article__notfound">
@@ -54,9 +62,13 @@ const Article = ({
                 <img src="https://image.flaticon.com/icons/svg/147/147144.svg" alt="article author" width="70" className="circle" />
               </div>
               <div id="author__profile__div">
-                <h5 className="author__name">{singleArticle?.author?.firstName} {singleArticle?.author?.lastName}</h5>
+                <h5 className="author__name">{singleArticle ?.author ?.firstName} {singleArticle ?.author ?.lastName}</h5>
                 <button className="follow__button" type="button">Follow</button>
-                <div className="user__comment_info"><i className="material-icons">comment</i><span>{singleArticle?.articlecomment?.length}</span></div>
+                <div className="user__comment_info"><i className="material-icons">comment</i><span>{singleArticle ?.articlecomment ?.length}</span></div>
+                <div className="like-dislike-reaction">
+                  <LikeArticle slug={articleSlug} likes={likes} className={isLiked ? 'liked' : null} type="like" />
+                  <LikeArticle slug={articleSlug} dislikes={dislikes} className={isLiked === false ? 'liked' : null} type="dislike" />
+                </div>
               </div>
             </div>
             <div className="article__content">
@@ -69,10 +81,10 @@ const Article = ({
                 {Object.keys(singleArticle).length > 0
                   ? ReactHtmlParser(parseDataFromJSON((JSON.parse(singleArticle.body))))
                   : <h1>Something went wrong..</h1>
-           }
+                }
               </div>
               <div className="article__tags">
-                {singleArticle?.tagsList?.length > 0 ? singleArticle.tagsList.map(tag => (
+                {singleArticle ?.tagsList ?.length > 0 ? singleArticle.tagsList.map(tag => (
                   <Tag tagName={tag.toString()} key={tag.toString()} />
                 )) : <p className="article__no__tags">No Tags for this article</p>}
               </div>
@@ -98,7 +110,7 @@ const Article = ({
                 <ArticleCommentForm match={match} />
               ) : ''
               }
-              {singleArticle?.articlecomment?.length > 0 ? singleArticle.articlecomment.map(
+              {singleArticle ?.articlecomment ?.length > 0 ? singleArticle.articlecomment.map(
                 comment => (
                   <ArticleCommentList
                     key={comment.id}
@@ -110,25 +122,25 @@ const Article = ({
                 ''
               )
                 : (<Link to="/signin"><button type="button" className="comment_load_more">Sign in to Comment</button></Link>)
-                }
+              }
 
               <div className="article__related__articles">
                 <h3>Related Articles</h3>
                 <div className="article__divider" />
                 <div className="related__article__container">
                   {
-                  !isEmpty(relatedArticles) ? relatedArticles.map((related) => {
-                    if (related.id !== singleArticle.id) {
-                      return (
-                        <Card
-                          key={related.id}
-                          {...related}
-                        />
-                      );
-                    }
-                    return null;
-                  }) : <h2>There are currently no related articles to this article</h2>
-                }
+                    !isEmpty(relatedArticles) ? relatedArticles.map((related) => {
+                      if (related.id !== singleArticle.id) {
+                        return (
+                          <Card
+                            key={related.id}
+                            {...related}
+                          />
+                        );
+                      }
+                      return null;
+                    }) : <h2>There are currently no related articles to this article</h2>
+                  }
                 </div>
               </div>
             </div>
@@ -148,12 +160,20 @@ Article.propTypes = {
   loading: PropTypes.bool.isRequired,
   relatedArticles: PropTypes.shape([]),
   authenticatedUser: PropTypes.bool.isRequired,
+  userData: PropTypes.shape({}).isRequired,
+  likes: PropTypes.number,
+  dislikes: PropTypes.number,
+  isLiked: PropTypes.bool,
 };
 
 Article.defaultProps = {
   singleArticle: {},
   error: {},
   relatedArticles: [],
+  isLiked: null,
+  likes: 0,
+  dislikes: 0,
+
 };
 
 const mapStateToProps = state => ({
@@ -162,6 +182,11 @@ const mapStateToProps = state => ({
   error: state.singleArticle.error,
   relatedArticles: state.singleArticle.article.relatedArticles,
   authenticatedUser: state.auth.isAuthenticated,
+  userData: state.auth.user,
+  dislikes: state.singleArticle.article.dislikes,
+  likes: state.singleArticle.article.likes,
+  isLiked: state.singleArticle.articleStat.like,
+
 });
 
 export const ArticleComponent = Article;

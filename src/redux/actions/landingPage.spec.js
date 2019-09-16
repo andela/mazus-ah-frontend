@@ -4,8 +4,12 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import axios from 'axios';
 import { instance } from '@Utils/API';
-import { getTags, getTrendingArticles, getArticlesByCategory } from './landingPageActions';
-import { SET_TAGS, SET_TRENDING_ARTICLES, SET_ARTICLES, SET_ERROR } from './types/landingPage';
+import {
+  getTags, getTrendingArticles, getArticlesByCategory, loaded,
+} from './landingPageActions';
+import {
+  SET_TAGS, SET_TRENDING_ARTICLES, SET_ERROR, LOADING,
+} from './types/landingPage';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -268,6 +272,16 @@ describe('Test actions for articles', () => {
     }];
     await axios.get.mockRejectedValue(failedRequest);
     await store.dispatch(getTags());
+    const response = store.getActions();
+    expect(response).toEqual(expectedAction);
+  });
+  it('should dispatch loaded() Action', async () => {
+    const expectedAction = [{
+      type: LOADING,
+      payload: {},
+    }];
+    const payload = {};
+    await store.dispatch(loaded(payload));
     const response = store.getActions();
     expect(response).toEqual(expectedAction);
   });
