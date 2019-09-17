@@ -9,6 +9,7 @@ import './tagsInput.scss';
 const TagsInput = (props) => {
   const [tags, setTags] = useState([]);
   const [tagInput, setTag] = useState('');
+
   const addTags = (event) => {
     if (event.key === 'Enter' && event.target.value !== '' && tags.length < 10) {
       setTags([...tags, event.target.value]);
@@ -16,19 +17,23 @@ const TagsInput = (props) => {
       setTag('');
     }
   };
+
   const removeTags = (index) => {
     setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
+    props.removeSelectedTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
   };
+
   const sendTags = () => props.selectedTags(tags);
+  const sendRemovedTags = () => props.removeSelectedTags(tags);
   return (
     <div className="tags-input">
-      <Holder sendTags={sendTags} />
+      <Holder sendTags={sendTags} sendRemovedTags={sendRemovedTags} />
       <input
         type="text"
         id="tag-input"
         value={tagInput}
         onChange={e => setTag(e.target.value)}
-        onKeyUp={event => addTags(event)}
+        onKeyPress={event => addTags(event)}
         placeholder="Add Tags"
       />
       <div className="tags" tags={tags}>
@@ -50,6 +55,7 @@ const TagsInput = (props) => {
 
 TagsInput.propTypes = {
   selectedTags: PropTypes.func.isRequired,
+  removeSelectedTags: PropTypes.func.isRequired,
 };
 
 export default TagsInput;

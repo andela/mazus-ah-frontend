@@ -25,6 +25,10 @@ const Modal = (
     setArticleTags(tags);
     return articleTags;
   };
+  const removeSelectedTags = (tags) => {
+    setArticleTags(tags);
+    return articleTags;
+  };
   const getThumbnail = (thumbnail) => {
     setArticleThumbnail(thumbnail);
     return articleThumbnail;
@@ -53,7 +57,7 @@ const Modal = (
             onChange={e => setDescription(e.target.value)}
             placeholder="Description"
           />
-          <TagsInput selectedTags={selectedTags} />
+          <TagsInput selectedTags={selectedTags} removeSelectedTags={removeSelectedTags} />
           <div className="action-btn">
             <button className="publish-btn" type="button" onClick={() => publish('published')} disabled={loading}>PUBLISH</button>
             <button className="draft-btn" type="button" onClick={() => publish('draft')}>SAVE DRAFT</button>

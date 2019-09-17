@@ -35,7 +35,7 @@ const NewArticle = () => {
           <div id="editorjs" />
         </div>
         <span id="done_btn">
-          <button className="done" type="submit" onClick={show}>Done?</button>
+          <button className="done" type="button" onClick={show}>Done?</button>
         </span>
       </div>{showModal ? <Modal showModal={show} title={title} body={JSON.stringify(body)} /> : ''}
 

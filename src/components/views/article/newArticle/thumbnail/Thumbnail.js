@@ -13,6 +13,7 @@ const Thumbnail = (props) => {
   const [thumbnail, setThumbmail] = useState('');
   const [loader, setLoader] = useState(false);
   const [newThumbnail, setNewThumbnail] = useState(false);
+
   const uploadThumbnail = async (e) => {
     const uploadLocation = 'https://api.cloudinary.com/v1_1/mazus/image/upload';
     const formData = new FormData();
@@ -21,13 +22,16 @@ const Thumbnail = (props) => {
     formData.append('upload_preset', 'ml_default');
     setLoader(true);
     const res = await instance.post(uploadLocation, formData, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+
     setThumbmail(res.data.url);
     setLoader(false);
     setNewThumbnail(true);
     props.getThumbnail(...thumbnail, res.data.url);
     return { thumbnail, loader };
   };
+
   const sendThumbnail = () => props.getThumbnail(thumbnail);
+
   return (
     <div className="thumbmail-wrapper">
       <Holder sendThumbnail={sendThumbnail} />
