@@ -51,6 +51,9 @@ const Modal = (
     <div className="overlay">
       <div className="modal-content">
         <div className="desc-tags">
+          <div className="small_screen_thumbnail">
+            <Thumbnail getThumbnail={getThumbnail} />
+          </div>
           <textarea
             id="description"
             value={description}
@@ -63,7 +66,9 @@ const Modal = (
             <button className="draft-btn" type="button" onClick={() => publish('draft')}>SAVE DRAFT</button>
           </div>
         </div>
-        <Thumbnail getThumbnail={getThumbnail} />
+        <div className="big_screen_thumbnail">
+          <Thumbnail getThumbnail={getThumbnail} />
+        </div>
         <span id="close" role="button" tabIndex="0" onClick={() => showModal()} onKeyPress={() => showModal()}>
           <i
             className="material-icons"
