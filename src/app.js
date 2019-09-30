@@ -14,6 +14,7 @@ import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
+import starRating from '@Common/starRating/StarRating';
 import setUser from '@Utils/setUser';
 import Profile from '@Views/profile';
 import store from './redux/store';
@@ -27,6 +28,7 @@ const App = () => (
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/rate" component={starRating} />
         <Route path="/forgot-password" component={SubmitEmail} />
         <Route path="/reset-password/:token" component={PasswordResetForm} />
         <ContainerWrapper exact path="/" component={LandingPage} />
