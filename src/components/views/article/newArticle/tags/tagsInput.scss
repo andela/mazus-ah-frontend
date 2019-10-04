@@ -1,0 +1,31 @@
+.tags {
+    width: 400px;
+    padding-bottom: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#tag-content {
+  padding: 3px 9px 3px 9px;
+  background-color: #e6e6e6;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  margin: 0.2rem;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#tag-input {
+    width: 18rem !important; 
+    border-radius: 8px;
+    font-size: 18px;
+    border: 1px #2FB5EE solid !important;
+}
+
+.material-icons {
+  cursor: pointer;
+}

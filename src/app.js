@@ -13,6 +13,7 @@ import SubmitEmail from '@Views/passwordReset/SubmitEmail';
 import PasswordResetForm from '@Views/passwordReset/NewPassword';
 import LandingPage from '@Views/landingPage/LandingPage';
 import Article from '@Views/article/Article';
+import NewArticle from '@Views/article/newArticle/NewArticle';
 import ContainerWrapper from '@Common/hoc/ContainerWrapper';
 import setUser from '@Utils/setUser';
 import Profile from '@Views/profile';
@@ -32,6 +33,7 @@ const App = () => (
         <ContainerWrapper exact path="/" component={LandingPage} />
         <ContainerWrapper exact path="/article/:slug" component={Article} />
         <ContainerWrapper exact path="/profile/:userId" component={Profile} />
+        <ContainerWrapper exact path="/new-article" component={NewArticle} />
         <Route component={NotFound} />
       </Switch>
     </Router>

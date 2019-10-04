@@ -1,4 +1,3 @@
-// TODO: take this to a utility folder
 import {
   AUTH_LOADING,
   AUTH_SUCCESS,
